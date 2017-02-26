@@ -23,7 +23,7 @@ This repository collects the code written by students for the SLT coding exercis
 
 ## Adding code ##
 
-In order to add your code for a particular exercise, e.g. *1_locally_linear_embedding* :
+In order to add your code for a particular exercise, e.g. for 1_locally_linear_embedding :
 
 (1) Change into the repository directory:
     
