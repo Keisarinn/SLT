@@ -41,4 +41,4 @@ In order to add your code for a particular exercise, e.g. *1_locally_linear_embe
 
 (6) Eventually push your files, i.e.
 
-    git push --set-upstream origin your-legi-number/1_locally_linear_embedding
+```git push --set-upstream origin your-legi-number/1_locally_linear_embedding```
