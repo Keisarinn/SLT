@@ -9,7 +9,7 @@ This repository collects the code written by students for the SLT coding exercis
 
 (2) Clone the repository to your machine, i.e.
 
-    git clone https://gitlab.vis.ethz.ch/vwegmayr/slt-coding-exercises.git
+    ```git clone https://gitlab.vis.ethz.ch/vwegmayr/slt-coding-exercises.git```
     
 (3) Change into the repository directory:
     
