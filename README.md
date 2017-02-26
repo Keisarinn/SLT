@@ -33,7 +33,7 @@ In order to add your code for a particular exercise, e.g. for 1_locally_linear_e
 
 ```git checkout your-legi-number```
 
-(4) Create a branch for the exercise, i.e.
+(4) Derive a new branch for the exercise, i.e.
 
 ```git checkout -b your-legi-number/1_locally_linear_embedding```
     
