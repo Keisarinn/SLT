@@ -1,8 +1,8 @@
 # Statistical Learning Theory: Coding Exercises #
 
 This repository serves two purposes:
-Markup : * collects the code written by students for the SLT coding exercises.
-
+* Distribute the coding exercises, including the templates.
+* Collect the code written by students for the SLT coding exercises.
 
 ## Initial setup ##
 
@@ -38,7 +38,7 @@ In order to add your code for a particular exercise, e.g. for 1_locally_linear_e
 
 ```git checkout -b your-legi-number/1_locally_linear_embedding```
     
-(5) Do some work
+(5) Do some work, including the report.
 
 (6) Eventually push your files, i.e.
 
