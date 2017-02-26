@@ -22,7 +22,8 @@ The legi has to be correct, so that we can match it!
 Now you can go ahead and do some work, like compiling the template, adding and running code, etc.
 
 Use the template also for your report and delete the instructions which are in the document.
-Do not forget to set your name, legi number and git branch at the beginning of the template.
+
+Do not forget to set your name, legi number and git branch at the beginning of each template.
 
 You can always commit and push to your branch and we will take your final report from your branch.
 
