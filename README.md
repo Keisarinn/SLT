@@ -14,11 +14,9 @@ This repository collects the code written by students for the SLT coding exercis
     
     cd slt-coding-exercises
     
-(4) Create a branch for yourself, i.e.
+(4) Create a branch for yourself, from where all your exercises are derived later:
 
-        git branch your-legi-number
-    
-    This branch is used to derive all your exercises from.
+    git branch your-legi-number
     
 
 **Adding code**
