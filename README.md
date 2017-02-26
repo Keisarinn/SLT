@@ -1,8 +1,9 @@
-**Statistical Learning Theory: Coding Exercises**
+# Statistical Learning Theory: Coding Exercises #
 
 This repository collects the code written by students for the SLT coding exercises.
 
-**Initial setup**
+
+## Initial setup ##
 
 (1) First you need to request and get access to the repository.
 
@@ -19,7 +20,8 @@ This repository collects the code written by students for the SLT coding exercis
     git branch your-legi-number
     
 
-**Adding code**
+
+## Adding code ##
 
 In order to add your code for a particular exercise, e.g. *1_locally_linear_embedding* :
 
