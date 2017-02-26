@@ -11,8 +11,8 @@ In order to add your code for a particular exercise, e.g. *1_locally_linear_embe
     
 (3) Create a new branch for yourself, i.e.
 
-    git branch *your-legi-number*
+    git branch your-legi-number
     
 (5) Create a brunch for the exercise, i.e.
 
-    git checkout -b *1_locally_linear_embedding* *your-legi-number*
+    git checkout -b 1_locally_linear_embedding your-legi-number
