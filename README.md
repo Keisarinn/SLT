@@ -1,6 +1,7 @@
 # Statistical Learning Theory: Coding Exercises #
 
-This repository collects the code written by students for the SLT coding exercises.
+This repository serves two purposes:
+Markup : * collects the code written by students for the SLT coding exercises.
 
 
 ## Initial setup ##
