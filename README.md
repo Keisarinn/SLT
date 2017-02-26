@@ -4,9 +4,33 @@ This repository serves two purposes:
 * Distribute the coding exercises, including the templates.
 * Collect the code written by students for the SLT coding exercises.
 
+## How to find exercises ##
+The exercises templates are published on the master branch. The latex templates contain all the information about the exercises.
+
+## How to do an exercise ##
+First you need to setup the repository on your machine, see initial setup below.
+
+Once an exercise template is online, derive your working branch for the exercise:
+
+```git checkout master```
+
+```git checkout -b your-legi-number/exercise_name```
+
+Make sure you provide your ETH legi number with separating spaces and the exercise name identical to the latex template.
+The legi has to be correct, so that we can match it!
+
+Now you can go ahead and do some work, like compiling the template, adding and running code, etc.
+
+Use the template also for your report and delete the instructions which are in the document.
+Do not forget to set your name, legi number and git branch at the beginning of the template.
+
+You can always commit and push to your branch and we will take your final report from your branch.
+
+If you are uncertain if everything is where it should be, just look at your branch in the browser.
+
 ## Initial setup ##
 
-(1) First you need to request and get access to the repository.
+(1) Request and get access to the repository.
 
 (2) Clone the repository to your machine, i.e.
 
@@ -15,31 +39,3 @@ This repository serves two purposes:
 (3) Change into the repository directory:
     
 ```cd slt-coding-exercises```
-    
-(4) Create a branch for yourself, from where all your exercises are derived later:
-
-```git branch your-legi-number```
-    
-
-
-## Adding code ##
-
-In order to add your code for a particular exercise, e.g. for 1_locally_linear_embedding :
-
-(1) Change into the repository directory:
-    
-```cd slt-coding-exercises```
-    
-(2) Switch to your branch:
-
-```git checkout your-legi-number```
-
-(4) Derive a new branch for the exercise, i.e.
-
-```git checkout -b your-legi-number/1_locally_linear_embedding```
-    
-(5) Do some work, including the report.
-
-(6) Eventually push your files, i.e.
-
-```git push --set-upstream origin your-legi-number/1_locally_linear_embedding```
