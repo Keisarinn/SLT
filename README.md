@@ -2,6 +2,8 @@
 
 This repository collects the code written by students for the SLT coding exercises.
 
+_Initial setup_
+
 In order to add your code for a particular exercise, e.g. *1_locally_linear_embedding* :
 
 If this is the first time you add code:
