@@ -1,44 +1,4 @@
-# Statistical Learning Theory: Coding Exercises #
-
-This repository collects the code written by students for the SLT coding exercises.
-
-
-## Initial setup ##
-
-(1) First you need to request and get access to the repository.
-
-(2) Clone the repository to your machine, i.e.
-
-    git clone https://gitlab.vis.ethz.ch/vwegmayr/slt-coding-exercises.git
-    
-(3) Change into the repository directory:
-    
-    cd slt-coding-exercises
-    
-(4) Create a branch for yourself, from where all your exercises are derived later:
-
-    git branch your-legi-number
-    
-
-
-## Adding code ##
-
-In order to add your code for a particular exercise, e.g. *1_locally_linear_embedding* :
-
-(1) Change into the repository directory:
-    
-    cd slt-coding-exercises
-    
-(2) Switch to your branch:
-
-    git checkout your-legi-number
-    
-(4) Create a branch for the exercise, i.e.
-
-    git checkout -b your-legi-number/1_locally_linear_embedding
-    
-(5) Do some work
-
-(6) Eventually push your files, i.e.
-
-    git push --set-upstream origin your-legi-number/1_locally_linear_embedding
+JÖ­ŠËbq©KyªçŠx…ê+È*ŠxÅêÜŠÇ¬N¬­êh²+h¯'(–Wœ¶ËayÊ{
+â¶×§o+-¹×§¶Çè®Ø^H´Ü¡Ø§ì^­È¬zÂ'ŠØš–Ç­ºEŠ»-Ê‹§yçm¢·ª¹ë-jw`zÖœqë,¶‹az·©¢È­¢¼¶
+Z'zØ^­êh²+h¯+hÊ‹«™§!Šw¢z­rZ'zm¦Ïÿ‚+ei»â±ëaÍÈ¿ ™¬«şÉmr‡b±z·"±ë ŠİÂ…©àz)í¢Ø^­êh²+h¯'b­ç-¢¼œvÉmr‡b±z·"±ë8
+·šµæ›­©Ü…ú+Ê‹«±é_~º&Â«y©eÊ‹«{«r+±ªŞuêâ½çej×«‚+[­©Ü‡*.®W Š{¦mêÀuØ§Êx‰è­×«¶†w*.­Êyú+j–«¶'.•ªŞÅêÜŠÇƒYhq©eÊX§yªŞ™·v)àÔ(Z¢Ú-…êŞ¦‹"¶Šòv*ŞrÚ+ÉÇl–×(v)à{«r+³d°Š×!¶Œ¨º¶ëjw!‚+\…ç$¢ër¢êåz§ºfŞ¯€«y«^iºÚÈ_¢»ayì^­È¬z' Š×!yÉ(ºÖò¢êåz§ºfŞ¯ıe¡Æ¥—)bæ«zfŞuØ§ƒè²‰ÂŠäèKŞÛš–\©ºÈr¢êßŠW¬‰è"¶›¬†Ç­º›-­æ¦¢¸ Š|¨º¹^‚)î™·«ÿYhq©eÊX§yªŞ™·v)à
