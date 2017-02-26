@@ -13,11 +13,11 @@ This repository collects the code written by students for the SLT coding exercis
 
 (3) Change into the repository directory:
     
-    ```cd slt-coding-exercises```
+```cd slt-coding-exercises```
     
 (4) Create a branch for yourself, from where all your exercises are derived later:
 
-    ```git branch your-legi-number```
+```git branch your-legi-number```
     
 
 
@@ -27,7 +27,7 @@ In order to add your code for a particular exercise, e.g. *1_locally_linear_embe
 
 (1) Change into the repository directory:
     
-    ```cd slt-coding-exercises```
+```cd slt-coding-exercises```
     
 (2) Switch to your branch:
 
@@ -35,7 +35,7 @@ In order to add your code for a particular exercise, e.g. *1_locally_linear_embe
 
 (4) Create a branch for the exercise, i.e.
 
-    git checkout -b your-legi-number/1_locally_linear_embedding
+```git checkout -b your-legi-number/1_locally_linear_embedding```
     
 (5) Do some work
 
