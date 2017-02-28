@@ -16,7 +16,7 @@ Once an exercise template is online, derive your working branch for the exercise
 
 ```git checkout -b xx-xxx-xxx/exercise_name```
 
-Make sure you provide your correct ETH legi number in the format xx-xxx-xxx and the exercise name identical as on the latex template.
+Make sure you provide your correct ETH legi number in the format xx-xxx-xxx and the exercise name identical to the name of the latex template.
 
 The legi has to be correct, so that we can match it!
 
