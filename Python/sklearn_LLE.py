@@ -98,14 +98,12 @@ print test_restrict.shape
 
 # Setup LLE
 # 5 Neighbours 3D
-lle = manifold.LocallyLinearEmbedding(n_neighbors=5, n_components=3)
+lle = manifold.LocallyLinearEmbedding(n_neighbors=10, n_components=3)
 transformed_test = lle.fit_transform(test_restrict)
 print transformed_test.shape
 
-fig = plt.figure()
-ax = fig.add_subplot(111, projection='3d')
+# fig = plt.figure()
+# ax = fig.add_subplot(111, projection='3d')
 
 plot_3D_embedding(X=transformed_test, y=test_labels[0:RESTRIC_NUM, 0])
-
-ax.scatter(transformed_test[:,0], transformed_test[:,1], transformed_test[:,2])
 plt.show()
