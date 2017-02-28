@@ -10,7 +10,7 @@ The final grade for the lecture is max(exam, 0.7 exam + 0.3 project).
 
 Students who wish to get the advantage of the project bonus need to submit reports about their coding excercises.
 
-There will be eight coding ecercises, and each report will be graded either as good, normal or not accepted/not submitted. 
+There will be eight coding excercises, and each report will be graded either as good, normal or not accepted/not submitted. 
 
 With no submitted/accepted reports, the project grade is 4.0. Each good report increases the project grade by 0.25, while each normal report increases it by 0.125.
 
