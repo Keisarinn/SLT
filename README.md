@@ -5,10 +5,15 @@ This repository serves two purposes:
 * Collect the code written by students for the SLT coding exercises.
 
 The coding exercises concern the implementation of an algorithm taught in the lecture/exercise class.
+
 The final grade for the lecture is max(exam, 0.7 exam + 0.3 project). 
+
 Students who wish to get the advantage of the project bonus need to submit reports about their coding excercises.
+
 There will be eight coding ecercises, and each report will be graded either as good, normal or not accepted/not submitted. 
+
 With no submitted/accepted reports, the project grade is 4.0. Each good report increases the project grade by 0.25, while each normal report increases it by 0.125.
+
 This means eight good reports result in a project grade of 6.0, while eight normal reports will give you a project grade of 5.0. 
 
 ## How to find exercises ##
