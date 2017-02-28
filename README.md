@@ -14,7 +14,9 @@ There will be eight coding excercises, and each report will be graded either as 
 
 With no submitted/accepted reports, the project grade is 4.0. Each good report increases the project grade by 0.25, while each normal report increases it by 0.125.
 
-This means eight good reports result in a project grade of 6.0, while eight normal reports will give you a project grade of 5.0. 
+This means eight good reports result in a project grade of 6.0, while eight normal reports will give you a project grade of 5.0.
+
+Note that even if you are not interested in doing the projects, the written exam might include problems addressed in the coding exercises.
 
 ## How to find exercises ##
 The exercises templates are published on the master branch. The latex templates contain all the information about the exercises.
