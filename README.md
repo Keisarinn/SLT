@@ -4,7 +4,7 @@ This repository serves two purposes:
 * Distribute the coding exercises, including the templates.
 * Collect the code written by students for the SLT coding exercises.
 
-The coding exercises concern the implementation of an algorithm taught in the lecture/exercise class.
+The coding exercises concern the implementation of algorithms taught in the lecture/exercise class.
 
 The final grade for the lecture is max(exam, 0.7 exam + 0.3 project). 
 
