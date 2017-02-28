@@ -12,9 +12,11 @@ Students who wish to get the advantage of the project bonus need to submit repor
 
 There will be eight coding excercises, and each report will be graded either as good, normal or not accepted/not submitted. 
 
-With no submitted/accepted reports, the project grade is 4.0. Each good report increases the project grade by 0.25, while each normal report increases it by 0.125.
+With no submitted/accepted reports, the project grade is 4.0. Each normal report increases the project grade by 0.25, while a good report increases it by 0.5.
 
-This means eight good reports result in a project grade of 6.0, while eight normal reports will give you a project grade of 5.0.
+This means eight normal reports result in a project grade of 6.0 and good reports help you to compensate for not submitted/accepted reports.
+
+The maximum project grade is 6.0. 
 
 Note that even if you are not interested in doing the projects, the written exam might include problems addressed in the coding exercises.
 
