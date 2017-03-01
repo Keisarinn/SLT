@@ -92,6 +92,17 @@ def LLE(k = 4):
     a = 2
 
     # 2. Solve for the reconstruction weights W
+    Z = np.asarray(Z)
+    C = [[[[0] for l in range(k)] for j in range(k)] for i in range(n)]
+    for i in range(n):
+        X_i = images[i]
+        for j in range(k):
+            X_j = Z[i][j]
+            for l in range(k):
+                X_l = Z[i][l]
+                C[i][j][l] = np.dot((X_i-X_j),(X_i-X_l))
+
+    a = 2
 
 
 
