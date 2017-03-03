@@ -57,3 +57,10 @@ If you are uncertain if everything is where it should be, just look at your bran
 (3) Change into the repository directory:
     
 ```cd slt-coding-exercises```
+
+## Forum ##
+
+If you want to ask questions or just show off your latest results, sign up at
+our dedicated slack channel:
+
+https://ise-squad.slack.com/messages/statistical-learning
