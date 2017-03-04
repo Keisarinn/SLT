@@ -1,0 +1,334 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Make sure to set your name, legi number and url to the right git branch.
+\newcommand{\hmwkAuthorName}{Asha Anoosheh} % Your name
+\newcommand{\hmwkAuthorLegi}{16-948-358} % Your name
+\newcommand{\hmwkGitBranch}{YOUR GIT BRANCH} % Your name
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%	Skip this
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{hyperref}
+
+\usepackage{graphicx} % Required to insert images
+\graphicspath{{../Plot/}}
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in 
+
+\linespread{1.1} % Line spacing
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName} % Top left header
+\chead{\hmwkClass\ \hmwkTitle} % Top center header
+\rhead{\firstxmark} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+
+\newcommand{\homeworkProblemName}{}
+\newenvironment{homeworkProblem}[1][Problem \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+\enterProblemHeader{\homeworkProblemName} % Header and footer within the environment
+}{
+\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{
+\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+   
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%	Skip this
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Locally Linear Embedding} % Assignment title
+\newcommand{\hmwkDueDate}{Monday,\ March\ 6th,\ 2017} % Due date
+\newcommand{\hmwkClass}{SLT coding exercise\ \#1} % Course/class
+\newcommand{\hmwkClassTime}{Mo 16:15} % Class/lecture time
+\newcommand{\hmwkClassInstructor}{} % Teacher/lecturer
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%	Skip this
+%----------------------------------------------------------------------------------------
+
+\title{
+\vspace{2in}
+\textmd{\small{\hmwkClass}}\\
+\textmd{\textbf{\hmwkTitle}}\\
+\small{https://gitlab.vis.ethz.ch/vwegmayr/slt-coding-exercises}\\
+\normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}
+%\vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+\vspace{3in}
+}
+
+\author{
+\hmwkAuthorName\\
+\hmwkAuthorLegi
+}
+
+\date{ } % Insert date here if you want it to appear below your name
+
+\begin{document}
+
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%	Skip this
+%----------------------------------------------------------------------------------------
+
+%\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
+
+\newpage
+\tableofcontents
+\newpage
+
+%----------------------------------------------------------------------------------------
+%	SECTIONS
+%	Now you are in the right hood
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkProblem}[The Model]
+The model section is intended to allow you to recapitulate the essential ingredients used in \hmwkTitle. Write down the \textit{necessary} equations to specify \hmwkTitle\ and and shortly explain the variables that are involved. This section should only introduce the equations, their solution should be outlined in the implementation section.\newline
+Hard limit: One page
+\vspace{10pt}
+
+\problemAnswer{ % Answer
+I feel like there aren't enough confusing equations for me to need this section this time :)
+
+The Implementation section is concise enough, in my opinion.
+}
+\end{homeworkProblem}
+\clearpage
+
+%----------------------------------------------------------------------------------------
+\begin{homeworkProblem}[The Questions]
+%This is the core section of your report, which contains the tasks for this exercise and your respective solutions. Make sure you present your results in an illustrative way by making use of graphics, plots, tables, etc. so that a reader can understand the results with a single glance. Check that your graphics have enough resolution or are vector graphics. Consider the use of GIFs when appropriate.\newline
+%Hard limit: Two pages
+
+%\begin{homeworkSection}{(a) Get the data}
+%For this exercise we will work with the MNIST data set. In order to learn more about it and download it, go to http://yann.lecun.com/exdb/mnist/.
+%\end{homeworkSection}
+%
+%\begin{homeworkSection}{(b) Locally linear embedding}
+%Implement the LLE algorithm and apply it to the MNIST data set. Provide descriptive visualizations for 2D \& 3D embedding spaces. Is it possible to see clusters?
+%\end{homeworkSection}
+%
+%\begin{homeworkSection}{(c) Cluster structure}
+%Investigate the cluster structure of the data. Can you observe block structures in the $M$ matrix (use matrix plots)? Also plot the singular values of $M$. Do you notice something?
+%Can you think of ways to determine the optimal embedding dimension?
+%\end{homeworkSection}
+
+%\begin{homeworkSection}{(d) Nearest Neighbors}
+%Investigate the influence of the choice of how many nearest neighbors you take into account. Additionally, try different metrics to find the nearest neighbors (we are dealing with images!).
+%\end{homeworkSection}
+
+%\begin{homeworkSection}{(e) Linear manifold interpolation}
+%Assume you pick some point in the embedding space. How can you map it back to the original (high dimensional) space? Investigate how well this works for points within and outside the manifold (does it depend on the dimensionality of the embedding space?) Try things like linearly interpolating between two embedding vectors and plot the sequence of images along that line. What happens if you do that in the original space?
+%\end{homeworkSection}
+
+%\vspace{10pt}
+
+
+\problemAnswer{ % Answer
+
+\begin{enumerate}[label=(\alph*)]
+\item {
+Data was downloaded using SkLearn's built-in dataset manager to avoid file format importing issues. 
+}
+\item {
+\textbf{Figures 1 \& 2} show the results of my LLE implementation. They are run on the same random 10\% of MNIST data (7000 datum), using 4 nearest-neighbors and Euclidean distance as the metric.
+
+As the points are colored by their digit label, it is very possible to see distinct clusters for most classes even in 2 or 3 dimensions, though it is clearer in the latter.
+}
+\item{
+After post-processing the visualization of the M matrix to clearly see something as \textbf{Figure 3}, I noticed the diagonal has a consistent "deterioration" from both corners toward the middle, where values go toward zero. The matrix, as expected, is also extremely sparse as most values are zero or close to zero (visualized as red).
+
+And plotting the reverse-sorted singular values in \textbf{Figure 4} (equal to the eigenvalues of a PSD matrix such as M) initially shows only an elbow drop in the values on the larger end. But looking closer at the small end in \textbf{Figure 5}, we can find a flat "elbow" of sorts for our purposes as well, since we want the smaller ones instead. The optimal dimension could be the one with eigenvalues before a certain rise in slope - similar to the corner method in many applications.
+}
+\item{
+Holding everything else constant and changing the number of nearest-neighbors for a sample of 4000 datum, one notices using less than four nearest neighbors results in a degenerate M matrix - with negative eigenvalues and thus not PSD. The reconstruction error, equivalent to the sum of the eigenvalues for positive eigenvalues, is positive and lowest for k = 4 neighbors, and this is plotted in \textbf{Figure 6}.
+
+Additionally, I tried another distance function (cosine angle) for NN that makes sense for images (and high-dim data in general). Although its reconstruction error was usually on the same order of magnitude as euclidean - regardless of data points used, it was consistently ~6x larger. Surprisingly, Euclidean distance did better, at least according to this error definition.
+}
+\item{
+The process simply involves finding nearest neighbors of a chosen point in the embedded space and weighing them by inverse distance (normalized), but adding together the weighted 784-dim images corresponding to the embedded neighbors instead.
+
+I have excluded some images for lack of space due to the 2-page requirement, but I have included two images of points as I moved from the space within digit 7 towards 3/8 (\textbf{Figures 7 \& 8}).
+
+Images resulting from "outside" the simplex region (not pictured) are still fine because it uses a fixed number of neighbors anyway that usually end up being of the same class. The idea should hold in higher dim, but the distance function used to calculate neighbors deteriorates in higher dim of course.
+
+Performing this in the original space (not pictured) just looks like overlaid digit pixels with less structure (though not completely noisy). The original dimension lacks the geometry that maintains the reconstruction properties that the embedded dimension does, where distances between points imply manifold distance rather than whatever some high-dim distance function would.
+}
+\end{enumerate}
+
+}
+\end{homeworkProblem}
+
+\begin{figure}
+\centering
+\begin{minipage}{.42\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{7000n_4k_sqeu_2D}
+  \captionof{figure}{2D Embedding}
+\end{minipage}
+\begin{minipage}{.42\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{7000n_4k_sqeu_3D}
+  \captionof{figure}{3D Embedding}
+\end{minipage}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.6\linewidth]{M_recolor}
+\caption{M matrix colorized}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{minipage}{.6\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{EigenValues_M}
+  \captionof{figure}{eigenvalues of M}
+\end{minipage}
+\begin{minipage}{.33\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{EigenValues_M_zoom}
+  \captionof{figure}{zoomed-in on smallest}
+\end{minipage}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{4000n_neighbors_test}
+\caption{}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{minipage}{.42\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{7000n_2d_iterp_(-267,-112)}
+  \captionof{figure}{Interpolated 7}
+\end{minipage}
+\begin{minipage}{.42\textwidth}
+  \centering
+  \includegraphics[width=\linewidth]{{2000n_2d_iterp_(1.52e6,-484)}.png}
+  \captionof{figure}{Interpolated between 3/8}
+\end{minipage}
+\end{figure}
+
+\clearpage
+
+%----------------------------------------------------------------------------------------
+\begin{homeworkProblem}[The Implementation]
+%In the implementation section you give a concise insight to the practical aspects of this coding exercise. It mainly mentions the optimization methods used to solve the model equations. Did you encounter numerical or efficiency problems? If yes, how did you solve them?
+%Provide the link to your git branch of this coding exercise.\newline
+%Hard limit: One page
+
+\vspace{10pt}
+\problemAnswer{ % Answer
+
+My LLE implementation first creates the \textit{W} matrix mentioned in the original paper, which represents a graph of barycentric weights from each data point to another.
+\\\\
+This involves finding the K nearest neighbors of all points to another, which is done using a built-in function with multi-core functionality and the default Minkowski (Euclidean in this case) distance which performs the best, somehow.
+\\\\
+Then the optimal reconstruction weights are found by solving a least squares problem on the covariance matrix of the difference between each point and its neighbors, essentially leading to finding weights \textit{w} such that $Cw=1$. A \textit{w} vector is found per data point, using a built-in least-squares solver, and stored in an $N \times k$ matrix \textit{W}.
+\\\\
+After deriving a lot of other stuff, we essentially need to create a matrix $M = (I-W)^T(I-W)$ and extract its eigenvectors corresponding to the smallest eigenvalues, which can be done using SciPy's built-in eigenvalue solver. Strangely, the sparse solver does not seem to work whereas the dense one does, and I cannot seem to figure out why.
+\\\\
+The resulting smallest eigenvectors can be used as the reduced-dimension data, although technically the smallest eigenvalue is apparently always zero, so that one should be discarded of course. 
+\\\\\\
+\textbf{Problems Encountered along the Way:}
+\\\\
+The experiments run on the MNIST dataset were done on a (deterministically) random subset of the images instead of all original 70,000, due to significant computation time when performing nearest-neighbors. Usually under 10000 images were used.
+\\\\
+Initally I made my own nearest-neighbors function, but I switched to SkLearn's version after seeing it had multi-processing support.
+\\\\
+Numerical issues were encountered when using fewer than 4 neighbors, as M would be created as a non-PSD matrix whose eigenvalues would be negative.
+\\\\
+The returned eigenvectors are apparently known to be negated and require scaling by the square root of the eigenvalues of M to be considered truly-transformed data, but of course this is not a necessity.
+\\\\
+M is known to be sparse and handling it as a dense matrix is memory-intensive compared to using a sparse matrix from SciPy's CSR implementation.
+}
+\end{homeworkProblem}
+\clearpage
+
+%----------------------------------------------------------------------------------------
+\begin{homeworkProblem}[Your Page]
+%Your page gives you space to include ideas, observations and results which do not fall into the categories provided by us. You can also use it as an appendix to include things which did not have space in the other sections.\newline
+%No page limit.
+
+\vspace{10pt}
+\problemAnswer{ % Answer
+
+\hmwkGitBranch % defined in line 5
+\\\\
+\textbf{References:}
+\begin{enumerate}
+\item \url{https://www.cs.nyu.edu/~roweis/lle/papers/lleintro.pdf}
+\item \url{http://axon.cs.byu.edu/Dan/678/miscellaneous/Manifold.example.pdf}
+\end{enumerate}
+
+}
+\end{homeworkProblem}
+\clearpage
+
+\end{document}
+
