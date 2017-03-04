@@ -55,6 +55,11 @@ You can always commit and push to your branch and we will take your final report
 
 If you are uncertain if everything is where it should be, just look at your branch in the browser.
 
+## Report Submission ##
+When you have finished your experiments and report please push everything to the respective exercise
+
+branch. Make sure to put the final report tex file and a pdf compiled from it in the top level directory of the exercise branch.
+
 ## Initial setup ##
 
 (1) Request and get access to the repository.
