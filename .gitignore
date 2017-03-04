@@ -1,0 +1,6 @@
+Report/*
+!Report/*.pdf
+!Report/*.tex
+
+Data/
+Plot/
