@@ -1,4 +1,5 @@
 import numpy as np
+from time import time
 import struct
 from array import array
 import matplotlib.pylab as plt
@@ -69,7 +70,7 @@ def load(path_img, path_lbl):
     
 
 #Load data
-train_data, train_labels = load(train_img_path, train_lbl_path)
+all_data, all_labels = load(train_img_path, train_lbl_path)
 
 
 """
@@ -77,6 +78,7 @@ LLE method
 """
 
 def locally_linear_embedding(X, n_neighbors, out_dim, tol=1e-3, max_iter=200):
+    start_time = time()
     
     n = len(X)
     
@@ -159,6 +161,10 @@ def locally_linear_embedding(X, n_neighbors, out_dim, tol=1e-3, max_iter=200):
                                                 tol=tol, maxiter=max_iter)
     index = np.argsort(eigen_values) #In case the values are not sorted
     index = index[1:] # Drop lowest eigenvalue
+    
+    end_time = time()
+    print("Time for LLE ("+str(n)+" samples): "+str(end_time-start_time))    
+    
     return eigen_vectors[:, index]
 
 
@@ -190,7 +196,59 @@ def simple_reconstruct(Y,X,p,n_neighbors,pic):
 
 
 def learn_mapping(X,Y,ps):
+    #Learns reverse mapping from Y to X with 
+    from sklearn.kernel_ridge import KernelRidge
+   
+    #X = X/255.0
+   
+    reg = KernelRidge(kernel="linear")
+    reg.fit(Y,X)
+    
+    #Some arbitrary samples to compare reconstruction
+#    for i in [0,100,356,432,768,862]:
+#        generated_image = reg.predict(np.reshape(Y[i,:], (1,-1)))
+#        generated_image[generated_image < 0] = 0
+#        plt.figure()
+#        plt.imshow(np.reshape(generated_image,(28,28)),cmap='gray')
+#        plt.show()
+#        plt.figure()
+#        plt.imshow(np.reshape(X[i,:],(28,28)),cmap='gray')
+#        plt.show()
+    
+    for i in range(np.shape(ps)[0]):
+        predictions = reg.predict(np.reshape(ps[i], (1,-1)))
+        predictions[predictions < 0] = 0
+        fig = plt.figure()
+        plt.imshow(np.reshape(predictions,(28,28)),cmap='gray')
+        if save_figures:
+            fig.savefig(plot_folder+"series/"+str(i)+".png")
+        plt.draw()
+    
+    plt.show()
+    
+    pstart = ps[-1]
+    #Create a point which is certainly outside of the manifold
+    print(np.amax(ps,axis=0))
+    pend = 2*np.amax(ps,axis=0)#np.random.randn(np.shape(ps)[1])
+    print(pend)
+    ps = []
+    for t in np.arange(0,1.01,0.1): 
+        ps.append((1-t)*pstart+t*pend)
+    for i in range(np.shape(ps)[0]):
+        predictions = reg.predict(np.reshape(ps[i], (1,-1)))
+        predictions[predictions < 0] = 0
+        fig = plt.figure()
+#        plt.title("Outside manifold "+str(i))
+        plt.imshow(np.reshape(predictions,(28,28)),cmap='gray')
+        if save_figures:
+            fig.savefig(plot_folder+"series/outside"+str(i)+".png")
+        plt.draw()
+    plt.show()
+
+
+def learn_mapping_neuralnetwork(X,Y,ps):
     #Learns reverse mapping from Y to X
+    #This network only learned an average representation (see report)
     
     X = X/255.0 #Normalize X by maximum value
     
@@ -266,12 +324,13 @@ def learn_mapping(X,Y,ps):
 Sort samples by labels in order to make block structure in matrix visible
 """
 
-samples = 2000
-neighbors = 10
+samples = 1000
+
+neighbors = 30
 
 #Sort train data for better visuals on block structures
-train_data = train_data[0:samples]
-train_labels = train_labels[0:samples]
+train_data = all_data[0:samples]
+train_labels = all_labels[0:samples]
 train_data = np.asarray([x for (y,x) in sorted(zip(train_labels,train_data))])
 train_labels = sorted(train_labels)
 
@@ -281,24 +340,35 @@ We can compute the LLE once for 3 dimensions.
 The lower 2 dimensions are not influenced by the fact that we already computed the 3rd one.
 I.e. the matrix M is the same independent of how many dimensions the embedded space has.
 """
-lle = locally_linear_embedding(train_data, neighbors, 100)
+dim = 30 #Dimensions used for reconstruction
+lle = locally_linear_embedding(train_data, neighbors, dim)
+
+
+
 
 """
 Plot 2D
 """
 fig = plt.figure(figsize=(12,8))
 plt.title("2D Embedding")
-plt.scatter(lle[:,0],lle[:,1],c=train_labels)
+sc = plt.scatter(lle[:,0],lle[:,1],c=train_labels,cmap=plt.cm.get_cmap("jet",10))
+plt.colorbar(sc)
 if save_figures:
     fig.savefig(plot_folder+'2dEmbeddingNew.png')
 plt.draw()
 
 
+"""
+Reconstruction
+plot path in 2d plot
+"""
+
 reconstruction_method = 'learn'#'interpolation' or 'learn'
 
-dim = 100 #Dimensions used for reconstruction
-a, b = lle[0,:dim], lle[700,:dim]
+first_ind, second_ind = 400, 700
+a, b = lle[first_ind,:dim], lle[second_ind,:dim]
 a, b = np.asarray(a), np.asarray(b)
+print("Reconstruction from a "+str(train_labels[first_ind])+" to a "+str(train_labels[second_ind]))
 plt.plot([a[0],b[0]],[a[1],b[1]])
 plt.draw()
 
@@ -315,17 +385,19 @@ elif reconstruction_method == 'learn':
     learn_mapping(train_data,lle[:,:dim],ps)
 
 
+
+
 """
 Plot 3D
 """
 fig = plt.figure(figsize=(12,8))
 ax = fig.add_subplot(111, projection='3d')
 ax.set_title("3D Embedding")
-ax.scatter(lle[:,0],lle[:,1],lle[:,2],c=train_labels)
+sc = ax.scatter(lle[:,0],lle[:,1],lle[:,2],c=train_labels,cmap=plt.cm.get_cmap("jet",10))
+plt.colorbar(sc)
 if save_figures:
     fig.savefig(plot_folder+'3dEmbeddingNew.png')
-plt.show()
-
+plt.draw()
 
 
 

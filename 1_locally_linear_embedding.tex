@@ -162,13 +162,7 @@ Hard limit: One page
 	
 	with  $C_{jk} = (x-\eta_j)\cdot(x-\eta_k)$ where $\eta_i$ Neighbor i
 	
-	The weights can be computed by solving the following linear system of equations
-	
-	\[
-		\sum_j C_{jk}w_k = 1
-	\]
-	
-	and then rescaling the weights so that they sum to one for each data point.
+
 	
 	\vspace*{1em}
 	
@@ -184,15 +178,7 @@ Hard limit: One page
 	\]
 	
 	The optimal embedding is found by computing the bottom $d+1$ eigenvectors of $M$. Discard the bottom eigenvector which is the unit vector. The remaining $d$ eigenvectors are the $d$ embedding coordinates found by LLE.
-	
-	\vspace*{1em}
-	
-	Algorithm:
-	\begin{enumerate}
-		\item Compute the Neighbors of each data point, $X_i$.
-		\item Compute the weights $W_{ij}$ that best reconstruct each data point $X_i$ from its neighbors, minimizing the cost by constrained linear fits.
-		\item Compute the vectors $Y_i$ best reconstructed by the weights $W_{ij}$ minimizing the quadratic form by its bottom nonzero eigenvectors.
-	\end{enumerate}
+
 
 
 }
@@ -229,7 +215,7 @@ Assume you pick some point in the embedding space. How can you map it back to th
 \problemAnswer{ % Answer
 
 
-b) A description of the implementation is in the implementation section. The following two plots show the 2d and 3d embedding of 1000 samples with 10 neighbors. The colors correspond to the label of a data point. Clusters are visible, e.g. the blue and dark red points. In the 3d embedding the green data points form a very distinct cluster.
+b) A description of the implementation is in the implementation section. The following two plots show the 2d and 3d embedding of 1000 samples with 10 neighbors. The colors correspond to the label of a data point. Clusters are visible, e.g. the blue (label 0) and dark red (label 9) points. In the 3d embedding the green (label 5) data points form a very distinct cluster.
 
 
 \includegraphics[width=0.5\textwidth]{plots/2dEmbedding}
@@ -266,7 +252,21 @@ d) With more neighbors the manifold is smoother. The following two figures illus
 I implemented another way to determine the neighbors of a datapoint. Since we are dealing with images I use the structural similarity\footnote{https://en.wikipedia.org/wiki/Structural\_similarity} on the smoothed images (Gaussian filter with $\sigma=1$). The resulting matrix $M$ is slightly better diagonalized (less neighbors with different labels). See appendix for figures.
 
 \vspace*{1em}
-e) As a first attempt I determined the closest neighbors of a point in the embedded space. I assigned weights to these neighbors, so that the linear combination results in the point we want to map into high dimensional space (number of neighbors equals the dimension of the embedded space). Then I simply computed the weighted average of the high dimensional neighbors. But this method does only work if the point is very close to an already existing one. See gif at /plots/interpolation2d.gif.
+e) As a first attempt I tried to mimic a reversal of the embedding. I determined the closest neighbors of a point in the embedded space and then assigned weights to these neighbors, so that the linear combination results in the chosen point (number of neighbors equals the dimension of the embedded space). Then I simply computed the weighted average of the high dimensional neighbors. The results are not satisfactory and this method only works if the point is very close to an already existing one. See gif at \emph{/plots/interpolation2d.gif}.
+
+A more promising method is to learn the mapping with machine learning. 
+Kernelized ridge regression with a linear kernel worked surprisingly well. Other regression methods either just interpolate between the two high dimensional pictures or only learn an average representation (which they then predicted for all inputs).
+I set the dimension of the embedded space to 30 and increased the number of neighbors to 30 as well. This improved the reconstruction, most likely because the manifold is smoother with more neighbors, as mentioned before. The only post-processing step is to set every pixel which has a value below 0 to 0.
+The following figure shows the path along which the reconstructions were computed, the gif is located at \emph{/plots/reconstruct3to7.gif} (or see appendix for a few of the intermediate stages and what happens outside of the manifold).
+
+\begin{center}
+\includegraphics[width=0.5\textwidth]{plots/reconstructionPath}
+\end{center}
+
+
+
+
+I also tried using a neural network but it only learned an "average" high dimensional representation (see appendix).
 
 }
 \end{homeworkProblem}
@@ -287,6 +287,27 @@ Branch name \hmwkGitBranch
 The code is located at ./code/locally\_linear\_embedding.py.
 \vspace*{0.5em}
 
+
+\textbf{Algorithm}
+
+	\begin{enumerate}
+	\item Compute the Neighbors of each data point, $X_i$.
+	\item Compute the weights $W_{ij}$ that best reconstruct each data point $X_i$ from its neighbors, minimizing the cost by constrained linear fits.
+	\item Compute the vectors $Y_i$ best reconstructed by the weights $W_{ij}$ minimizing the quadratic form by its bottom nonzero eigenvectors.
+\end{enumerate}
+
+The weights in step 2 can be computed by solving the following linear system of equations
+
+\[
+\sum_j C_{jk}w_k = 1
+\]
+
+and then rescaling the weights so that they sum to one for each data point.
+
+\vspace*{1em}
+
+\textbf{Implementation}
+
 The MNIST loading code is taken from 
 
 https://github.com/sorki/python-mnist/blob/master/mnist/loader.py.
@@ -296,16 +317,20 @@ The implementation of the LLE algorithm was done mostly from scratch with occasi
 
 (https://github.com/scikit-learn/scikit-learn/blob/14031f6/sklearn/manifold/locally\_linear.py\#L508)
 
-and the Matlab code provided here: https://www.cs.nyu.edu/~roweis/lle/code.html.
+and the Matlab code provided here: https://www.cs.nyu.edu/$\sim$roweis/lle/code.html.
 
 \vspace*{1em}
 The implementation works with a sparse csr matrix and uses the arpack \texttt{eigsh} function to solve for the eigenvectors. 
-I never encountered performance problems with this implementation because I only use the first 1000 samples of the training data. If I used more samples the visualizations become cluttered.
-Numerical instabilities are prevented by adding a small value to the main diagonal of the covariance matrix (as proposed in the paper, appendix A equation 6).
+I never encountered performance problems with this implementation (See figure below for performance).
+Numerical instabilities are prevented by adding a small value to the main diagonal of the covariance matrix (as proposed in the paper\footnote{"An Introduction to Locally Linear Embedding" by L. Saul and S. Roweis}, appendix A equation 6).
 
 The hardest part of the implementation was at first understanding which steps were actually required for the algorithm and then to have the correct shapes, dimensions and transpositions for the matrices and vectors.
 
+The performance of the algorithm is a bit slower than $O(n^2)$.
 
+\begin{center}
+\includegraphics[width=0.5\textwidth]{plots/LLEperformance}
+\end{center}
 
 }
 \end{homeworkProblem}
@@ -336,6 +361,34 @@ The resulting embeddings are quite similar, except for a rotation. (Left Euclide
 \includegraphics[width=0.5\textwidth]{plots/ssim2dEmbedding}
 
 
+
+\textbf{Learning the reverse mapping}
+
+The kernelized ridge regression learned to reconstruct arbitrary points on the manifold. The following pictures are some of the stages contained in the reconstruction gif (\emph{/plots/reconstruct3to7.gif}).
+
+\begin{center}
+\includegraphics[width=0.2\textwidth]{plots/reconstruct_0}
+\includegraphics[width=0.2\textwidth]{plots/reconstruct_3}
+\includegraphics[width=0.2\textwidth]{plots/reconstruct_6}
+\includegraphics[width=0.2\textwidth]{plots/reconstruct_10}
+\end{center}
+
+}
+
+\problemAnswer{ % Answer
+
+Outside of the manifold the reconstructions do no longer clearly represent a digit. But they still have some features of the digits (certain curves etc.).
+
+\begin{center}
+\includegraphics[width=0.5\textwidth]{plots/outsideManifold}
+\end{center}
+
+The neural network mentioned in task (e) had learned the following "average" high dimensional representation. The network returned this for all inputs (with small deviations).
+
+
+\begin{center}
+\includegraphics[width=0.5\textwidth]{plots/learnedMappingNN}
+\end{center}
 
 }
 \end{homeworkProblem}
