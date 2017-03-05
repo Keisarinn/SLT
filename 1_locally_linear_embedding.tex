@@ -19,7 +19,8 @@
 \usepackage{extramarks} % Required for headers and footers
 \usepackage{graphicx} % Required to insert images
 \usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
-
+\usepackage{caption}
+\usepackage{subcaption}
 % Margins
 \topmargin=-0.45in
 \evensidemargin=0in
@@ -164,8 +165,9 @@ Yes, some clusters appear. See examples in figure 1 below.
 }
 
 \begin{figure}[h]
-\includegraphics[scale=0.4]{fig_2d_8k.png}
-\includegraphics[scale=0.4]{fig_3d_8k.png}
+\centering
+\includegraphics[scale=0.3]{fig_2d_8k.png}
+\includegraphics[scale=0.3]{fig_3d_8k.png}
 
 \caption{There are some visible clusters in the results.}
 \end{figure}
@@ -173,57 +175,65 @@ Yes, some clusters appear. See examples in figure 1 below.
 \problemAnswer{
 Answer c:
 We can see that the diagonal elements are all non-zero.
-
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.3]{Mplot.png}
-\caption{Plotting part of the matrix M}
-\end{figure}
-
-
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.3]{signularvalues.png}
-\caption{Singular values of M}
-\end{figure}
 }
-
+\begin{figure}[H]
+\centering
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=.4\linewidth]{Mplot.png}
+  \captionof{figure}{Plotting part of the matrix M}
+  \label{fig:test1}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=.4\linewidth]{signularvalues.png}
+  \captionof{figure}{Singular values of M}
+  \label{fig:test2}
+\end{minipage}
+\end{figure}
 \vspace{10pt}
 \problemAnswer{ % Answer
 Answer d:
 When we change K, the number of nearest neighbors we can see some differences. If we only use 1 neighbor for each data point we can see that no visible clusters form (figure 4). Then as we increase the number of nearest neighbors we start seeing clusters even with K=3 (figure 5). The clusters seem to become more clear when we increase K. 
-
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.4]{fig_2d_1k.png}
-\caption{Using only 1 nearest neighbor}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.4]{fig_2d_3k.png}
-\caption{Using 3 nearest neighbor}
-\end{figure}
 }
+\begin{figure}[H]
+\centering
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=.5\linewidth]{fig_2d_1k.png}
+  \captionof{figure}{Using only 1 nearest neighbor}
+  \label{fig:test1}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=.5\linewidth]{fig_2d_3k.png}
+  \captionof{figure}{Using 3 nearest neighbor}
+  \label{fig:test2}
+\end{minipage}
+\end{figure}
 \problemAnswer{
 Figures 6,7 and 8 show the use of 7 nearest neighbors with Euclidean, Hamming and Chebyshev distance metrics respectively.
-
+}
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.4]{fig_2d_7k.png}
-\caption{K=7, Euclidean distance}
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=.5\linewidth]{fig_2d_7k.png}
+  \captionof{figure}{K=7, Euclidean distance}
+  \label{fig:test1}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=.5\linewidth]{fig_2d_7k_hamming.png}
+  \captionof{figure}{K=7, Hamming distance}
+  \label{fig:test2}
+\end{minipage}%
 \end{figure}
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.4]{fig_2d_7k_hamming.png}
-\caption{K=7, Hamming distance}
-\end{figure}
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.4]{fig_2d_7k_cheby.png}
+\includegraphics[width=.5\linewidth]{fig_2d_7k_cheby.png}
 \caption{K=7, Chebyshev distance}
 \end{figure}
-}
 \problemAnswer{
 Answer e:
 One method would be to find the point's K nearest neighbors in the embedding space and find the reconstruction weights as in the high dimensional space. Then use these K nearest neighbors and weights in the high dimensional space to reconstruct the data-point. This depends highly on the dimensionality of the embedding space, it works better for higher dimensions.
