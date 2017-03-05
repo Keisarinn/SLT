@@ -199,8 +199,6 @@ def learn_mapping(X,Y,ps):
     #Learns reverse mapping from Y to X with 
     from sklearn.kernel_ridge import KernelRidge
    
-    #X = X/255.0
-   
     reg = KernelRidge(kernel="linear")
     reg.fit(Y,X)
     
@@ -226,11 +224,10 @@ def learn_mapping(X,Y,ps):
     
     plt.show()
     
+    #Outside of manifold
     pstart = ps[-1]
     #Create a point which is certainly outside of the manifold
-    print(np.amax(ps,axis=0))
     pend = 2*np.amax(ps,axis=0)#np.random.randn(np.shape(ps)[1])
-    print(pend)
     ps = []
     for t in np.arange(0,1.01,0.1): 
         ps.append((1-t)*pstart+t*pend)
