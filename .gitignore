@@ -3,3 +3,4 @@ data/*
 1_locally_linear_embedding.log
 1_locally_linear_embedding.synctex.gz
 1_locally_linear_embedding.toc
+*.ipynb_checkpoints/
