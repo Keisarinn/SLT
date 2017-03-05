@@ -1,8 +1,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Make sure to set your name, legi number and url to the right git branch.
-\newcommand{\hmwkAuthorName}{YOUR NAME} % Your name
-\newcommand{\hmwkAuthorLegi}{YOUR LEGI NUMBER} % Your name
-\newcommand{\hmwkGitBranch}{YOUR GIT BRANCH} % Your name
+\newcommand{\hmwkAuthorName}{Giacomo Giuliari} % Your name
+\newcommand{\hmwkAuthorLegi}{16-932-121} % Your name
+\newcommand{\hmwkGitBranch}{16-932-121/ 1\_locally\_linear\_embedding} % Your name
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -18,6 +18,7 @@
 \usepackage{extramarks} % Required for headers and footers
 \usepackage{graphicx} % Required to insert images
 \usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage{enumitem}
 
 \usepackage{animate}
 
@@ -146,7 +147,22 @@ Hard limit: One page
 \vspace{10pt}
 
 \problemAnswer{ % Answer
-Your Answer
+The fundamental idea of this algorithm relies on the minimization of the two reconstruction errors, defined as:
+	$$ E\left( W\right) =\sum^{N}_{i=1}\parallel x_{i}-\sum 			^{N}_{i=1}w_{ij}x_{j}\parallel ^{2} $$
+	
+	$$E \left( y_1 \dots y_n \right) =\sum^{N}_{i=1}\parallel y_{i}-\sum ^{N}_{i=1}w_{ij}y_{j}\parallel ^{2} $$
+	
+However, the explicit formulation of the error is never used in the actual implementation. \\
+An important role in the algorithm is played by the matrix $C_i$ for each datapoint $x_i$:
+$$ C_i = Z \cdot Z^T $$
+Where $Z = N - X_i$ and $N$ is the matrix containing as columns the k-nearest-neighbors of $x_i$.\\
+The weights $w$ are found by solving the linear system of equations
+$$ C_i \cdot w = \mathbf{1}$$
+Finally, the $y$ points in the embedding are the eigenvectors of the matrix
+$$ M = (I- W)^T \cdot (I - W)$$
+associated with the $k+1$ smallest eigenvalues (after dropping the eigenvector associated with eigenvalue 0).
+
+
 }
 \end{homeworkProblem}
 \clearpage
@@ -179,66 +195,170 @@ Assume you pick some point in the embedding space. How can you map it back to th
 
 \vspace{10pt}
 \problemAnswer{ % Answer
-
-
-        In the plots, expecially the 3D ones, the clusters are clearly visible. It seems that more numbers are "recognised" (gathered in the same cluster) better tant the others.
-
-            \includegraphics[scale=0.10]{imgs/2D_2000.png}
-            \includegraphics[scale=0.10]{imgs/3D_1_2000.png}
-            \includegraphics[scale=0.10]{imgs/3D_2_2000.png}
-            \includegraphics[scale=0.10]{imgs/3D_3_2000.png}
-
-            % \animategraphics{12}{Python/interp/im_}{0}{19}[scale=3]
-
-
-            No relevant box structures seem to appear in the matrix plot of M.\\
-            The matrix appears to be symmetric, sparse and with higher numbers on the diagonal.
-
-            \includegraphics[scale=0.25]{imgs/mat_20_1.png}
-            \includegraphics[scale=0.25]{imgs/mat_20_2.png}
-
-            \animategraphics[loop,scale=3]{12}{Python/interp/im_}{0}{19}
-
-        \subsubsection{Singular Values}
-            By plotting the singular values in order it can be noticed that there are a few of them with a high absolute value. Since the singular values are associated with the energy of the projection on the lower-dimensional space, a way to determine the optimal embedding space would be to choose the number of dimendions of the space equal to the number singular values (in order of decreasing magnitude) that have the biggest difference in value from the others (i.e. before their value starts to decrease slowly).
-            This can be regarded as an "elbow method".
-
-            \newpage
-
-
-            \includegraphics[scale=0.12]{imgs/svd_1.png}
-            \includegraphics[scale=0.12]{imgs/svd_2.png}
-
-
-
-        \subsubsection{Interpolation in the embedding space}
-
-        \animategraphics[loop,scale=3]{12}{Python/interp/im_}{0}{19}
-        \subsubsection{interpolation in the original space}
-
-        Axes3D\\
-        das\\
-        asd\\
-        asd\\
-        asd\\
-        asd\\
-        asd\\
-        sad\\
-        sad\\
-        asd\\
-        ads\\das
-
-        \\Axes3D
-        \\d
-        \\
-        \\Axes3D\\
-        asd\\
-        
-
-
+	
+	\begin{enumerate}[label=(\alph*)]
+	\item{
+		The dataset was loaded from the supplied website and was then parsed to access images and labels.
+		}
+	\item{
+		In the plots, expecially the 3D ones, the clusters are clearly visible. It seems that more numbers are "recognised" (gathered in the same cluster) better tant the others.
+		}
+	\item{
+        No relevant box structures seem to appear in the matrix plot of M.\\
+        The matrix appears to be symmetric, sparse and with higher numbers on the diagonal.\\
+        By plotting the singular values in order it can be noticed that there are a few of them with a high absolute value. Since the singular values are associated with the energy of the projection on the lower-dimensional space, a way to determine the optimal embedding space would be to choose the number of dimendions of the space equal to the number singular values (in order of decreasing magnitude) that have the biggest difference in value from the others (i.e. before their value starts to decrease slowly).
+        This can be regarded as an "elbow method".
+        }
+	\item{
+        The lowest error is achieved by using 4-nearest-neighbors. For values greater than 4 the error increases, for lower values the matrices can be singular.\\
+        The L1-norm (Manhattan distance) was tried instead of the usual L2. No changes in the results were noticed. More sophisticated image-related metrics were not investigated due to lack of time.
+	    }
+	 \item{
+	 	The mapping is done by first finding the k-nearest-neighbors of the point amongst the transformed ones. Then the local weights need to be calculated and used to find the corresponding point in the higher-dimensional space by applying the same weights to the transformations of the neighbors.\\
+	 	The linear interpolations in the embedding and in the original space are shown in figure.
+	 	}
+	\end{enumerate}
 }
 \end{homeworkProblem}
+
+	\begin{figure}[h]
+		\centering
+		\begin{minipage}{.45\textwidth}
+			\centering
+			\includegraphics[width=\linewidth]{imgs/2D_2000.png}
+			\caption{figure}{2D Embedding}
+		\end{minipage}
+		\begin{minipage}{.45\textwidth}
+			\centering
+			\includegraphics[width=\linewidth]{imgs/3D_1_2000.png}
+			\caption{figure}{3D Embedding}
+		\end{minipage}
+	\end{figure}
+
+	\begin{figure}[h]
+		\centering
+		\begin{minipage}{.35\textwidth}
+			\centering
+			\includegraphics[width=\linewidth]{imgs/mat_20_1.png}
+		\end{minipage}
+		\begin{minipage}{.35\textwidth}
+			\centering
+			\includegraphics[width=\linewidth]{imgs/mat_20_2.png}
+		\end{minipage}
+		\caption{figure}{Matrix plots of a subset of indices on the diagonal of the M matrix.}
+	\end{figure}
+	
+	\begin{figure}[h]
+		\centering
+		\begin{minipage}{.50\textwidth}
+			\centering
+			\includegraphics[width=\linewidth, scale=0.2]{imgs/svd_2.png}
+			\caption{figure}{All the singular values}
+		\end{minipage}
+		\begin{minipage}{.50\textwidth}
+			\centering
+			\includegraphics[width=\linewidth, scale=0.2]{imgs/svd_1.png}
+			\caption{figure}{The top 7 singular values. Notice the change in the 'gradient' after the third.}
+		\end{minipage}
+	\end{figure}
+	
+	\begin{figure}[h]
+	\centering
+	\begin{minipage}{.09\textwidth}
+		\centering
+		\includegraphics[width=\linewidth, scale=0.2]{Python/interp/im_0.png}
+	\end{minipage}
+	\begin{minipage}{.09\textwidth}
+		\centering
+		\includegraphics[width=\linewidth, scale=0.2]{Python/interp/im_2.png}
+	\end{minipage}
+	\begin{minipage}{.09\textwidth}
+		\centering
+		\includegraphics[width=\linewidth, scale=0.2]{Python/interp/im_4.png}
+	\end{minipage}
+	\begin{minipage}{.09\textwidth}
+		\centering
+		\includegraphics[width=\linewidth, scale=0.2]{Python/interp/im_6.png}
+	\end{minipage}
+	\begin{minipage}{.09\textwidth}
+		\centering
+		\includegraphics[width=\linewidth, scale=0.2]{Python/interp/im_8.png}
+	\end{minipage}
+	\begin{minipage}{.09\textwidth}
+		\centering
+		\includegraphics[width=\linewidth, scale=0.2]{Python/interp/im_10.png}
+	\end{minipage}
+	\begin{minipage}{.09\textwidth}
+		\centering
+		\includegraphics[width=\linewidth, scale=0.2]{Python/interp/im_12.png}
+	\end{minipage}
+	\begin{minipage}{.09\textwidth}
+		\centering
+		\includegraphics[width=\linewidth, scale=0.2]{Python/interp/im_14.png}
+	\end{minipage}
+	\begin{minipage}{.09\textwidth}
+		\centering
+		\includegraphics[width=\linewidth, scale=0.2]{Python/interp/im_16.png}
+	\end{minipage}
+	\begin{minipage}{.09\textwidth}
+		\centering
+		\includegraphics[width=\linewidth, scale=0.2]{Python/interp/im_18.png}
+	\end{minipage}
+	\caption{Interpolation (linear) in the 2-dimensional embedding space, mapped to the original space.}
+	\end{figure}
+	
+	\begin{figure}[h]
+		\centering
+		\begin{minipage}{.09\textwidth}
+			\centering
+			\includegraphics[width=\linewidth, scale=0.2]{Python/interp_orig/im_0.png}
+		\end{minipage}
+		\begin{minipage}{.09\textwidth}
+			\centering
+			\includegraphics[width=\linewidth, scale=0.2]{Python/interp_orig/im_1.png}
+		\end{minipage}
+		\begin{minipage}{.09\textwidth}
+			\centering
+			\includegraphics[width=\linewidth, scale=0.2]{Python/interp_orig/im_2.png}
+		\end{minipage}
+		\begin{minipage}{.09\textwidth}
+			\centering
+			\includegraphics[width=\linewidth, scale=0.2]{Python/interp_orig/im_3.png}
+		\end{minipage}
+		\begin{minipage}{.09\textwidth}
+			\centering
+			\includegraphics[width=\linewidth, scale=0.2]{Python/interp_orig/im_4.png}
+		\end{minipage}
+		\begin{minipage}{.09\textwidth}
+			\centering
+			\includegraphics[width=\linewidth, scale=0.2]{Python/interp_orig/im_5.png}
+		\end{minipage}
+		\begin{minipage}{.09\textwidth}
+			\centering
+			\includegraphics[width=\linewidth, scale=0.2]{Python/interp_orig/im_6.png}
+		\end{minipage}
+		\begin{minipage}{.09\textwidth}
+			\centering
+			\includegraphics[width=\linewidth, scale=0.2]{Python/interp_orig/im_7.png}
+		\end{minipage}
+		\begin{minipage}{.09\textwidth}
+			\centering
+			\includegraphics[width=\linewidth, scale=0.2]{Python/interp_orig/im_8.png}
+		\end{minipage}
+		\begin{minipage}{.09\textwidth}
+			\centering
+			\includegraphics[width=\linewidth, scale=0.2]{Python/interp_orig/im_9.png}
+		\end{minipage}
+		\caption{Interpolation (linear) in the original 784-dimensional space.}
+	\end{figure}
+
+
 \clearpage
+
+
+
+
+
 
 %----------------------------------------------------------------------------------------
 \begin{homeworkProblem}[The Implementation]
@@ -248,7 +368,19 @@ Hard limit: One page
 
 \vspace{10pt}
 \problemAnswer{ % Answer
-Your Answer
+	I implemented the algorithm 3 times, one using matrix inversion, another using the linear system solution and the last one changing the way the M and C matrices were handled.\\
+	The implementation problems encountered were in practice the ones listed in the paper presenting the LLE algorithm. In particular:
+	
+	\begin{itemize}
+		\item The efficiency issue of inverting the C matrix was solved by instead finding the results of the linear system and then normalizing the weights.
+		
+		\item The problem with singular C matrices, i.e. no solution of the linear system, was solved by adding a term to the diagonal that is small compared to the trace.
+		
+		\item The possibly huge dimensions of the M matrix were handled leveraging on the fact that it is sparse and symmetric, enabling efficient storage and computation.
+		
+		\item To find efficiently the nearest neighbors in case the total number of datapoints is "small enough" k-d trees can be used.
+	\end{itemize}
+
 }
 \end{homeworkProblem}
 \clearpage

@@ -5,8 +5,5 @@
 \contentsline {subsection}{(c) Cluster structure}{4}
 \contentsline {subsection}{(d) Nearest Neighbors}{4}
 \contentsline {subsection}{(e) Linear manifold interpolation}{4}
-\contentsline {subsubsection}{Singular Values}{5}
-\contentsline {subsubsection}{Interpolation in the embedding space}{5}
-\contentsline {subsubsection}{interpolation in the original space}{5}
 \contentsline {section}{The Implementation}{7}
 \contentsline {section}{Your Page}{8}

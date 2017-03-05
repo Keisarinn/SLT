@@ -1,2 +1,6 @@
 # Ignore the data in the Python directory
 /Python/Data/*
+*.aux
+*.log
+*.toc
+*.out
