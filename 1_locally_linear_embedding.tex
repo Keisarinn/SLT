@@ -1,8 +1,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Make sure to set your name, legi number and url to the right git branch.
-\newcommand{\hmwkAuthorName}{YOUR NAME} % Your name
-\newcommand{\hmwkAuthorLegi}{YOUR LEGI NUMBER} % Your name
-\newcommand{\hmwkGitBranch}{YOUR GIT BRANCH} % Your name
+\newcommand{\hmwkAuthorName}{Michael Giegrich } % Your name
+\newcommand{\hmwkAuthorLegi}{16-715-187} % Your name
+\newcommand{\hmwkGitBranch}{16-715-187/1\_locally\_linear\_embedding} % Your name
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -18,7 +18,8 @@
 \usepackage{extramarks} % Required for headers and footers
 \usepackage{graphicx} % Required to insert images
 \usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
-
+\usepackage{graphicx} % Required to insert images
+\usepackage{subcaption}
 % Margins
 \topmargin=-0.45in
 \evensidemargin=0in
@@ -144,7 +145,15 @@ Hard limit: One page
 \vspace{10pt}
 
 \problemAnswer{ % Answer
-Your Answer
+The data set contains N vectors $X_i$ with dimensionality D.First, we need to identify the K nearest neighbors per data point using the appropriate metric. The reconstruction error which is minimized over the optimal weights W is given by
+\begin{equation}
+E(W)=\sum_i\mid X_i-\sum_j W_{ij}X_j\mid^2
+\end{equation}
+where $W_{ij}=0$ if $X_j$ is not a nearest neighbor and $\sum_j W_{ij}=1$.
+Further, we choose the lower dimensional representations $Y_i$ by minimizing the embedding cost function:
+\begin{equation}
+\Phi(Y)=\sum_{i}\mid Y_i-\sum_j W_{ij}Yj\mid^2
+\end{equation}
 }
 \end{homeworkProblem}
 \clearpage
@@ -174,11 +183,102 @@ Investigate the influence of the choice of how many nearest neighbors you take i
 \begin{homeworkSection}{(e) Linear manifold interpolation}
 Assume you pick some point in the embedding space. How can you map it back to the original (high dimensional) space? Investigate how well this works for points within and outside the manifold (does it depend on the dimensionality of the embedding space?) Try things like linearly interpolating between two embedding vectors and plot the sequence of images along that line. What happens if you do that in the original space?
 \end{homeworkSection}
-
+\newpage
 \vspace{10pt}
-\problemAnswer{ % Answer
-Your Answer
-}
+ 
+(b) In the visualization of the Local Linear Embedding, we can distinguish several clusters in both the 2D case and the 3D case. The 3D embedding, however, allows us to identify more clusters than the 2D embedding.
+ 
+
+
+\begin{figure}[h]
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{scatter2D}
+  \caption{2D Embedding with 1000 digits and 15 neighbors}
+  \label{fig:sfig1}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{scatter3D}
+  \caption{3D Embedding with 1000 digits and 15 neighbors}
+  \label{fig:sfig2}
+\end{subfigure}
+
+\label{fig:fig}
+\end{figure}
+
+% AnswerInvestigate the cluster structure of the data. Can you observe block structures in the $M$ matrix (use matrix plots)? Also plot the singular values of $M$. Do you notice something?Can you think of ways to determine the optimal embedding dimension?
+ 
+(c) The matrix is relatively sparse and close to being a diagonal matrix. I cannot observe any block structures. Most singular values are close to 0 and the relative frequency of singular values is sharply decreasing in the values. The optimal embedding dimension can be found by examining the d+1 smallest eigenvalues not equal to zero. Using them, we can introduce a threshold on the embedding error.
+
+\begin{figure}[h]
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{matrix}
+  \caption{Matrix Plot}
+  \label{fig:sfig1}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{sv}
+  \caption{Singular Values}
+  \label{fig:sfig2}
+\end{subfigure}
+
+\label{fig:fig}
+\end{figure}
+%Investigate the influence of the choice of how many nearest neighbors you take into account. Additionally, try different metrics to find the nearest neighbors (we are dealing with images!).
+(d) The choice of the number of neighbors has a big effect on embedding. It seems that the visibility of clusters first improves with the number of neighbors but then diminishes for a to large number of neighbors (as can be seen in the Euclidean norm graph). Also the choice of the norm has an impact on the quality of the dimension reduction. The Euclidean Norm seems to generate the best clusters when comparing the norms I used.The Minkowski norm seems to perform also quite well while the City Block and the Chebychev norm perform the worst.  
+\begin{figure}[h]
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{NN1}
+  \caption{Euclidean Norm}
+  \label{fig:sfig1}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{city}
+  \caption{City Block Norm}
+  \label{fig:sfig2}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{chebychev}
+  \caption{Chebychev Norm}
+  \label{fig:sfig2}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{mink}
+  \caption{Minkowski Norm}
+  \label{fig:sfig2}
+\end{subfigure}
+\label{fig:fig}
+\end{figure}
+\\
+(e) 
+%Assume you pick some point in the embedding space. How can you map it back to the original (high dimensional) space? Investigate how well this works for points within and outside the manifold (does it depend on the dimensionality of the embedding space?) Try things like linearly interpolating between two embedding vectors and plot the sequence of images along that line. What happens if you do that in the original space?
+I can map a point back into the high-dimensional space by considering the nearest neighbors in the low dimensional space. By taking into account the distances to the nearest neighbor in the low dimensional space and weighting them accordingly,I am able to interpolate a representation of the high dimensional point. This method seems to work quit well for points on the boundary of the manifold and inside the manifold performance varies. Further, the inversion of the 3D space seems to perform better than the 2D case.  
+
+\begin{figure}[h]
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{invers}
+  \caption{Inversion of a 3D point. The inverted point is on the top left.}
+  \label{fig:sfig1}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=.8\linewidth]{inter}
+  \caption{Inversion of an Interpolation between two points in the low dimensional}
+  \label{fig:sfig2}
+\end{subfigure}
+
+\label{fig:fig}
+\end{figure}
+
+   
 \end{homeworkProblem}
 \clearpage
 
@@ -190,7 +290,7 @@ Hard limit: One page
 
 \vspace{10pt}
 \problemAnswer{ % Answer
-Your Answer
+For my implementation, I mainly relied on the dimension reduction toolbox for matlab. More specifically the lle function. To employ different norms in part (d), I had to adapt the code accordingly. I did not encounter other problems.  
 }
 \end{homeworkProblem}
 \clearpage
@@ -202,7 +302,6 @@ No page limit.
 
 \vspace{10pt}
 \problemAnswer{ % Answer
-Your Answer
 
 \hmwkGitBranch % defined in line 5
 }
