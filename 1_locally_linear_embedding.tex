@@ -1,8 +1,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Make sure to set your name, legi number and url to the right git branch.
-\newcommand{\hmwkAuthorName}{YOUR NAME} % Your name
-\newcommand{\hmwkAuthorLegi}{YOUR LEGI NUMBER} % Your name
-\newcommand{\hmwkGitBranch}{YOUR GIT BRANCH} % Your name
+\newcommand{\hmwkAuthorName}{Robin Vaaler} % Your name
+\newcommand{\hmwkAuthorLegi}{12-927-463} % Your name
+\newcommand{\hmwkGitBranch}{12-927-463/1\_locally\_linear\_embedding} % Your name
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -144,7 +144,20 @@ Hard limit: One page
 \vspace{10pt}
 
 \problemAnswer{ % Answer
-Your Answer
+$ E(W) = \sum_i |{\mathbf{X}_i - \sum_j {\mathbf{W}_{ij}\mathbf{X}_j}|}^\mathsf{2} $
+
+The weights $W_{ij}$ refer to the amount of contribution the point $X_j$ has while reconstructing the point $X_i$. The cost function is minimized under two constraints:
+(a) Each data point '$X_i$ is reconstructed only from its neighbors, thus enforcing $W_{ij}$ to be zero for all points $i$ and $j$ that aren't neighbors and 
+(b) The sum of every row of the weight matrix equals 1.
+
+$\sum_j {\mathbf{W}_{ij}} = 1 $
+
+The original data points are collected in a $D$ dimensional space and the goal of the algorithm is to reduce the dimensionality to $d$ such that $D >> d$. The same weights $W_{ij}$ that reconstructs the $i$th data point in the $D$ dimensional space will be used to reconstruct the same point in the lower $d$ dimensional space. A neighborhood preserving map is created based on this idea. Each point $X_i$ in the $D$ dimensional space is mapped onto a point$ Y_i$ in the $d$ dimensional space by minimizing the cost function
+
+$ C(Y) = \sum_i |{\mathbf{Y}_i - \sum_j {\mathbf{W}_{ij}\mathbf{Y}_j}|}^\mathsf{2} $
+
+In this cost function, unlike the previous one, the weights $W_{ij}$ are kept fixed and the minimization is done on the points $Y_i$ to optimize the coordinates. %This minimization problem can be solved by solving a sparse $N \times N$ Eigendecomposition of a matrix (''N'' being the number of data points), whose bottom $d$ nonzero eigen vectors provide an orthogonal set of coordinates. Generally the data points are reconstructed from ''K'' nearest neighbors, as measured by some distance metric. For such an implementation the algorithm has only one free parameter ''K,'' which can be chosen by cross validation.
+
 }
 \end{homeworkProblem}
 \clearpage
@@ -177,7 +190,23 @@ Assume you pick some point in the embedding space. How can you map it back to th
 
 \vspace{10pt}
 \problemAnswer{ % Answer
-Your Answer
+(a) I used the sklearn library to download the dataset. To allow for faster iteration I only used a sample of 1000 images for my analyis. 
+
+(b) The figure on the left (right) visualizes the resulting embedding space for two (three) dimensions. Images corresponding to similar digits tend to be close in the resulting embedding space. \\
+\includegraphics[width=0.5\textwidth]{k_10euclidean.png}
+\includegraphics[width=0.5\textwidth]{k_10euclidean3d.png}\\
+
+(c) The $M$ matrix is very sparse and is almost diagonal. Most eigen values of M (equal to singular values because M is semi-positive-definite) are small. \\
+\includegraphics[width=0.5\textwidth]{Matrix_M.png}
+\includegraphics[width=0.5\textwidth]{eigen_histo.png}\\
+%\includegraphics[width=0.33\textwidth]{error.png}\\
+
+(d)
+
+
+(e) When one just linearly combines two images the result is just a superposition of the two original images (left). By following the same procedure in the embedding space and retransforming the resulting embedding to the original space one can see a nonlinear transformation from one digit to another one (right). Y
+\includegraphics[width=0.5\textwidth]{interpolation_original.png}
+\includegraphics[width=0.5\textwidth]{interpolation_reconstruction.png}
 }
 \end{homeworkProblem}
 \clearpage
@@ -190,7 +219,7 @@ Hard limit: One page
 
 \vspace{10pt}
 \problemAnswer{ % Answer
-Your Answer
+In a first step I make use of the k-nearest neighbor implementation provided by the sklearn library. Given the k neighrest neighbors of every data point, the $C$ matrices get constructed since they are needed to compute the $W$ matrix. Instead of inverting the $C$ matrices to get $W$, one can solve a least-squares problem (using e.g. numpy). To finally get the low dimensional embeddings $Y$ one can use the eigendecomposition implementation provieded by the scipy library to decompose the  matrix $M = (I - W)^T (I - W)$. To make sure that we don't encounter any numerical instabilities, the paper recomends to add $\epsilon I$ to all the $C$ matrices, where $\epsilon$ should depend on the traces of the $C$ matrices and the number of neighbors $k$. 
 }
 \end{homeworkProblem}
 \clearpage
