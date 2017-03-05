@@ -1,8 +1,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Make sure to set your name, legi number and url to the right git branch.
-\newcommand{\hmwkAuthorName}{YOUR NAME} % Your name
+\newcommand{\hmwkAuthorName}{Linus Handschin} % Your name
 \newcommand{\hmwkAuthorLegi}{12-922-621} % Your name
-\newcommand{\hmwkGitBranch}{YOUR GIT BRANCH} % Your name
+\newcommand{\hmwkGitBranch}{12-922-621/1\_locally\_linear\_embedding} % Your name
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -144,7 +144,13 @@ Hard limit: One page
 \vspace{10pt}
 
 \problemAnswer{ % Answer
-Your Answer
+Given sample $\mathbf{X}_i$ and its neighbors $\mathbf{X}_j$ in a high dimensional space LLE computes the barycentric coordinates. The sample is reconstructed by a linear combination, given by $\mathbf{W}_ij$ (the same weight matrix is used to reconstruct the point in the low dimensional space). The reconstruction error is then given by: \\
+$E(W) = \sum_i |\mathbf{X}_i - \sum_j \mathbf{W}_{ij} \mathbf{X}_j  |^2$\\
+Each data point is reconstructed only is reconstructed from its neighbor and the contribtuion must be normalized, e.g. $ \sum_j \mathbf{W}_{ij} = 1$.\\
+
+Each sample $ \mathbf{X}_i$ is mapped to a low dimensional representation $\mathbf{Y}_i$ by minimizing the the following cost function for a fixed $\mathbf{W}_{ij}$:\\
+$C(Y) = \sum_i |\mathbf{Y}_i - \sum_j \mathbf{W}_{ij} \mathbf{Y}_j  |^2$\\
+
 }
 \end{homeworkProblem}
 \clearpage
@@ -160,20 +166,88 @@ For this exercise we will work with the MNIST data set. In order to learn more a
 
 \begin{homeworkSection}{(b) Locally linear embedding}
 Implement the LLE algorithm and apply it to the MNIST data set. Provide descriptive visualizations for 2D \& 3D embedding spaces. Is it possible to see clusters?
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\linewidth]{2D-vs-3D}
+	\caption[SHort desc]{2D and 3D LLE of 1000 MNIST samples using the 30 nearest neighbor (according their eucledian distance) of each sample}
+	\label{fig:2d}
+\end{figure}
+
+\vspace{10pt}
+\problemAnswer{ % Answer
+	The above plots show distinct clusters only using the 30 nearest neighbors in a 2dimensional and 3 dimensional embedding space.\\
+	(All the following expermements are performed using 1000 random selected MNIST samples and eucledian distance metric for the 30 nearest neighbors if not stated otherwise.)
+	
+}
+
+
+
 \end{homeworkSection}
 
 \begin{homeworkSection}{(c) Cluster structure}
 Investigate the cluster structure of the data. Can you observe block structures in the $M$ matrix (use matrix plots)? Also plot the singular values of $M$. Do you notice something?
 Can you think of ways to determine the optimal embedding dimension?
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.5\linewidth]{M}
+	\caption[Matrix plot of M]{Matrix plot of M with large values on the diagonal}
+	\label{fig:m}
+\end{figure}
+
+\vspace{10pt}
+\problemAnswer{ % Answer
+	The matrix plot shows large values on the diagonal and all other values are all close to zero.
+}
+ 
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.5\linewidth]{eigenvalues}
+	\caption[Histogram of eigenvalues]{The histogram shows that most eigenvalues are close to zero. }
+	\label{fig:eigenvalues}
+\end{figure}
+
+\vspace{10pt}
+\problemAnswer{ % Answer
+	The distribution of the eigenvalues shows that most of the eigenvalues are close to zero. To minimize the reconstruction error we are looking for the the eigenvectors with low corresponding eigenvalues. For this model a knee can seen around the first 200 to 250 dimensions.
+}
+
+
 \end{homeworkSection}
 
 \begin{homeworkSection}{(d) Nearest Neighbors}
 Investigate the influence of the choice of how many nearest neighbors you take into account. Additionally, try different metrics to find the nearest neighbors (we are dealing with images!).
 \end{homeworkSection}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1\linewidth]{NN}
+	\caption[short]{3D embeddings for different distance metrics and nearest neighbor configurations.}
+	\label{fig:nn}
+\end{figure}
+
+\vspace{10pt}
+\problemAnswer{ % Answer
+	Expermiments with different distance metrics (manhattan, euclidiean, canberra and hamming distance) a different number of neighbors (10, 30, 300 nearest neighbors) showed relative low influence on the clusters. For all tested configurations the cluster were very stable (\ref{fig:nn}). Since the digits are black white with only few gray scale values and centered in the image the distance metric has low influence and good results can be achived using the euclidean distance. Increasing the number of neighbors results in dense clusters with only few outliers. 
+}
+
 
 \begin{homeworkSection}{(e) Linear manifold interpolation}
 Assume you pick some point in the embedding space. How can you map it back to the original (high dimensional) space? Investigate how well this works for points within and outside the manifold (does it depend on the dimensionality of the embedding space?) Try things like linearly interpolating between two embedding vectors and plot the sequence of images along that line. What happens if you do that in the original space?
 \end{homeworkSection}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\linewidth]{reconst}
+	\caption[short]{The reconstruction from the 784 dimensional space (28x28 images). Left: original, right: reconstruction }
+	\label{fig:reconst}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\linewidth]{interpol}
+	\caption[short]{Top: interpolation between embedded digit 6 and 7. Bottom: Same interpolation in the original high dimensional space. }
+	\label{fig:reconst}
+\end{figure}
 
 \vspace{10pt}
 \problemAnswer{ % Answer
