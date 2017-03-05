@@ -9,7 +9,7 @@ import numpy as np
 
 from mpl_toolkits.mplot3d import Axes3D
 
-import LLE_implementation as LLE
+import giac_lle as myLLE
 
 # ------------------------------------------------------------
 def plot_embedding(X, y, title=None):
@@ -79,9 +79,8 @@ test_images, test_labels = ma.get_labeled_data(const.TEST_IM, const.TEST_LABELS)
 print "test labels shape: " + str(test_labels.shape)
 #Turn into matrix
 test_matrix = ma.to_feature_matrix(test_images)
-print test_matrix.shape
 # Restrict matrix so for testing purposes
-RESTRIC_NUM = 2000
+RESTRIC_NUM = 1000
 test_restrict = test_matrix[0:RESTRIC_NUM,:]
 # print test_restrict.shape
 
@@ -90,8 +89,6 @@ test_restrict = test_matrix[0:RESTRIC_NUM,:]
 # # 5 Neighbours
 lle = manifold.LocallyLinearEmbedding(n_neighbors=5, n_components=2)
 transformed_test = lle.fit_transform(test_restrict)
-print transformed_test.shape
-print transformed_test
 
 # plt.scatter(transformed_test[:,0],transformed_test[:,1], cmap=plt.cm.Spectral)
 plot_embedding(X=transformed_test, y=test_labels[0:RESTRIC_NUM, 0])
@@ -103,8 +100,6 @@ test_restrict = test_matrix[0:RESTRIC_NUM,:]
 # 5 Neighbours 3D
 lle = manifold.LocallyLinearEmbedding(n_neighbors=5, n_components=3)
 transformed_test = lle.fit_transform(test_restrict)
-print transformed_test.shape
-print transformed_test
 
 # fig = plt.figure()
 # ax = fig.add_subplot(111, projection='3d')
@@ -114,9 +109,7 @@ plot_3D_embedding(X=transformed_test, y=test_labels[0:RESTRIC_NUM, 0])
 
 # -------------------------------- 2D PLOT with MyLLE --------------------------
 
-myLLE_result = LLE.fit_LLE(X=transformed_test, n_neighbours=5, n_components=2)
-print myLLE_result.shape
-print myLLE_result
+myLLE_result = myLLE.fit_LLE(X=test_restrict, n_neighbours=5, n_components=2)
 plot_embedding(X=myLLE_result, y=test_labels[0:RESTRIC_NUM, 0])
 
 # -------------------------------- 3D PLOT with MyLLE --------------------------
@@ -125,9 +118,7 @@ t_restrict = test_matrix[0:RESTRIC_NUM,:]
 
 # Setup LLE
 # 5 Neighbours 3D
-myLLE_result = LLE.fit_LLE(X=transformed_test, n_neighbours=5, n_components=3)
-print myLLE_result.shape
-print myLLE_result
+myLLE_result = myLLE.fit_LLE(X=test_restrict, n_neighbours=5, n_components=3)
 
 # fig = plt.figure()
 # ax = fig.add_subplot(111, projection='3d')

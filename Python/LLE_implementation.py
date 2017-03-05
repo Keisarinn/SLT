@@ -4,7 +4,7 @@ import scipy.spatial as spatial # This is needed to find the nearest neighbours 
 import scipy.linalg as linalg
 
 # Step 1: find weights of local patches
-def find_weights(X, n_neighbours, norm):
+def find_weights(X, n_neighbours, norm=2):
     print "Asked #neighbours is: " + str(n_neighbours) + "; #datapoints is: " + str(X.shape[0])
     if n_neighbours > X.shape[0]:   # Asked for more neighbours than points
         n_neighbours = X.shape[0]-1   # Max NN is all the other points in the graph minus yourself
@@ -62,7 +62,7 @@ def calc_Wij(C_inverse, j):
     Wij = sum_numerator(C_inverse, j) / sum_denominator(C_inverse)
     return Wij
 
-def regularization_matrix(C, small_denom=1000):
+def regularization_matrix(C, small_denom=1000000):
     trace = np.trace(C)
     Delta = trace / small_denom
     reg = np.multiply(Delta, np.identity(C.shape[0]))
@@ -78,10 +78,16 @@ def get_M(W):
 # Step 3: Find the eigenvectors associated with the n_components+1 smallest eigenvalues
 # i.e. get the 'u' vectors
 def get_u(M, n_components):
-    eigenvalues, eigenvectors = linalg.eigh(M, eigvals_only=False, eigvals=(0,n_components), turbo=True)
+    eigenvalues, eigenvectors = linalg.eig(M) # PROBLEM: IS EIG THE CORRECT FUNCTION??
+    # Sort Eigencalues/eigenvectors
+    idx = eigenvalues.argsort()
+    eigenvalues = eigenvalues[idx]
+    eigenvectors = eigenvectors[:,idx]
     # drop the eigenvector associated to the smallest eigenvalue
-    correct_eigenv = np.delete(eigenvectors, (0), axis=1)
-    return correct_eigenv
+    correct_eigenvectors = np.delete(eigenvectors, 0, axis=0)
+    # Select the first n_components eigenvectors
+    u = correct_eigenvectors[0:n_components, :]
+    return u
 
 # Step 4: Multiply by the weights to obtain correct y representations
 def get_transformed_points(W, u):
@@ -90,9 +96,9 @@ def get_transformed_points(W, u):
 
 # Step 5: Wrap Up
 def fit_LLE(X, n_neighbours, n_components, norm=2):
-    W = find_weights(X, n_neighbours, norm)
+    W = find_weights(X, n_neighbours)
     M = get_M(W)
     # Get the matrix containing as ROWS the vectors embedded in the n_components space
     u = get_u(M, n_components)
     y = get_transformed_points(W, u)
-    return y
+    return y.T
