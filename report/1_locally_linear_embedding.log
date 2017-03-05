@@ -1,0 +1,539 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.3.2)  5 MAR 2017 19:59
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**1_locally_linear_embedding.tex
+(/home/zhejun/slt-coding-exercises/1_locally_linear_embedding.tex
+LaTeX2e <2016/02/01>
+Babel <3.9q> and hyphenation patterns for 81 language(s) loaded.
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
+\fancy@headwidth=\skip43
+\f@ncyO@elh=\skip44
+\f@ncyO@erh=\skip45
+\f@ncyO@olh=\skip46
+\f@ncyO@orh=\skip47
+\f@ncyO@elf=\skip48
+\f@ncyO@erf=\skip49
+\f@ncyO@olf=\skip50
+\f@ncyO@orf=\skip51
+)
+(/usr/share/texlive/texmf-dist/tex/latex/lastpage/lastpage.sty
+Package: lastpage 2015/03/29 v1.2m Refers to last page's name (HMM; JPG)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/extramarks.sty
+\@temptokenb=\toks14
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks15
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2016/01/03 v1.0q Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/graphics.cfg
+File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
+)
+Package graphics Info: Driver file: pdftex.def on input line 95.
+
+(/usr/share/texlive/texmf-dist/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count87
+))
+\Gin@req@height=\dimen103
+\Gin@req@width=\dimen104
+)
+(/usr/share/texlive/texmf-dist/tex/latex/lipsum/lipsum.sty
+Package: lipsum 2014/07/27 v1.3 150 paragraphs of Lorem Ipsum dummy text
+\c@lips@count=\count88
+)
+\c@homeworkProblemCounter=\count89
+
+(/home/zhejun/slt-coding-exercises/1_locally_linear_embedding.aux)
+\openout1 = `1_locally_linear_embedding.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 121.
+LaTeX Font Info:    ... okay on input line 121.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 121.
+LaTeX Font Info:    ... okay on input line 121.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 121.
+LaTeX Font Info:    ... okay on input line 121.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 121.
+LaTeX Font Info:    ... okay on input line 121.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 121.
+LaTeX Font Info:    ... okay on input line 121.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 121.
+LaTeX Font Info:    ... okay on input line 121.
+Package lastpage Info: Please have a look at the pageslts package at
+(lastpage)             https://www.ctan.org/pkg/pageslts
+(lastpage)             ! on input line 121.
+
+(/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count90
+\scratchdimen=\dimen105
+\scratchbox=\box26
+\nofMPsegments=\count91
+\nofMParguments=\count92
+\everyMPshowfont=\toks16
+\MPscratchCnt=\count93
+\MPscratchDim=\dimen106
+\MPnumerator=\count94
+\makeMPintoPDFobject=\count95
+\everyMPtoPDFconversion=\toks17
+) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is detected.
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
+
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
+))
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 123.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 123.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 123.
+
+[1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+(/home/zhejun/slt-coding-exercises/1_locally_linear_embedding.toc
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 3.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 3.
+)
+\tf@toc=\write3
+\openout3 = `1_locally_linear_embedding.toc'.
+
+ [2] [3]
+Package epstopdf Info: Source file: <2d_embedding_1000p_5n.eps>
+(epstopdf)                    date: 2017-03-05 09:32:59
+(epstopdf)                    size: 131483 bytes
+(epstopdf)             Output file: <2d_embedding_1000p_5n-eps-converted-to.pdf
+>
+(epstopdf)                    date: 2017-03-05 09:33:39
+(epstopdf)                    size: 19503 bytes
+(epstopdf)             Command: <repstopdf --outfile=2d_embedding_1000p_5n-eps-
+converted-to.pdf 2d_embedding_1000p_5n.eps>
+(epstopdf)             \includegraphics on input line 204.
+Package epstopdf Info: Output file is already uptodate.
+
+<2d_embedding_1000p_5n-eps-converted-to.pdf, id=23, 433.62pt x 289.08pt>
+File: 2d_embedding_1000p_5n-eps-converted-to.pdf Graphic file (type pdf)
+
+<use 2d_embedding_1000p_5n-eps-converted-to.pdf>
+Package pdftex.def Info: 2d_embedding_1000p_5n-eps-converted-to.pdf used on inp
+ut line 204.
+(pdftex.def)             Requested size: 227.62204pt x 151.74721pt.
+Package epstopdf Info: Source file: <3d_embedding_1000p_5n.eps>
+(epstopdf)                    date: 2017-03-05 09:31:26
+(epstopdf)                    size: 138705 bytes
+(epstopdf)             Output file: <3d_embedding_1000p_5n-eps-converted-to.pdf
+>
+(epstopdf)                    date: 2017-03-05 09:33:40
+(epstopdf)                    size: 23191 bytes
+(epstopdf)             Command: <repstopdf --outfile=3d_embedding_1000p_5n-eps-
+converted-to.pdf 3d_embedding_1000p_5n.eps>
+(epstopdf)             \includegraphics on input line 204.
+Package epstopdf Info: Output file is already uptodate.
+
+<3d_embedding_1000p_5n-eps-converted-to.pdf, id=24, 433.62pt x 289.08pt>
+File: 3d_embedding_1000p_5n-eps-converted-to.pdf Graphic file (type pdf)
+
+<use 3d_embedding_1000p_5n-eps-converted-to.pdf>
+Package pdftex.def Info: 3d_embedding_1000p_5n-eps-converted-to.pdf used on inp
+ut line 204.
+(pdftex.def)             Requested size: 227.62204pt x 151.74721pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 204--204
+
+ []
+
+<M_matrix.png, id=25, 278.03876pt x 252.945pt>
+File: M_matrix.png Graphic file (type png)
+ <use M_matrix.png>
+Package pdftex.def Info: M_matrix.png used on input line 204.
+(pdftex.def)             Requested size: 142.26378pt x 129.42479pt.
+Package epstopdf Info: Source file: <EW.eps>
+(epstopdf)                    date: 2017-03-05 10:26:39
+(epstopdf)                    size: 17667 bytes
+(epstopdf)             Output file: <EW-eps-converted-to.pdf>
+(epstopdf)                    date: 2017-03-05 10:27:05
+(epstopdf)                    size: 10010 bytes
+(epstopdf)             Command: <repstopdf --outfile=EW-eps-converted-to.pdf EW
+.eps>
+(epstopdf)             \includegraphics on input line 204.
+Package epstopdf Info: Output file is already uptodate.
+
+<EW-eps-converted-to.pdf, id=27, 433.62pt x 289.08pt>
+File: EW-eps-converted-to.pdf Graphic file (type pdf)
+
+<use EW-eps-converted-to.pdf>
+Package pdftex.def Info: EW-eps-converted-to.pdf used on input line 204.
+(pdftex.def)             Requested size: 227.62204pt x 151.74721pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 204--204
+
+ []
+
+Package epstopdf Info: Source file: <2d_embedding_1000p_10n_euclidean.eps>
+(epstopdf)                    date: 2017-03-05 10:57:08
+(epstopdf)                    size: 131191 bytes
+(epstopdf)             Output file: <2d_embedding_1000p_10n_euclidean-eps-conve
+rted-to.pdf>
+(epstopdf)                    date: 2017-03-05 11:02:50
+(epstopdf)                    size: 19748 bytes
+(epstopdf)             Command: <repstopdf --outfile=2d_embedding_1000p_10n_euc
+lidean-eps-converted-to.pdf 2d_embedding_1000p_10n_euclidean.eps>
+(epstopdf)             \includegraphics on input line 204.
+Package epstopdf Info: Output file is already uptodate.
+
+<2d_embedding_1000p_10n_euclidean-eps-converted-to.pdf, id=28, 433.62pt x 289.0
+8pt>
+File: 2d_embedding_1000p_10n_euclidean-eps-converted-to.pdf Graphic file (type 
+pdf)
+ <use 2d_embedding_1000p_10n_euclidean-eps-converted-to.pdf>
+Package pdftex.def Info: 2d_embedding_1000p_10n_euclidean-eps-converted-to.pdf 
+used on input line 204.
+(pdftex.def)             Requested size: 227.62204pt x 151.74721pt.
+Package epstopdf Info: Source file: <2d_embedding_1000p_20n_euclidean.eps>
+(epstopdf)                    date: 2017-03-05 11:00:33
+(epstopdf)                    size: 131543 bytes
+(epstopdf)             Output file: <2d_embedding_1000p_20n_euclidean-eps-conve
+rted-to.pdf>
+(epstopdf)                    date: 2017-03-05 11:02:51
+(epstopdf)                    size: 19273 bytes
+(epstopdf)             Command: <repstopdf --outfile=2d_embedding_1000p_20n_euc
+lidean-eps-converted-to.pdf 2d_embedding_1000p_20n_euclidean.eps>
+(epstopdf)             \includegraphics on input line 204.
+Package epstopdf Info: Output file is already uptodate.
+
+<2d_embedding_1000p_20n_euclidean-eps-converted-to.pdf, id=29, 433.62pt x 289.0
+8pt>
+File: 2d_embedding_1000p_20n_euclidean-eps-converted-to.pdf Graphic file (type 
+pdf)
+ <use 2d_embedding_1000p_20n_euclidean-eps-converted-to.pdf>
+Package pdftex.def Info: 2d_embedding_1000p_20n_euclidean-eps-converted-to.pdf 
+used on input line 204.
+(pdftex.def)             Requested size: 227.62204pt x 151.74721pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 204--205
+
+ []
+
+[4
+
+]
+Overfull \vbox (21.5016pt too high) has occurred while \output is active []
+
+
+[5 </home/zhejun/slt-coding-exercises/2d_embedding_1000p_5n-eps-converted-to.pd
+f> </home/zhejun/slt-coding-exercises/3d_embedding_1000p_5n-eps-converted-to.pd
+f> </home/zhejun/slt-coding-exercises/M_matrix.png> </home/zhejun/slt-coding-ex
+ercises/EW-eps-converted-to.pdf> </home/zhejun/slt-coding-exercises/2d_embeddin
+g_1000p_10n_euclidean-eps-converted-to.pdf> </home/zhejun/slt-coding-exercises/
+2d_embedding_1000p_20n_euclidean-eps-converted-to.pdf>]
+Missing character: There is no ‚ in font cmr10!
+Missing character: There is no Ä in font cmr10!
+Missing character: There is no ú in font cmr10!
+Missing character: There is no ‚ in font cmr10!
+Missing character: There is no Ä in font cmr10!
+Missing character: There is no ù in font cmr10!
+Package epstopdf Info: Source file: <2d_embedding_1000p_10n_manhatten.eps>
+(epstopdf)                    date: 2017-03-05 11:32:01
+(epstopdf)                    size: 131494 bytes
+(epstopdf)             Output file: <2d_embedding_1000p_10n_manhatten-eps-conve
+rted-to.pdf>
+(epstopdf)                    date: 2017-03-05 13:50:47
+(epstopdf)                    size: 19552 bytes
+(epstopdf)             Command: <repstopdf --outfile=2d_embedding_1000p_10n_man
+hatten-eps-converted-to.pdf 2d_embedding_1000p_10n_manhatten.eps>
+(epstopdf)             \includegraphics on input line 227.
+Package epstopdf Info: Output file is already uptodate.
+
+<2d_embedding_1000p_10n_manhatten-eps-converted-to.pdf, id=114, 433.62pt x 289.
+08pt>
+File: 2d_embedding_1000p_10n_manhatten-eps-converted-to.pdf Graphic file (type 
+pdf)
+ <use 2d_embedding_1000p_10n_manhatten-eps-converted-to.pdf>
+Package pdftex.def Info: 2d_embedding_1000p_10n_manhatten-eps-converted-to.pdf 
+used on input line 227.
+(pdftex.def)             Requested size: 227.62204pt x 151.74721pt.
+Package epstopdf Info: Source file: <2d_embedding_1000p_20n_manhatten.eps>
+(epstopdf)                    date: 2017-03-05 13:52:24
+(epstopdf)                    size: 131602 bytes
+(epstopdf)             Output file: <2d_embedding_1000p_20n_manhatten-eps-conve
+rted-to.pdf>
+(epstopdf)                    date: 2017-03-05 13:53:18
+(epstopdf)                    size: 19253 bytes
+(epstopdf)             Command: <repstopdf --outfile=2d_embedding_1000p_20n_man
+hatten-eps-converted-to.pdf 2d_embedding_1000p_20n_manhatten.eps>
+(epstopdf)             \includegraphics on input line 227.
+Package epstopdf Info: Output file is already uptodate.
+
+<2d_embedding_1000p_20n_manhatten-eps-converted-to.pdf, id=115, 433.62pt x 289.
+08pt>
+File: 2d_embedding_1000p_20n_manhatten-eps-converted-to.pdf Graphic file (type 
+pdf)
+ <use 2d_embedding_1000p_20n_manhatten-eps-converted-to.pdf>
+Package pdftex.def Info: 2d_embedding_1000p_20n_manhatten-eps-converted-to.pdf 
+used on input line 227.
+(pdftex.def)             Requested size: 227.62204pt x 151.74721pt.
+Package epstopdf Info: Source file: <images_interp1.eps>
+(epstopdf)                    date: 2017-03-05 18:15:17
+(epstopdf)                    size: 295318 bytes
+(epstopdf)             Output file: <images_interp1-eps-converted-to.pdf>
+(epstopdf)                    date: 2017-03-05 19:20:28
+(epstopdf)                    size: 6986 bytes
+(epstopdf)             Command: <repstopdf --outfile=images_interp1-eps-convert
+ed-to.pdf images_interp1.eps>
+(epstopdf)             \includegraphics on input line 227.
+Package epstopdf Info: Output file is already uptodate.
+
+<images_interp1-eps-converted-to.pdf, id=116, 433.62pt x 289.08pt>
+File: images_interp1-eps-converted-to.pdf Graphic file (type pdf)
+
+<use images_interp1-eps-converted-to.pdf>
+Package pdftex.def Info: images_interp1-eps-converted-to.pdf used on input line
+ 227.
+(pdftex.def)             Requested size: 85.35826pt x 56.90189pt.
+Package epstopdf Info: Source file: <images_interp2.eps>
+(epstopdf)                    date: 2017-03-05 18:15:17
+(epstopdf)                    size: 295317 bytes
+(epstopdf)             Output file: <images_interp2-eps-converted-to.pdf>
+(epstopdf)                    date: 2017-03-05 19:20:54
+(epstopdf)                    size: 7420 bytes
+(epstopdf)             Command: <repstopdf --outfile=images_interp2-eps-convert
+ed-to.pdf images_interp2.eps>
+(epstopdf)             \includegraphics on input line 227.
+Package epstopdf Info: Output file is already uptodate.
+
+<images_interp2-eps-converted-to.pdf, id=117, 433.62pt x 289.08pt>
+File: images_interp2-eps-converted-to.pdf Graphic file (type pdf)
+
+<use images_interp2-eps-converted-to.pdf>
+Package pdftex.def Info: images_interp2-eps-converted-to.pdf used on input line
+ 227.
+(pdftex.def)             Requested size: 85.35826pt x 56.90189pt.
+Package epstopdf Info: Source file: <images_interp3.eps>
+(epstopdf)                    date: 2017-03-05 18:15:17
+(epstopdf)                    size: 295317 bytes
+(epstopdf)             Output file: <images_interp3-eps-converted-to.pdf>
+(epstopdf)                    date: 2017-03-05 19:20:54
+(epstopdf)                    size: 7464 bytes
+(epstopdf)             Command: <repstopdf --outfile=images_interp3-eps-convert
+ed-to.pdf images_interp3.eps>
+(epstopdf)             \includegraphics on input line 227.
+Package epstopdf Info: Output file is already uptodate.
+
+<images_interp3-eps-converted-to.pdf, id=118, 433.62pt x 289.08pt>
+File: images_interp3-eps-converted-to.pdf Graphic file (type pdf)
+
+<use images_interp3-eps-converted-to.pdf>
+Package pdftex.def Info: images_interp3-eps-converted-to.pdf used on input line
+ 227.
+(pdftex.def)             Requested size: 85.35826pt x 56.90189pt.
+Package epstopdf Info: Source file: <images_interp4.eps>
+(epstopdf)                    date: 2017-03-05 18:15:17
+(epstopdf)                    size: 295317 bytes
+(epstopdf)             Output file: <images_interp4-eps-converted-to.pdf>
+(epstopdf)                    date: 2017-03-05 19:20:55
+(epstopdf)                    size: 7446 bytes
+(epstopdf)             Command: <repstopdf --outfile=images_interp4-eps-convert
+ed-to.pdf images_interp4.eps>
+(epstopdf)             \includegraphics on input line 227.
+Package epstopdf Info: Output file is already uptodate.
+
+<images_interp4-eps-converted-to.pdf, id=119, 433.62pt x 289.08pt>
+File: images_interp4-eps-converted-to.pdf Graphic file (type pdf)
+
+<use images_interp4-eps-converted-to.pdf>
+Package pdftex.def Info: images_interp4-eps-converted-to.pdf used on input line
+ 227.
+(pdftex.def)             Requested size: 85.35826pt x 56.90189pt.
+Package epstopdf Info: Source file: <images_interp5.eps>
+(epstopdf)                    date: 2017-03-05 18:15:17
+(epstopdf)                    size: 295317 bytes
+(epstopdf)             Output file: <images_interp5-eps-converted-to.pdf>
+(epstopdf)                    date: 2017-03-05 19:20:55
+(epstopdf)                    size: 7061 bytes
+(epstopdf)             Command: <repstopdf --outfile=images_interp5-eps-convert
+ed-to.pdf images_interp5.eps>
+(epstopdf)             \includegraphics on input line 227.
+Package epstopdf Info: Output file is already uptodate.
+
+<images_interp5-eps-converted-to.pdf, id=120, 433.62pt x 289.08pt>
+File: images_interp5-eps-converted-to.pdf Graphic file (type pdf)
+
+<use images_interp5-eps-converted-to.pdf>
+Package pdftex.def Info: images_interp5-eps-converted-to.pdf used on input line
+ 227.
+(pdftex.def)             Requested size: 85.35826pt x 56.90189pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 227--227
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 227--227
+
+ []
+
+Package epstopdf Info: Source file: <images_reconstructed1.eps>
+(epstopdf)                    date: 2017-03-05 19:02:29
+(epstopdf)                    size: 295325 bytes
+(epstopdf)             Output file: <images_reconstructed1-eps-converted-to.pdf
+>
+(epstopdf)                    date: 2017-03-05 19:22:24
+(epstopdf)                    size: 7404 bytes
+(epstopdf)             Command: <repstopdf --outfile=images_reconstructed1-eps-
+converted-to.pdf images_reconstructed1.eps>
+(epstopdf)             \includegraphics on input line 227.
+Package epstopdf Info: Output file is already uptodate.
+<images_reconstructed1-eps-converted-to.pdf, id=121, 433.62pt x 289.08pt>
+File: images_reconstructed1-eps-converted-to.pdf Graphic file (type pdf)
+
+<use images_reconstructed1-eps-converted-to.pdf>
+Package pdftex.def Info: images_reconstructed1-eps-converted-to.pdf used on inp
+ut line 227.
+(pdftex.def)             Requested size: 227.62204pt x 151.74721pt.
+Package epstopdf Info: Source file: <images_reconstructed2.eps>
+(epstopdf)                    date: 2017-03-05 19:18:31
+(epstopdf)                    size: 295325 bytes
+(epstopdf)             Output file: <images_reconstructed2-eps-converted-to.pdf
+>
+(epstopdf)                    date: 2017-03-05 19:22:24
+(epstopdf)                    size: 7632 bytes
+(epstopdf)             Command: <repstopdf --outfile=images_reconstructed2-eps-
+converted-to.pdf images_reconstructed2.eps>
+(epstopdf)             \includegraphics on input line 227.
+Package epstopdf Info: Output file is already uptodate.
+
+<images_reconstructed2-eps-converted-to.pdf, id=122, 433.62pt x 289.08pt>
+File: images_reconstructed2-eps-converted-to.pdf Graphic file (type pdf)
+
+<use images_reconstructed2-eps-converted-to.pdf>
+Package pdftex.def Info: images_reconstructed2-eps-converted-to.pdf used on inp
+ut line 227.
+(pdftex.def)             Requested size: 227.62204pt x 151.74721pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 227--228
+
+ []
+
+[6 </home/zhejun/slt-coding-exercises/2d_embedding_1000p_10n_manhatten-eps-conv
+erted-to.pdf> </home/zhejun/slt-coding-exercises/2d_embedding_1000p_20n_manhatt
+en-eps-converted-to.pdf> </home/zhejun/slt-coding-exercises/images_interp1-eps-
+converted-to.pdf> </home/zhejun/slt-coding-exercises/images_interp2-eps-convert
+ed-to.pdf> </home/zhejun/slt-coding-exercises/images_interp3-eps-converted-to.p
+df> </home/zhejun/slt-coding-exercises/images_interp4-eps-converted-to.pdf> </h
+ome/zhejun/slt-coding-exercises/images_interp5-eps-converted-to.pdf> </home/zhe
+jun/slt-coding-exercises/images_reconstructed1-eps-converted-to.pdf> </home/zhe
+jun/slt-coding-exercises/images_reconstructed2-eps-converted-to.pdf>] [7
+
+]
+[8
+
+] 
+AED: lastpage setting LastPage
+(/home/zhejun/slt-coding-exercises/1_locally_linear_embedding.aux) ) 
+Here is how much of TeX's memory you used:
+ 1990 strings out of 493029
+ 30022 string characters out of 6136235
+ 189014 words of memory out of 5000000
+ 5488 multiletter control sequences out of 15000+600000
+ 8847 words of font info for 31 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 37i,10n,43p,574b,233s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/font
+s/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+r9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
+></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
+Output written on /home/zhejun/slt-coding-exercises/1_locally_linear_embedding.
+pdf (8 pages, 299340 bytes).
+PDF statistics:
+ 265 PDF objects out of 1000 (max. 8388607)
+ 115 compressed objects within 2 object streams
+ 0 named destinations out of 1000 (max. 500000)
+ 76 words of extra memory for PDF output out of 10000 (max. 10000000)
+
