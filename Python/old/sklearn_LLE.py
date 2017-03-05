@@ -11,6 +11,8 @@ from mpl_toolkits.mplot3d import Axes3D
 
 import giac_lle as myLLE
 
+import sklearn_lle_implement as implement 
+
 # ------------------------------------------------------------
 def plot_embedding(X, y, title=None):
     x_min, x_max = np.min(X, 0), np.max(X, 0)
@@ -80,7 +82,7 @@ print "test labels shape: " + str(test_labels.shape)
 #Turn into matrix
 test_matrix = ma.to_feature_matrix(test_images)
 # Restrict matrix so for testing purposes
-RESTRIC_NUM = 1000
+RESTRIC_NUM = 2000
 test_restrict = test_matrix[0:RESTRIC_NUM,:]
 # print test_restrict.shape
 
@@ -107,22 +109,22 @@ transformed_test = lle.fit_transform(test_restrict)
 plot_3D_embedding(X=transformed_test, y=test_labels[0:RESTRIC_NUM, 0])
 
 
-# -------------------------------- 2D PLOT with MyLLE --------------------------
-
-myLLE_result = myLLE.fit_LLE(X=test_restrict, n_neighbours=5, n_components=2)
-plot_embedding(X=myLLE_result, y=test_labels[0:RESTRIC_NUM, 0])
-
-# -------------------------------- 3D PLOT with MyLLE --------------------------
-
-t_restrict = test_matrix[0:RESTRIC_NUM,:]
-
-# Setup LLE
-# 5 Neighbours 3D
-myLLE_result = myLLE.fit_LLE(X=test_restrict, n_neighbours=5, n_components=3)
-
-# fig = plt.figure()
-# ax = fig.add_subplot(111, projection='3d')
-
-plot_3D_embedding(X=myLLE_result, y=test_labels[0:RESTRIC_NUM, 0])
+# # -------------------------------- 2D PLOT with MyLLE --------------------------
+#
+# myLLE_result = myLLE.fit_LLE(X=test_restrict, n_neighbours=5, n_components=2)
+# plot_embedding(X=myLLE_result, y=test_labels[0:RESTRIC_NUM, 0])
+#
+# # -------------------------------- 3D PLOT with MyLLE --------------------------
+#
+# t_restrict = test_matrix[0:RESTRIC_NUM,:]
+#
+# # Setup LLE
+# # 5 Neighbours 3D
+# myLLE_result = myLLE.fit_LLE(X=test_restrict, n_neighbours=5, n_components=3)
+#
+# # fig = plt.figure()
+# # ax = fig.add_subplot(111, projection='3d')
+#
+# plot_3D_embedding(X=myLLE_result, y=test_labels[0:RESTRIC_NUM, 0])
 
 plt.show()

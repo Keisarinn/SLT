@@ -82,7 +82,7 @@ def barycenter_kneighbors_graph(X, n_neighbors, reg=1e-3, n_jobs=1):
     sklearn.neighbors.kneighbors_graph
     sklearn.neighbors.radius_neighbors_graph
     """
-    knn = NearestNeighbors(n_neighbors + 1, n_jobs=n_jobs).fit(X)
+    knn = NearestNeighbors(n_neighbors + 1, n_jobs=n_jobs, p=3).fit(X)
     X = knn._fit_X
     n_samples = X.shape[0]
     ind = knn.kneighbors(X, return_distance=False)[:, 1:]
@@ -225,15 +225,15 @@ def locally_linear_embedding(
         ``norm(Y - W Y, 'fro')**2``, where W are the reconstruction weights.
     References
     ----------
-    .. [1] `Roweis, S. & Saul, L. Nonlinear dimensionality reduction
+    sklearn. [1] `Roweis, S. & Saul, L. Nonlinear dimensionality reduction
         by locally linear embedding.  Science 290:2323 (2000).`
-    .. [2] `Donoho, D. & Grimes, C. Hessian eigenmaps: Locally
+    sklearn. [2] `Donoho, D. & Grimes, C. Hessian eigenmaps: Locally
         linear embedding techniques for high-dimensional data.
         Proc Natl Acad Sci U S A.  100:5591 (2003).`
-    .. [3] `Zhang, Z. & Wang, J. MLLE: Modified Locally Linear
+    sklearn. [3] `Zhang, Z. & Wang, J. MLLE: Modified Locally Linear
         Embedding Using Multiple Weights.`
         http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.70.382
-    .. [4] `Zhang, Z. & Zha, H. Principal manifolds and nonlinear
+    sklearn. [4] `Zhang, Z. & Zha, H. Principal manifolds and nonlinear
         dimensionality reduction via tangent space alignment.
         Journal of Shanghai Univ.  8:406 (2004)`
     """
@@ -243,7 +243,7 @@ def locally_linear_embedding(
     if method not in ('standard', 'hessian', 'modified', 'ltsa'):
         raise ValueError("unrecognized method '%s'" % method)
 
-    nbrs = NearestNeighbors(n_neighbors=n_neighbors + 1, n_jobs=n_jobs)
+    nbrs = NearestNeighbors(n_neighbors=n_neighbors + 1, n_jobs=n_jobs, p=3)
     nbrs.fit(X)
     X = nbrs._fit_X
 
@@ -463,7 +463,7 @@ def locally_linear_embedding(
             M[neighbors[i], neighbors[i]] += 1
 
     return null_space(M, n_components, k_skip=1, eigen_solver=eigen_solver,
-                      tol=tol, max_iter=max_iter, random_state=random_state), M #MOD
+                      tol=tol, max_iter=max_iter, random_state=random_state)
 
 
 class LocallyLinearEmbedding(BaseEstimator, TransformerMixin):
@@ -531,15 +531,15 @@ class LocallyLinearEmbedding(BaseEstimator, TransformerMixin):
         if applicable.
     References
     ----------
-    .. [1] `Roweis, S. & Saul, L. Nonlinear dimensionality reduction
+    sklearn. [1] `Roweis, S. & Saul, L. Nonlinear dimensionality reduction
         by locally linear embedding.  Science 290:2323 (2000).`
-    .. [2] `Donoho, D. & Grimes, C. Hessian eigenmaps: Locally
+    sklearn. [2] `Donoho, D. & Grimes, C. Hessian eigenmaps: Locally
         linear embedding techniques for high-dimensional data.
         Proc Natl Acad Sci U S A.  100:5591 (2003).`
-    .. [3] `Zhang, Z. & Wang, J. MLLE: Modified Locally Linear
+    sklearn. [3] `Zhang, Z. & Wang, J. MLLE: Modified Locally Linear
         Embedding Using Multiple Weights.`
         http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.70.382
-    .. [4] `Zhang, Z. & Zha, H. Principal manifolds and nonlinear
+    sklearn. [4] `Zhang, Z. & Zha, H. Principal manifolds and nonlinear
         dimensionality reduction via tangent space alignment.
         Journal of Shanghai Univ.  8:406 (2004)`
     """
@@ -564,7 +564,7 @@ class LocallyLinearEmbedding(BaseEstimator, TransformerMixin):
     def _fit_transform(self, X):
         self.nbrs_ = NearestNeighbors(self.n_neighbors,
                                       algorithm=self.neighbors_algorithm,
-                                      n_jobs=self.n_jobs)
+                                      n_jobs=self.n_jobs, p=3)
 
         random_state = check_random_state(self.random_state)
         X = check_array(X, dtype=float)

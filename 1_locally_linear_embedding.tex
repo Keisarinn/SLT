@@ -1,8 +1,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Make sure to set your name, legi number and url to the right git branch.
-\newcommand{\hmwkAuthorName}{Giacomo Giuliari} % Your name
-\newcommand{\hmwkAuthorLegi}{16-932-121} % Your name
-\newcommand{\hmwkGitBranch}{16-932-121/1_locally_linear_embedding} % Your name
+\newcommand{\hmwkAuthorName}{YOUR NAME} % Your name
+\newcommand{\hmwkAuthorLegi}{YOUR LEGI NUMBER} % Your name
+\newcommand{\hmwkGitBranch}{YOUR GIT BRANCH} % Your name
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -18,6 +18,8 @@
 \usepackage{extramarks} % Required for headers and footers
 \usepackage{graphicx} % Required to insert images
 \usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+
+\usepackage{animate}
 
 % Margins
 \topmargin=-0.45in
@@ -144,15 +146,13 @@ Hard limit: One page
 \vspace{10pt}
 
 \problemAnswer{ % Answer
-    \textbf{Question a)} \\
-    
-
+Your Answer
 }
 \end{homeworkProblem}
 \clearpage
 
 %----------------------------------------------------------------------------------------
-\begin{homeworkProblem}[The Questions]
+\begin{homeworkProblem}[The Answers]
 This is the core section of your report, which contains the tasks for this exercise and your respective solutions. Make sure you present your results in an illustrative way by making use of graphics, plots, tables, etc. so that a reader can understand the results with a single glance. Check that your graphics have enough resolution or are vector graphics. Consider the use of GIFs when appropriate.\newline
 Hard limit: Two pages
 
@@ -179,16 +179,61 @@ Assume you pick some point in the embedding space. How can you map it back to th
 
 \vspace{10pt}
 \problemAnswer{ % Answer
-    \textbf{Question a)}\\
 
-    \textbf{Question b)}\\
-    The algorithm has been implemented using Python
 
-        \begin{figure}[h]
-            \includegraphics{imgs/2D_2000.png}
-        \end{figure}
+        In the plots, expecially the 3D ones, the clusters are clearly visible. It seems that more numbers are "recognised" (gathered in the same cluster) better tant the others.
 
-    \textbf{Question b)}\\
+            \includegraphics[scale=0.10]{imgs/2D_2000.png}
+            \includegraphics[scale=0.10]{imgs/3D_1_2000.png}
+            \includegraphics[scale=0.10]{imgs/3D_2_2000.png}
+            \includegraphics[scale=0.10]{imgs/3D_3_2000.png}
+
+            % \animategraphics{12}{Python/interp/im_}{0}{19}[scale=3]
+
+
+            No relevant box structures seem to appear in the matrix plot of M.\\
+            The matrix appears to be symmetric, sparse and with higher numbers on the diagonal.
+
+            \includegraphics[scale=0.25]{imgs/mat_20_1.png}
+            \includegraphics[scale=0.25]{imgs/mat_20_2.png}
+
+            \animategraphics[loop,scale=3]{12}{Python/interp/im_}{0}{19}
+
+        \subsubsection{Singular Values}
+            By plotting the singular values in order it can be noticed that there are a few of them with a high absolute value. Since the singular values are associated with the energy of the projection on the lower-dimensional space, a way to determine the optimal embedding space would be to choose the number of dimendions of the space equal to the number singular values (in order of decreasing magnitude) that have the biggest difference in value from the others (i.e. before their value starts to decrease slowly).
+            This can be regarded as an "elbow method".
+
+            \newpage
+
+
+            \includegraphics[scale=0.12]{imgs/svd_1.png}
+            \includegraphics[scale=0.12]{imgs/svd_2.png}
+
+
+
+        \subsubsection{Interpolation in the embedding space}
+
+        \animategraphics[loop,scale=3]{12}{Python/interp/im_}{0}{19}
+        \subsubsection{interpolation in the original space}
+
+        Axes3D\\
+        das\\
+        asd\\
+        asd\\
+        asd\\
+        asd\\
+        asd\\
+        sad\\
+        sad\\
+        asd\\
+        ads\\das
+
+        \\Axes3D
+        \\d
+        \\
+        \\Axes3D\\
+        asd\\
+        
 
 
 }

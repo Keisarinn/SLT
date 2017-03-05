@@ -1,9 +1,12 @@
 \contentsline {section}{The Model}{3}
-\contentsline {section}{The Questions}{4}
+\contentsline {section}{The Answers}{4}
 \contentsline {subsection}{(a) Get the data}{4}
 \contentsline {subsection}{(b) Locally linear embedding}{4}
 \contentsline {subsection}{(c) Cluster structure}{4}
 \contentsline {subsection}{(d) Nearest Neighbors}{4}
 \contentsline {subsection}{(e) Linear manifold interpolation}{4}
-\contentsline {section}{The Implementation}{5}
-\contentsline {section}{Your Page}{6}
+\contentsline {subsubsection}{Singular Values}{5}
+\contentsline {subsubsection}{Interpolation in the embedding space}{5}
+\contentsline {subsubsection}{interpolation in the original space}{5}
+\contentsline {section}{The Implementation}{7}
+\contentsline {section}{Your Page}{8}
