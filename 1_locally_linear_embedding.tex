@@ -1,8 +1,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Make sure to set your name, legi number and url to the right git branch.
-\newcommand{\hmwkAuthorName}{YOUR NAME} % Your name
-\newcommand{\hmwkAuthorLegi}{YOUR LEGI NUMBER} % Your name
-\newcommand{\hmwkGitBranch}{YOUR GIT BRANCH} % Your name
+\newcommand{\hmwkAuthorName}{Sveinn Pálsson} % Your name
+\newcommand{\hmwkAuthorLegi}{16-931-149} % Your name
+\newcommand{\hmwkGitBranch}{https://gitlab.vis.ethz.ch/vwegmayr/slt-coding-exercises/tree/16-931-149/1\_locally\_linear\_embedding} % Your name
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -13,6 +13,7 @@
 
 \documentclass{article}
 
+\usepackage{float}
 \usepackage{fancyhdr} % Required for custom headers
 \usepackage{lastpage} % Required to determine the last page for the footer
 \usepackage{extramarks} % Required for headers and footers
@@ -139,70 +140,118 @@
 %----------------------------------------------------------------------------------------
 
 \begin{homeworkProblem}[The Model]
-The model section is intended to allow you to recapitulate the essential ingredients used in \hmwkTitle. Write down the \textit{necessary} equations to specify \hmwkTitle\ and and shortly explain the variables that are involved. This section should only introduce the equations, their solution should be outlined in the implementation section.\newline
-Hard limit: One page
-\vspace{10pt}
 
 \problemAnswer{ % Answer
-Your Answer
+Suppose the data consists of $N$ real valued vectors $X_i$, each of dimensionality D. For each data point we find its K nearest neighbors as measured by Euclidean distance. For each data point $X_i$ we want to find weights $W_{ij}$ for each of the K nearest neighbor such that we minimize the reconstruction error function
+$$\mathcal{E}(W) = \sum_i\bigg\vert X_i - \sum_jW_{ij}X_j\bigg\vert^2$$
+
+subject to two constraints: first, that each data point is reconstructed only from its neigbors, enforcing $W_{ij} = 0$ if $X_j$ does not belong to this set; second, that the rows of the weight matrix sum to one.
+
+We choose a $d<<D$ and find d dimensional coordinates $Y_i$ for each data point $X_i$. We do this by minimizing the embedding cost function
+$$\Phi(Y) = \sum_i\bigg\vert Y_i - \sum_j W_{ij}Y_j\bigg\vert^2$$
+
 }
+
 \end{homeworkProblem}
 \clearpage
 
 %----------------------------------------------------------------------------------------
 \begin{homeworkProblem}[The Questions]
-This is the core section of your report, which contains the tasks for this exercise and your respective solutions. Make sure you present your results in an illustrative way by making use of graphics, plots, tables, etc. so that a reader can understand the results with a single glance. Check that your graphics have enough resolution or are vector graphics. Consider the use of GIFs when appropriate.\newline
-Hard limit: Two pages
 
-\begin{homeworkSection}{(a) Get the data}
-For this exercise we will work with the MNIST data set. In order to learn more about it and download it, go to http://yann.lecun.com/exdb/mnist/.
-\end{homeworkSection}
+\problemAnswer{
+Answer b:
+Yes, some clusters appear. See examples in figure 1 below.
+}
 
-\begin{homeworkSection}{(b) Locally linear embedding}
-Implement the LLE algorithm and apply it to the MNIST data set. Provide descriptive visualizations for 2D \& 3D embedding spaces. Is it possible to see clusters?
-\end{homeworkSection}
+\begin{figure}[h]
+\includegraphics[scale=0.4]{fig_2d_8k.png}
+\includegraphics[scale=0.4]{fig_3d_8k.png}
 
-\begin{homeworkSection}{(c) Cluster structure}
-Investigate the cluster structure of the data. Can you observe block structures in the $M$ matrix (use matrix plots)? Also plot the singular values of $M$. Do you notice something?
-Can you think of ways to determine the optimal embedding dimension?
-\end{homeworkSection}
+\caption{There are some visible clusters in the results.}
+\end{figure}
 
-\begin{homeworkSection}{(d) Nearest Neighbors}
-Investigate the influence of the choice of how many nearest neighbors you take into account. Additionally, try different metrics to find the nearest neighbors (we are dealing with images!).
-\end{homeworkSection}
+\problemAnswer{
+Answer c:
+We can see that the diagonal elements are all non-zero.
 
-\begin{homeworkSection}{(e) Linear manifold interpolation}
-Assume you pick some point in the embedding space. How can you map it back to the original (high dimensional) space? Investigate how well this works for points within and outside the manifold (does it depend on the dimensionality of the embedding space?) Try things like linearly interpolating between two embedding vectors and plot the sequence of images along that line. What happens if you do that in the original space?
-\end{homeworkSection}
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.4]{Mplot.png}
+\caption{Plotting part of the matrix M}
+\end{figure}
+}
+
 
 \vspace{10pt}
 \problemAnswer{ % Answer
-Your Answer
+Answer d:
+When we change K, the number of nearest neighbors we can see some differences. If we only use 1 neighbor for each data point we can see that no visible clusters form (figure 3). Then as we increase the number of nearest neighbors we start seeing clusters even with K=3 (figure 4). The clusters seem to become more clear when we increase K. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.4]{fig_2d_1k.png}
+\caption{Using only 1 nearest neighbor}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.4]{fig_2d_3k.png}
+\caption{Using 3 nearest neighbor}
+\end{figure}
+}
+\problemAnswer{
+Figures 5,6 and 7 show the use of 7 nearest neighbors with Euclidean, Hamming and Chebyshev distance metrics respectively.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.4]{fig_2d_7k.png}
+\caption{K=7, Euclidean distance}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.4]{fig_2d_7k_hamming.png}
+\caption{K=7, Hamming distance}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.4]{fig_2d_7k_cheby.png}
+\caption{K=7, Chebyshev distance}
+\end{figure}
+}
+\problemAnswer{
+Answer e:
+One method would be to find the point's K nearest neighbors in the embedding space and find the reconstruction weights as in the high dimensional space. Then use these K nearest neighbors and weights in the high dimensional space to reconstruct the data-point. This depends highly on the dimensionality of the embedding space, it works better for higher dimensions.
+See figure 8 where a data point is reconstructed using this method. The figures also show the original image for comparison.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.4]{rec_220.png}
+\caption{Reconstruction of a data point. Upper image shows the reconstruction, the lower image shows the original}
+\end{figure}
+
 }
 \end{homeworkProblem}
 \clearpage
 
 %----------------------------------------------------------------------------------------
 \begin{homeworkProblem}[The Implementation]
-In the implementation section you give a concise insight to the practical aspects of this coding exercise. It mainly mentions the optimization methods used to solve the model equations. Did you encounter numerical or efficiency problems? If yes, how did you solve them?
-Provide the link to your git branch of this coding exercise.\newline
-Hard limit: One page
+
 
 \vspace{10pt}
 \problemAnswer{ % Answer
-Your Answer
+The implementation involves finding eigenvectors of a very large matrix. For the MNIST dataset this could mean a 60000 by 60000 matrix which my implementation would take a very long time to compute. When answering the questions in the previous questions I used only 5000 samples which my implementation of LLE took only about 10 seconds to solve. 
+Link to my git branch: https://gitlab.vis.ethz.ch/vwegmayr/slt-coding-exercises/tree/16-931-149/1\_locally\_linear\_embedding
+
 }
 \end{homeworkProblem}
 \clearpage
 
 %----------------------------------------------------------------------------------------
 \begin{homeworkProblem}[Your Page]
-Your page gives you space to include ideas, observations and results which do not fall into the categories provided by us. You can also use it as an appendix to include things which did not have space in the other sections.\newline
-No page limit.
+
 
 \vspace{10pt}
 \problemAnswer{ % Answer
-Your Answer
 
 \hmwkGitBranch % defined in line 5
 }

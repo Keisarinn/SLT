@@ -22,7 +22,7 @@ def load_mnist(N):
 
 def lle(X,y,K,d):
 	#1: compute nearest neighboors of each datapoint
-	knn = NearestNeighbors(n_neighbors=K+1,metric='chebyshev')
+	knn = NearestNeighbors(n_neighbors=K+1)
 	knn.fit(X)
 	nn = knn.kneighbors(X,return_distance=False)
 	W = np.zeros([len(X),len(X)])
@@ -52,10 +52,37 @@ def plot3D(Y,labels):
 	plt.colorbar(p)
 	return plt
 
+def reconstruction(Y,i,X,K):
+	#find the Knn in low dim space
+	knn_r = NearestNeighbors(n_neighbors=K+1)
+	knn_r.fit(Y)
+	nn_r = knn_r.kneighbors(Y,return_distance=False)
+	Ci = np.zeros([K,K])
+	for j in range(1,K+1):
+		for k in range(1,K+1):
+			Ci[j-1,k-1] = np.dot((Y[i]-Y[nn_r[i][j]]),(Y[i]-Y[nn_r[i][k]]))
+	Ci_inv = np.linalg.inv(Ci)
+	den = np.sum(Ci_inv)
+	Wi = np.zeros([1,K])
+	for j in range(0,K):
+		Wi[0,j] = np.sum(Ci_inv[j,:])/den	
+	X_rec = np.dot(Wi,X[nn_r[i,1:]])
+	fig = plt.figure()
+	plt.subplot(211)
+	plt.imshow(X_rec.reshape([28,28]),cmap='gray')
+	plt.subplot(212)
+	plt.imshow(X[i].reshape([28,28]),cmap='gray')
+	plt.savefig('rec_'+str(i)+'.png')
+	plt.show()
+
 def main():
 	d = int(sys.argv[1])
 	N = int(sys.argv[2])
 	X,y = load_mnist(N)
+	Y,M = lle(X,y,K,d)
+	for i in range(200,300,10):
+		reconstruction(Y,i,X,K)
+	"""
 	for K in range(0,10):
 		Y,M = lle(X,y,K,d)
 		if d==2:
@@ -65,6 +92,7 @@ def main():
 		plt.title('LLE using '+str(K)+' nearest neighbors. Chebyshev distance.')
 		plt.savefig('fig_'+str(d)+'d_'+str(K)+'k_cheby.png')
 		print(K)
+	"""
 
 if __name__=='__main__':
 	main()
