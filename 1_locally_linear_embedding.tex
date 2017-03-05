@@ -179,13 +179,19 @@ We can see that the diagonal elements are all non-zero.
 \includegraphics[scale=0.4]{Mplot.png}
 \caption{Plotting part of the matrix M}
 \end{figure}
-}
 
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.4]{signularvalues.png}
+\caption{Singular values of M}
+\end{figure}
+}
 
 \vspace{10pt}
 \problemAnswer{ % Answer
 Answer d:
-When we change K, the number of nearest neighbors we can see some differences. If we only use 1 neighbor for each data point we can see that no visible clusters form (figure 3). Then as we increase the number of nearest neighbors we start seeing clusters even with K=3 (figure 4). The clusters seem to become more clear when we increase K. 
+When we change K, the number of nearest neighbors we can see some differences. If we only use 1 neighbor for each data point we can see that no visible clusters form (figure 4). Then as we increase the number of nearest neighbors we start seeing clusters even with K=3 (figure 5). The clusters seem to become more clear when we increase K. 
 
 \begin{figure}[H]
 \centering
@@ -200,7 +206,7 @@ When we change K, the number of nearest neighbors we can see some differences. I
 \end{figure}
 }
 \problemAnswer{
-Figures 5,6 and 7 show the use of 7 nearest neighbors with Euclidean, Hamming and Chebyshev distance metrics respectively.
+Figures 6,7 and 8 show the use of 7 nearest neighbors with Euclidean, Hamming and Chebyshev distance metrics respectively.
 
 \begin{figure}[H]
 \centering
@@ -221,7 +227,7 @@ Figures 5,6 and 7 show the use of 7 nearest neighbors with Euclidean, Hamming an
 \problemAnswer{
 Answer e:
 One method would be to find the point's K nearest neighbors in the embedding space and find the reconstruction weights as in the high dimensional space. Then use these K nearest neighbors and weights in the high dimensional space to reconstruct the data-point. This depends highly on the dimensionality of the embedding space, it works better for higher dimensions.
-See figure 8 where a data point is reconstructed using this method. The figures also show the original image for comparison.
+See figure 9 where a data point is reconstructed using this method. The figures also show the original image for comparison.
 
 \begin{figure}[H]
 \centering
