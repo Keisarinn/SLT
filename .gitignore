@@ -1,6 +1,5 @@
-Report/*
-!Report/*.pdf
-!Report/*.tex
-
+Report/
 Data/
 Plot/
+
+*.pyc
