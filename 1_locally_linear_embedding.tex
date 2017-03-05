@@ -219,7 +219,7 @@ For the 2D embedding space we can observe that the numbers 1 and 0 form a cluste
 %Investigate the cluster structure of the data. Can you observe block structures in the $M$ matrix (use matrix plots)? Also plot the singular values of $M$. Do you notice something?
 %Can you think of ways to determine the optimal embedding dimension?
 
-The matrix $M$, see Fig. \ref{fig:src/1figM.png}, is very sparse. It also has most of its non-zero entries on its diagonal and is symmetric. But I cannot see any form of a block structure. The singular values of $M$ can be seen in Fig. \ref{fig:src/1figEV.png}. As of determining the optimal embedding dimension we can basically read off the reconstruction error by summing up the last d eigenvalues. Therefore we can estimate the error easily and choose a certain threshold.
+The matrix $M$, see Fig. \ref{fig:src/1figM.png}, is very sparse. It also has most of its non-zero entries on its diagonal and is symmetric. But I cannot see any form of a block structure. The singular values of $M$ can be seen in Fig. \ref{fig:src/1figEV.png}. As of determining the optimal embedding dimension we can basically read off the reconstruction error by summing up the last d eigenvalues, where d is the dimension of the embedded space. Therefore we can estimate the error easily and choose a certain threshold.
 
 \end{homeworkSection}
 }
@@ -247,7 +247,7 @@ The matrix $M$, see Fig. \ref{fig:src/1figM.png}, is very sparse. It also has mo
 \problemAnswer{
 \begin{homeworkSection}{(d) Nearest Neighbors}
 %Investigate the influence of the choice of how many nearest neighbors you take into account. Additionally, try different metrics to find the nearest neighbors (we are dealing with images!).
-As can be seen in the following illustrations Fig \ref{fig:fig3}, \ref{fig:fig4} the choice of K and the metric can have a big effect on the quality of the solution.
+As can be seen in the following illustrations Fig \ref{fig:fig3}, \ref{fig:fig4} the choice of the number of neighbors K and the metric can have a big effect on the quality of the solution.
 
 \end{homeworkSection}
 }
@@ -375,10 +375,13 @@ See the Reconstruction algorithm in the section implementation for details. We c
 The implementation can be seen in src/code.ipynb. I mostly used the LocallyLinearEmbedding implementation from scikit learn or adapted it. Further I will describe issues I encountered as I worked through the project:
 
 \begin{enumerate}
-	\item chosen Parameters \\
-	b) I chose n\_neighbors = 30
+	\item Choices \\
+	b) I chose K = 30 (number of neighbors), as a measure of distance the minkovski norm was used
+	
 	\item Efficiency problems (task b) \\
 	Because the LLE algorithm has a complexity of $\mathcal{O}(N^2)$ I could not use the full dataset and restricted it to 1200 data points.
+	\item calculation of M in c) \\
+	M was calculated using $M = (I-W)^T(I-W)$
 \end{enumerate}
 
 
