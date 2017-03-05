@@ -1,10 +1,4 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Make sure to set your name, legi number and url to the right git branch.
-\newcommand{\hmwkAuthorName}{YOUR NAME} % Your name
-\newcommand{\hmwkAuthorLegi}{YOUR LEGI NUMBER} % Your name
-\newcommand{\hmwkGitBranch}{YOUR GIT BRANCH} % Your name
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 %----------------------------------------------------------------------------------------
 %	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
@@ -13,11 +7,29 @@
 
 \documentclass{article}
 
+\usepackage[utf8]{inputenc}
 \usepackage{fancyhdr} % Required for custom headers
 \usepackage{lastpage} % Required to determine the last page for the footer
 \usepackage{extramarks} % Required for headers and footers
 \usepackage{graphicx} % Required to insert images
 \usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{subcaption}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Make sure to set your name, legi number and url to the right git branch.
+\newcommand{\hmwkAuthorName}{Nicolas Känzig} % Your name
+\newcommand{\hmwkAuthorLegi}{12-916-615} % Your name
+\newcommand{\hmwkGitBranch}{12-916-615/1\_locally\_linear\_embedding} % Your name
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newenvironment{conditions}
+  {\par\vspace{\abovedisplayskip}\noindent\begin{tabular}{>{$}l<{$} @{${}={}$} l}}
+  {\end{tabular}\par\vspace{\belowdisplayskip}}
+  
 
 % Margins
 \topmargin=-0.45in
@@ -144,7 +156,29 @@ Hard limit: One page
 \vspace{10pt}
 
 \problemAnswer{ % Answer
-Your Answer
+\begin{align}
+\textrm{\textbf{Reconstruction Error}}\qquad \mathcal{E}(W) = \sum_{i}|\vec{X_{i}}- \sum_{j}W_{ij}\vec{X_{j}}|^2
+\end{align}
+\begin{conditions}
+ \ensuremath{\vec{X_{i}}}     &  Data Points, real-valued with dimensionality D \\
+ W     &  Weight Matrix. \ensuremath{W_{ij}} summarizes the contribution of the \textit{j}th data point to the \textit{i}th reconstruction \\   
+\end{conditions}
+
+\begin{align}
+\textrm{\textbf{Embedding Error}}\qquad \Phi(Y) = \sum_{i}|\vec{Y_{i}}- \sum_{j}W_{ij}\vec{Y_{j}}|^2
+\end{align}
+\begin{conditions}
+ \ensuremath{\vec{Y_{i}}}     &  Embedded representation of \ensuremath{\vec{X_{i}}}, real-valued with dimensionality d \\ 
+\end{conditions}
+
+Constraints:
+\begin{align}
+\sum_{j}W_{ij} = 1
+\end{align}
+\begin{align}
+W_{ij} = 0 \textrm{ if } \vec{X_{j}} \textrm{ and } \vec{X_{i}} \textrm{ do not belong to the same set}
+\end{align}
+
 }
 \end{homeworkProblem}
 \clearpage
@@ -176,9 +210,80 @@ Assume you pick some point in the embedding space. How can you map it back to th
 \end{homeworkSection}
 
 \vspace{10pt}
-\problemAnswer{ % Answer
-Your Answer
-}
+\newpage
+\begin{homeworkSection}{(b) Locally linear embedding}
+The LLE algorithm was applied on a subset of a thousand images from the provided training set.
+Fig. \ref{k10_embeddings} shows the calculated embeddings into 2-dimensional and 3-dimensional spaces. Clearly a clustured structure can be observed, however not all of them are well separable.
+
+\begin{figure*}[h]
+    \captionsetup[subfigure]{justification=centering}  
+    \centering
+    \begin{subfigure}[t]{0.5\textwidth}
+        \centering
+        \includegraphics[width=6cm]{figures/Emb_k10_2d.png}
+        %\caption{Selfmade Cantenna}
+    \end{subfigure}%
+    ~ 
+    \begin{subfigure}[t]{0.5\textwidth}
+        \centering
+        \includegraphics[width=6.2cm]{figures/Emb_k10_3d.png}
+        %\caption{Professional Cantenna}
+    \end{subfigure}
+    \caption{Directionality measurements}
+    \label{k10_embeddings}
+\end{figure*}
+\end{homeworkSection}
+
+\begin{homeworkSection}{(c) Cluster structure}
+When plotting the $M$ Matrix a strongly diagonal structure can be observed. As proven in Series 1 (Problem 1 - (4)), the embedding error is minimal when the embedded vectors are associated with the eigenvectors corresponding to the smallest d+1 eigenvalues of $M$. So for an optimal embedding dimension d, one has to ensure that the Matrix $M$ provides at least d+1 small eigenvalues. The closer these values are to zero, the better.
+
+\end{homeworkSection}
+
+
+\begin{homeworkSection}{(d) Nearest Neighbors}
+The influence of the number of the nearest neighbors that are added to a set was analyzed by comparing the embeddings calculated using different values. The embedded vectors for the values k = [3, 20, 40] are depicted in Figures \ref{fig:awesome_image1}-\ref{fig:awesome_image3}. An Euclidean distance-metric has been used for finding the k nearest neighbors. It can be seen that when k is chosen too big the cluster structure gets lost.
+
+\begin{figure}[!htb]
+\minipage{0.32\textwidth}
+  \includegraphics[width=\linewidth]{figures/Emb_k3_3d.png}
+  \caption{k=3}\label{fig:awesome_image1}
+\endminipage\hfill
+\minipage{0.32\textwidth}
+  \includegraphics[width=\linewidth]{figures/Emb_k20_3d.png}
+  \caption{k=20}\label{fig:awesome_image2}
+\endminipage\hfill
+\minipage{0.32\textwidth}%
+  \includegraphics[width=\linewidth]{figures/Emb_k40_3d.png}
+  \caption{k=40}\label{fig:awesome_image3}
+\endminipage
+\end{figure}
+\end{homeworkSection}
+
+\begin{homeworkSection}{(e) Linear manifold interpolation}
+To reconstruct an image from the embedding space first one has to find the k nearest neighbors of the embedded image to be reconstructed. Second the weights that minimze the reconstruction error in the embedding space must be computed. Lastly the image can be reconstructed by adding up the corresponding k neighbors in the original space using the calculated weigthts.\\
+The higher the dimension of the embedded space the better the result, as less information gets lost during the dimensionality reduction.\\
+Choosing a point that lies outside of the manifold leads to a less clear result, as the reconstruction error gets increased. If the point is chosen too far from a legit cluster, the reconstruction will lead to no result.
+Fig. \ref{reconst} shows the reconstructions using two different values for k. When choosing k too big the result is much worse which matches our observations in part \textbf{(a)}.
+
+\begin{figure*}[h]
+    \captionsetup[subfigure]{justification=centering}  
+    \centering
+    \begin{subfigure}[t]{0.5\textwidth}
+        \centering
+        \includegraphics[width=6cm]{figures/8reconst_k10_3d.png}
+        \caption{d=3 , k=10}
+    \end{subfigure}%
+    ~ 
+    \begin{subfigure}[t]{0.5\textwidth}
+        \centering
+        \includegraphics[width=6.2cm]{figures/8reconst_k40_3d.png}
+        \caption{d=3 , k=40}
+    \end{subfigure}
+    \caption{Directionality measurements}
+    \label{reconst}
+\end{figure*}
+\end{homeworkSection}
+
 \end{homeworkProblem}
 \clearpage
 
@@ -190,7 +295,8 @@ Hard limit: One page
 
 \vspace{10pt}
 \problemAnswer{ % Answer
-Your Answer
+For implementing the LLE algorithm, methods provided by sklearn and numpy libraries have been used. The complexity of LLE increases quadratically (Partial eigenvalue decomposition) with the number of training data points. So to limit the computational effort, instead of using the whole provided training set containing 60k elements, a 1k subset was used for the embeddings.
+
 }
 \end{homeworkProblem}
 \clearpage
