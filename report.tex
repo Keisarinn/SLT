@@ -1,0 +1,264 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Make sure to set your name, legi number and url to the right git branch.
+\newcommand{\hmwkAuthorName}{Lucio Fernandez-Arjona} % Your name
+\newcommand{\hmwkAuthorLegi}{16-741-928} % Your name
+\newcommand{\hmwkGitBranch}{16-741-928//1_locally_linear_embedding} % Your name
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%	Skip this
+%----------------------------------------------------------------------------------------
+\documentclass{article}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage{graphicx} % Required to insert images
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum'
+\usepackage{wrapfig}
+\usepackage{float}
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in 
+\linespread{1.1} % Line spacing
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName} % Top left header
+\chead{\hmwkClass\ \hmwkTitle} % Top center header
+\rhead{\firstxmark} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this
+%----------------------------------------------------------------------------------------
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+\nobreak\extramarks{#1}{}\nobreak
+}
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkProblemCounter} % Creates a counter to keep track of the number of problems
+\newcommand{\homeworkProblemName}{}
+\newenvironment{homeworkProblem}[1][Problem \arabic{homeworkProblemCounter}]{ % Makes a new environment called homeworkProblem which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkProblemCounter} % Increase counter for number of problems
+\renewcommand{\homeworkProblemName}{#1} % Assign \homeworkProblemName the name of the problem
+\section{\homeworkProblemName} % Make a section in the document with the custom problem count
+\enterProblemHeader{\homeworkProblemName} % Header and footer within the environment
+}{
+\exitProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+\enterProblemHeader{\homeworkProblemName\ [\homeworkSectionName]} % Header and footer within the environment
+}{
+\enterProblemHeader{\homeworkProblemName} % Header and footer after the environment
+}
+   
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%	Skip this
+%----------------------------------------------------------------------------------------
+\newcommand{\hmwkTitle}{Locally Linear Embedding} % Assignment title
+\newcommand{\hmwkDueDate}{Monday,\ March\ 6th,\ 2017} % Due date
+\newcommand{\hmwkClass}{SLT coding exercise\ \#1} % Course/class
+\newcommand{\hmwkClassTime}{Mo 16:15} % Class/lecture time
+\newcommand{\hmwkClassInstructor}{} % Teacher/lecturer
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%	Skip this
+%----------------------------------------------------------------------------------------
+\title{
+\vspace{2in}
+\textmd{\small{\hmwkClass}}\\
+\textmd{\textbf{\hmwkTitle}}\\
+\small{https://gitlab.vis.ethz.ch/vwegmayr/slt-coding-exercises}\\
+\normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}
+%\vspace{0.1in}\large{\textit{\hmwkClassInstructor\ \hmwkClassTime}}
+\vspace{3in}
+}
+\author{
+\hmwkAuthorName\\
+\hmwkAuthorLegi
+}
+\date{ } % Insert date here if you want it to appear below your name
+\begin{document}
+\maketitle
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%	Skip this
+%----------------------------------------------------------------------------------------
+%\setcounter{tocdepth}{1} % Uncomment this line if you don't want subsections listed in the ToC
+\newpage
+\tableofcontents
+\newpage
+%----------------------------------------------------------------------------------------
+%	SECTIONS
+%	Now you are in the right hood
+%----------------------------------------------------------------------------------------
+\begin{homeworkProblem}[The Model]
+
+\vspace{10pt}
+
+In LLE the original data points are reconstructed by a linear combination, given by the weight matrix $W_{ij}$, of its neighbors. The reconstruction error is given by the cost function E(W).
+
+$$E(W)=\sum _{i}|{\mathbf {X} _{i}-\sum _{j}{\mathbf {W} _{ij}\mathbf {X} _{j}}|}^{\mathsf {2}}$$
+
+The weights $W_{ij}$ refer to the contribution the point $X_j$ has while reconstructing the point Xi. The cost function is minimized under two constraints: (a) Each data point Xi is reconstructed only from its neighbors, thus enforcing $W_{ij}$ to be zero if point $X_j$ is not a neighbor of the point Xi and (b) The sum of every row of the weight matrix equals 1.
+
+{\displaystyle \sum _{j}{\mathbf {W} _{ij}}=1} 
+
+The original data points are collected in a D dimensional space and the goal of the algorithm is to reduce the dimensionality to d such that $D >> d$. The same weights $W_{ij}$ that reconstruct the ith data point in the D dimensional space will be used to reconstruct the same point in the lower d dimensional space. Each point $X_i$ in the D dimensional space is mapped onto a point $Y_i$ in the d dimensional space by minimizing the cost function
+
+$$\Phi(Y)=\sum _{i}|{\mathbf {Y} _{i}-\sum _{j}{\mathbf {W} _{ij}\mathbf {Y} _{j}}|}^{\mathsf {2}}$$
+
+In this cost function, unlike the previous one, the weights $W_{ij}$ are kept fixed and the minimization is done on the points $Y_i$ to optimize the coordinates. This minimization problem can be solved by re-expressing $\Phi(Y)$ as
+$$\Phi(Y)=\sum _{ji}{\mathbf {M}_{ij}(\mathbf {Y_i}\mathbf {Y_j}) $$
+
+with 
+$${\mathbf {M}}_{ij}=\delta_{ij}-{\mathbf {W}}_{ij}-{\mathbf {W}}_{ji}+\sum_k {\mathbf {W}}_{ki}{\mathbf {W}}_{kj}$$
+
+Taking the d+1 eigenvectors of $\mathbf {M}$ associated with the smallest d+1 eigenvalues and dropping the one associated with the smallest, we obtain the d eigenvectors that provide the coordinates $Y_i$ that minimize $\Phi(Y)$
+
+\end{homeworkProblem}
+\clearpage
+%----------------------------------------------------------------------------------------
+\begin{homeworkProblem}[The Questions]
+
+Hard limit: Two pages
+\begin{homeworkSection}{(b) Locally linear embedding}
+For this exercise we apply the LLE algorithm to the MNIST dataset. As the dataset is quite large, I have worked with subsets of the data to shorten runtimes.
+After applying the algorithm, it is possible to see clear clusters in the low-dimensional representation of the data, corresponding to the different digits. Not all digits stand out in the same way. ``0" (blue) is very clear in many of charts below for example. 
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}
+        \includegraphics[scale=.5]{legend.png}      
+    \end{subfigure}
+
+\begin{subfigure}
+    \includegraphics[width=65mm]{2D10ks10n.png}
+\end{subfigure}
+\begin{subfigure}
+  \includegraphics[width=65mm]{3D10ks10n.png}
+\end{subfigure}
+\end{figure} 
+
+    
+    
+\end{homeworkSection}
+\begin{homeworkSection}{(c) Cluster structure}
+
+The data in its original high-dimensional space seems to present a certain number of clusters but none is massively dominant. Using the elbow method one could choose about 20 clusters. 
+\begin{figure}[H]
+    \includegraphics[width=0.5\textwidth]{elbow.png}
+\end{figure}
+
+
+
+There are no obvious block structures in $M$. The chart below shows $M$ for 100 samples. $M$ is sparse, with 3,934 non-zero values out a total of 10,000. The only visible values are those in the diagonal, the rest are evenly distributed as seen in Figure \ref{fig:m}.
+\begin{figure}[H]
+    \includegraphics[width=0.5\textwidth]{m.png}
+    \caption{Plot of M matrix}
+    \label{fig:m}
+\end{figure}
+
+The following plot shows the singular values of $M$ (ignoring the smallest one) in linear and logarithmic scales. I would not be able to determine an optimal embedding, as it is not clear to me what optimal would be in this context. In cases like PCA, optimality is determined by the minimization of the reconstruction error from the low-dimensional $\hat{X}$ to the high-dimensional $X$. In the case of LLE, I am not sure such a metric would be possible (due to the selection of a limited number of neighbours, $k << n$). Intuitively, one possible candidate is the inflexion point of the singular value curve in log scale around the 8th smallest singular value. It would make sense if there were between 5 and 10 basic operations that determine the manifold dimensions.
+
+\includegraphics[width=\textwidth]{{"sv of m"}.png}
+
+
+\end{homeworkSection}
+\begin{homeworkSection}{(d) Nearest Neighbors}
+
+A low number of neighbors leads to sharp edges on the manifold, while higher numbers lead to rounder shapes. The following figure shows results for 3, 10 and 100 neighbors.
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}
+        \includegraphics[scale=.7]{legend.png}      
+    \end{subfigure}
+
+\begin{subfigure}
+    \includegraphics[width=65mm]{2D10ks3n.png}
+\end{subfigure}
+\begin{subfigure}
+  \includegraphics[width=65mm]{2D10ks10n.png}
+\end{subfigure}
+\begin{subfigure}
+  \includegraphics[width=65mm]{2D10ks100n.png}
+\end{subfigure}
+\end{figure}   
+
+The following is the result using the mutual information between the vectors as the distance. There does not seem to be any clustering which makes me think there is an error in the implementation (which I have not been able to find).
+
+\includegraphics[scale=.5]{using_mutual_information.png}
+
+Considering that the inputs are images, I think a measure of similarity that treats nearby pixels differently than far away pixels would be beneficial. Maybe using a 2-D convolution of the image to keep a measure of locality in the pixels, ie if I had three images with one black pixel each (and the rest all white), I would like the distance to be proportional to the cartesian distance of the pixels in the image.
+
+
+
+\end{homeworkSection}
+\begin{homeworkSection}{(e) Linear manifold interpolation}
+
+To map back a point $Y^{*}$ from the embedding space to the original space, one should find the closest neighbor and from the original $W$ matrix choose d neighbors of that point (d being the embedding dimension) of such point. With those d neighbors calculate the weights that minimize the reconstruction error of $Y^{*}$ in the embedding space and apply those weights in the original space. The following is the sequence of the convex combinations (in intervals of 0.1) between two images.
+
+\includegraphics[scale=.7]{interpolation_embedding_space.png}      
+
+The results are different if one interpolates in the original space:
+
+\includegraphics[scale=.7]{interpolation_original_space.png}      
+
+
+\end{homeworkSection}
+\vspace{10pt}
+
+\end{homeworkProblem}
+\clearpage
+%----------------------------------------------------------------------------------------
+\begin{homeworkProblem}[The Implementation]
+https://gitlab.vis.ethz.ch/vwegmayr/slt-coding-exercises/tree/16-741-928/1_locally_linear_embedding
+
+LLE exercise-Copy1.ipynb
+.\newline
+Hard limit: One page
+\vspace{10pt}
+
+One of the biggest problems was the size of the dataset and the complexity of the algorithm ($(O[D \log(k) N \log(N)] + O[D N k^3] + O[d N^2])$. To solve the problem, I used a subset of the data (between 100 and 10,000). The number of nearest neighbors is the most sensitivity parameter ($k^3$ term in the formula above) so I did not run with more than 100 neighbors.
+
+There was a problem with the covariance matrix being singular which is extremely common with large covariance matrices. I solved it in the way described in the reference paper (applying a small delta to the matrix).
+
+Another problem was that my implementation had a bug I could not find and had to construct a new version from the Scipy implementation to be able to read the matrix M and change the distance measure.
+
+\end{homeworkProblem}
+\clearpage
+%----------------------------------------------------------------------------------------
+\begin{homeworkProblem}[Your Page]
+Your page gives you space to include ideas, observations and results which do not fall into the categories provided by us. You can also use it as an appendix to include things which did not have space in the other sections.\newline
+No page limit.
+\vspace{10pt}
+\problemAnswer{ % Answer
+Your Answer
+\hmwkGitBranch % defined in line 5
+}
+\end{homeworkProblem}
+\clearpage
+\end{document}
