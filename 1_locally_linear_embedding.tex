@@ -144,14 +144,20 @@
 %----------------------------------------------------------------------------------------
 
 \begin{homeworkProblem}[The Model]
-The model section is intended to allow you to recapitulate the essential ingredients used in \hmwkTitle. Write down the \textit{necessary} equations to specify \hmwkTitle\ and and shortly explain the variables that are involved. This section should only introduce the equations, their solution should be outlined in the implementation section.\newline
-Hard limit: One page
-\vspace{10pt}
+%The model section is intended to allow you to recapitulate the essential ingredients used in \hmwkTitle. Write down the \textit{necessary} equations to specify \hmwkTitle\ and and shortly explain the variables that are involved. This section should only introduce the equations, their solution should be outlined in the implementation section.\newline
+%Hard limit: One page
+%\vspace{10pt}
 
 \problemAnswer{ % Answer
-I feel like there aren't enough confusing equations for me to need this section this time :)
+The goal of Locally-Linear Embedding is to uncover the manifold in which high-dimensional data lives. It maintains the property that, for a local neighborhood of points, the geometry among the points is preserved, making it "locally-linear." The manifold is then represented as a lower-dimensional representation of the data.
 
-The Implementation section is concise enough, in my opinion.
+For a defined neighborhood around a data point, the objective is to find weights such that the neighbors of a point reconstruct the chosen point with as much fidelity as possible. The reconstruction loss is defined as:
+$| x_i - \sum_{j} w_{ij} x_j |$ for all $x \in X$.
+\\\\
+This is done for all points, and a low-dimensional embedding of the data is computed such that the distances in that space represent the weights computed earlier. In this way, points in the embedded space are also reconstructed by the barycentric coordinates relative to its same neighbors, with an embedding loss defined just like in the original space, using the same weights $w$:
+$| y_i - \sum_{j} w_{ij} y_j |$ for all $y = LLEembed(x) \in Y$.
+\\\\
+Additionally, due to these properties, new samples can be computed by interpolating linearly between embedded points and translating it to weighted interpolation in the original dimension.
 }
 \end{homeworkProblem}
 \clearpage
