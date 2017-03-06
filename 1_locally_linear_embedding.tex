@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Make sure to set your name, legi number and url to the right git branch.
-\newcommand{\hmwkAuthorName}{YOUR NAME} % Your name
-\newcommand{\hmwkAuthorLegi}{YOUR LEGI NUMBER} % Your name
+\newcommand{\hmwkAuthorName}{Carl Rynegardh} % Your name
+\newcommand{\hmwkAuthorLegi}{16-909-327} % Your name
 \newcommand{\hmwkGitBranch}{YOUR GIT BRANCH} % Your name
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -18,6 +18,7 @@
 \usepackage{extramarks} % Required for headers and footers
 \usepackage{graphicx} % Required to insert images
 \usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage{subcaption}
 
 % Margins
 \topmargin=-0.45in
@@ -112,8 +113,8 @@
 }
 
 \author{
-\hmwkAuthorName\\
-\hmwkAuthorLegi
+Carl Rynegardh\\ 
+16-909-327
 }
 
 \date{ } % Insert date here if you want it to appear below your name
@@ -144,7 +145,14 @@ Hard limit: One page
 \vspace{10pt}
 
 \problemAnswer{ % Answer
-Your Answer
+LLE is a type of unsupervised learning used for the problem of non linear dimensionality reduction. We want to minimize the reconstruction error with regard to the weights W.\\
+Reconstruction error: 
+$$ \mathcal{E}(W) = \sum_{i}\big|X_i - \sum_{j}W_{ij}X_j\big|^2$$
+In the above formula $W_{ij}$ stands for the contribution from the j-th data point to the i-th data point. $X_{i}$ stands for the i-ith data point with D dimensions. Minimizing with regards to the weights, we also have two constraints: $\sum_{j}W_{ij}=1$ and that i-th data point only should be reconstructed with the help of it's $K$ neighbors.
+
+To receive the embedded coordinate in d, $d << D$, dimensions the following cost function is minimized with regards to Y, which is the low dimensional vector X is mapped to:
+$$ \Phi(Y) = \sum_{i}\big|Y_i - \sum_{j}W_{ij}Y_j\big|^2 = \sum_{ij}M_{ij}(Y_i \cdot Y_j)$$
+ 
 }
 \end{homeworkProblem}
 \clearpage
@@ -175,9 +183,64 @@ Investigate the influence of the choice of how many nearest neighbors you take i
 Assume you pick some point in the embedding space. How can you map it back to the original (high dimensional) space? Investigate how well this works for points within and outside the manifold (does it depend on the dimensionality of the embedding space?) Try things like linearly interpolating between two embedding vectors and plot the sequence of images along that line. What happens if you do that in the original space?
 \end{homeworkSection}
 
+\begin{figure}[h]
+	\centering
+		\begin{subfigure}[b]{1\textwidth}
+		\includegraphics[width=\textwidth]{pics/LEE_plt_2d3d.png}
+		\caption{2D LLE, 3D LLE plot}
+		\label{fig:LEE_plt_2d3d.png}
+	\end{subfigure}
+	\caption{}\label{fig:fig1}
+\end{figure}
+
+\begin{figure}[!htb]
+\minipage{0.6\textwidth}
+  \includegraphics[width=\linewidth]{pics/M.png}
+  \caption{The M matrix}\label{fig:awesome_image1}
+\endminipage\hfill
+\minipage{0.38\textwidth}
+  \includegraphics[width=\linewidth]{pics/M_eigenvalues.png}
+  \caption{Singular values of the M matrix}\label{fig:awesome_image2}
+\endminipage\hfill
+\end{figure}
+
+\begin{figure}[!htb]
+\minipage{0.3\textwidth}
+  \includegraphics[width=\linewidth]{pics/euclidean_k3.png}
+  \caption{k = 3, metric = euclidean}\label{fig:awesome_image1}
+\endminipage\hfill
+\minipage{0.3\textwidth}
+  \includegraphics[width=\linewidth]{pics/manhattan_k3.png}
+  \caption{k = 3, metric = manhattan}\label{fig:awesome_image2}
+\endminipage\hfill
+\minipage{0.3\textwidth}
+  \includegraphics[width=\linewidth]{pics/minkowski_k3.png}
+  \caption{k = 3, metric = minkowski}\label{fig:awesome_image2}
+\endminipage\hfill
+
+\minipage{0.3\textwidth}
+  \includegraphics[width=\linewidth]{pics/euclidean_k15.png}
+  \caption{k = 15, metric = euclidean}\label{fig:awesome_image1}
+\endminipage\hfill
+\minipage{0.3\textwidth}
+  \includegraphics[width=\linewidth]{pics/manhattan_k15.png}
+  \caption{k = 15, metric = manhattan}\label{fig:awesome_image2}
+\endminipage\hfill
+\minipage{0.3\textwidth}
+  \includegraphics[width=\linewidth]{pics/minkowski_k15.png}
+  \caption{k = 15, metric = minkowski}\label{fig:awesome_image2}
+\endminipage\hfill
+\end{figure}
+
 \vspace{10pt}
 \problemAnswer{ % Answer
-Your Answer
+\textbf{(b): } 
+In figure 1, we see both 3D and 2D of the embedded space. In 2D we can see some clustering and in 3D we see even more. While it might not be perfect, we can at least see some clustering.
+
+\textbf{(c): } There seem to be no structure in the M matrix. It might seem like there are structure in the diagonal but that is natural since that is the same number multiplied with itself(Fig 2).
+
+\textbf{(d): }  Looking at figure 4-9 one can easily see that different metrics gives different clustering and with more neighbors the structure get more complex. I can imagine that it is important to especially try with different number of neighbors to find a good clustering.
+
 }
 \end{homeworkProblem}
 \clearpage
