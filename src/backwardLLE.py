@@ -1,15 +1,8 @@
-
 import numpy as np
-
-
-from sklearn.neighbors import NearestNeighbors
-
-from scipy import linalg
-
-from LLE_plots import plot_embedding_2D, plot_embedding_3D,matrix_plot
-
+import mnist
 from datetime import datetime
-
+from sklearn.neighbors import NearestNeighbors
+import matplotlib.pyplot as plt
 
 
 def LLE_implementation(X,nfeatures,nneighbors,ncomponents,metric):
@@ -104,67 +97,41 @@ def LLE_implementation(X,nfeatures,nneighbors,ncomponents,metric):
 
         Weights = assign_Weights(Weights, i, neighbors, wij)
 
-    weight_end = datetime.now()
+    return Weights, correctNeighbors
 
-    delta_weight = weight_end - weight_start
 
-    print("Duration of Weight Computation: ", delta_weight)
+ncomponents = 3
+nneighbors = 9
 
-    ########################################
-    # Checking of Sum in Weights
-    ########################################
+mndata = mnist.MNIST('MNIST_data')
+training_x, training_y = mndata.load_training()
 
-    check_sum = 0
-
-    for i in Weights:
-        for j in i:
-            check_sum += j
-
-    if check_sum is not float(nfeatures):
-        print("Something went wrong!")
-        print("Overall Test Sum is: ", check_sum)
-
-    ########################################
-    # Building Matrix M
-    ########################################
-
-    M_Build_start = datetime.now()
-
-    I = np.identity(nfeatures)
-
-    WI = (I - Weights)
-    M = WI.transpose().dot(WI)
-
-    M_Build_end = datetime.now()
-
-    delta_M_Build = M_Build_end - M_Build_start
-
-    print("Duration of M Computation: ", delta_M_Build)
-
-    ########################################
-    # Computation of u and y
-    ########################################
-
-    eigenvector_start = datetime.now()
-
-    eigen_values, eigen_vectors = linalg.eigh(M, eigvals=(1, ncomponents + 1 - 1), overwrite_a=True)
-    index = np.argsort(np.abs(eigen_values))
-    y = eigen_vectors[:, index]
-
-    eigenvector_end = datetime.now()
-
-    delta_eigenvector = eigenvector_end - eigenvector_start
-
-    print("Duration of Computation of Eigenvectors: ", delta_eigenvector)
-
-    ########################################
-    # Generating Output
-    ########################################
-
-    return y, M
+X, labels = np.asarray(training_x[0:5000]), np.asarray(training_y[0:5000])
 
 
 
+file_name = "LLE_with_" + str(ncomponents) + "_components_and_" + str(nneighbors) + "_neighbors.npy"
+
+if ncomponents == 2:
+    y = np.load("Results/2D/euclidean/" + file_name)
+if ncomponents == 3:
+    y = np.load("Results/3D/euclidean/" + file_name)
 
 
 
+Weights, neighbors = LLE_implementation(y,5000,nneighbors,ncomponents,'euclidean')
+
+print(np.shape(X))
+
+x_new = np.zeros((1,784))
+
+for i in range(5000):
+    x_new += Weights[4][i]*X[i]
+
+img = np.reshape(x_new,(28,28))
+
+plt.figure()
+plt.imshow(img,'gray_r')
+plt.show()
+
+print('Done!')
