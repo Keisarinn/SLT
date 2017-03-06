@@ -1,8 +1,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Make sure to set your name, legi number and url to the right git branch.
-\newcommand{\hmwkAuthorName}{YOUR NAME} % Your name
-\newcommand{\hmwkAuthorLegi}{YOUR LEGI NUMBER} % Your name
-\newcommand{\hmwkGitBranch}{YOUR GIT BRANCH} % Your name
+\newcommand{\hmwkAuthorName}{Yu-chen Tsai} % Your name
+\newcommand{\hmwkAuthorLegi}{16-929-747} % Your name
+\newcommand{\hmwkGitBranch}{16-929-747/1 locally linear embedding} % Your name
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -145,6 +145,22 @@ Hard limit: One page
 
 \problemAnswer{ % Answer
 Your Answer
+$$\mathcal{E}(W)=\sum_i{|\vec{X_i}-\sum_j{W_{ij}\vec{X_j}}|^2}$$
+$$\sum_j{W_{ij}}=1$$
+$$\Phi(Y)=\sum_i{|\vec{Y_i}-\sum_j{W_{ij}\vec{Y_j}}|^2}$$
+$$\sum_i{\vec{Y_i}}=0$$
+$$\frac{1}{N}\sum_i{\vec{Y_i}\vec{Y_i}^T}=I$$
+
+\begin{enumerate}
+    \item 
+    For each $\vec{X_i}$, one identifies the neighbors $\vec{X_j}$ of it either by K nearest points in Euclidean distance or other sophisticated rules based on local metrics.
+    \item
+    Because the reconstruction error should be invariant to translation, the rows of the weight matrix $W$ have to sum to one.
+    \item
+    The cost function of the mapping is defined as sum of the reconstruction error of mapped vectors.
+    \item
+    The embedding should be invariant of translation and scaling, so one can remove two degrees of freedom by making $Y$ has zero mean and unit variance. 
+\end{enumerate}
 }
 \end{homeworkProblem}
 \clearpage
@@ -177,11 +193,68 @@ Assume you pick some point in the embedding space. How can you map it back to th
 
 \vspace{10pt}
 \problemAnswer{ % Answer
-Your Answer
+\begin{homeworkSection}{(b) Locally linear embedding}
+\end{homeworkSection}
+
+Yes, as the number of neighbors used for computing the embedding increases, we can see it gets easier to separate the clusters of different digits. And it is worth to mention that, as one can see, the 2 dimensional embedding is actually a projection of the 3 dimensional embedding. 
+\newline \newline
+\includegraphics[scale=0.428]{./pic/n_1000_k_3.png} \includegraphics[scale=0.428]{./pic/n_1000_k_5.png} \includegraphics[scale=0.428]{./pic/n_1000_k_15.png}
+
+
+\includegraphics[scale=0.428]{./pic/n_1000_k_3_3d.png} \includegraphics[scale=0.428]{./pic/n_1000_k_5_3d.png} \includegraphics[scale=0.428]{./pic/n_1000_k_15_3d.png}
+
+\begin{homeworkSection}{(c) Cluster structure}
+\end{homeworkSection}
+\begin{center}
+\includegraphics[scale=0.3]{./pic/M.png}\\
+Matrix plot of M\\
+\includegraphics[scale=0.3]{./pic/M_eigenvalue.png}\\
+Eigenvalues of M (sorted)\\
+\end{center}
+Honestly, I didn't observe any "block" structures in the matrix plot. But I think it depends on the dataset. If the space of the data can be partitioned  into m subspace, then maybe we can observe m blocks on the diagonal of the matrix plot indicating that the problem can be divided into smaller embedding problems. 
 }
 \end{homeworkProblem}
 \clearpage
 
+\vspace{10pt}
+\problemAnswer{ % Answer
+One can observe that there is a turning point in the growth of eigenvalues.
+Because the value of the cost function $\Phi(Y)$ is actually the sum of smallest d + 1 eigenvalues (including at least one zero), we can determine the embedding dimension by observing the growth of eigenvalues(sorted from lowest to highest) and then pick a d that is smaller than the point where eigenvalue starts to grow rapidly.
+\begin{homeworkSection}{(d) Nearest Neighbors}
+\end{homeworkSection}
+\includegraphics[scale=0.428]{./pic/n_2000_k_5.png}
+\includegraphics[scale=0.428]{./pic/n_2000_k_10.png}
+\includegraphics[scale=0.428]{./pic/n_2000_k_15.png}
+\includegraphics[scale=0.428]{./pic/n_2000_k_20.png}
+\includegraphics[scale=0.428]{./pic/n_2000_k_25.png}
+\includegraphics[scale=0.428]{./pic/n_2000_k_30.png}\\
+We can see that increasing the number of neighbors from 5 to 15 does make the clusters of each digit easier to separate, but more than 15 neighbors doesn't improve the result a lot. Maybe it's because the number of points I used here is 2000, so when we consider too many neighbors, we may include points of different digits. And this will only hinder the embedding algorithm to find a good embedding where digits are visually separated. \\\\
+\includegraphics[scale=0.65]{./pic/n_2000_k_10_compare.png}
+\includegraphics[scale=0.65]{./pic/n_2000_k_10_compare_hist.png}
+
+
+Because we are dealing with images here, it might helps to use histogram of sliding windows instead of raw image. Here I tried to compute the 8-bin histogram of 7x7 sliding window of step size 3, and concatenated them together as our new feature vector. In total it has 1352 dimensions. As we can see in the figures above, using histogram really improve the embedding result. Windows of proper size and step size can keep the important information and ignore the noise, that's why the result is better.
+}
+\clearpage
+
+
+\vspace{10pt}
+\problemAnswer{ % Answer
+\begin{homeworkSection}{(e) Linear manifold interpolation}
+
+Given a point $y_i$ in the embedding space, we first find the nearest neighbors of it in the embedding space, and computer the weights $w_j$ of them by
+$$w_j=\frac{\sum_k{C_{jk}^{-1}}}{\sum_{lk}{C_{lk}^{-1}}}$$
+where $C_{jk}=(y_i-y_j)^T(y_i-y_k)$. And then, construct $x_i$ in the original space by 
+$$x_i=\sum_j{w_jx_j}$$
+
+\includegraphics[scale=0.88]{./pic/recover_1_0.png}
+\includegraphics[scale=0.88]{./pic/recover_0_0.png}\\
+The left figure is a combination of neighbors of digit 1, the right figure is a combination of digit 2,3,8, and 9. The problem of this method is clear: when the picked point is in the embedding space but outside the manifold, the nearest neighbors are likely come from different clusters(because they are all far away). And the corresponding reconstruction may be totally meaningless.
+
+\end{homeworkSection}
+
+}
+\clearpage
 %----------------------------------------------------------------------------------------
 \begin{homeworkProblem}[The Implementation]
 In the implementation section you give a concise insight to the practical aspects of this coding exercise. It mainly mentions the optimization methods used to solve the model equations. Did you encounter numerical or efficiency problems? If yes, how did you solve them?
@@ -190,7 +263,14 @@ Hard limit: One page
 
 \vspace{10pt}
 \problemAnswer{ % Answer
-Your Answer
+\begin{enumerate}
+    \item 
+    Sometimes $C$ is singular or nearly singular, the program report error message at the matrix inversion step. And this typically arises when $K$ is large. One way to avoid the numerical difficulty is adding small values on all the diagonal terms of C as regularization.
+    \item
+    All the calculations have closed form solution, so no optimization used to solve the equations. The only mathematical libraries used is the inverse matrix solver and eigenvalue decomposition solver in numpy.
+    \item
+    Because of the limit of memory and time, all the experiments only run on less than 2000 points randomly selected from the original 70000 points.
+\end{enumerate}
 }
 \end{homeworkProblem}
 \clearpage
