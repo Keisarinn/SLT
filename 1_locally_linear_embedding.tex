@@ -1,8 +1,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Make sure to set your name, legi number and url to the right git branch.
-\newcommand{\hmwkAuthorName}{YOUR NAME} % Your name
-\newcommand{\hmwkAuthorLegi}{YOUR LEGI NUMBER} % Your name
-\newcommand{\hmwkGitBranch}{YOUR GIT BRANCH} % Your name
+\newcommand{\hmwkAuthorName}{Amirreza Bahreini} % Your name
+\newcommand{\hmwkAuthorLegi}{11-801-495} % Your name
+\newcommand{\hmwkGitBranch}{11-801-495/1\_locally\_linear\_embedding} % Your name
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -12,7 +12,9 @@
 %----------------------------------------------------------------------------------------
 
 \documentclass{article}
-
+\usepackage{subcaption}
+\usepackage{caption}
+\usepackage{amsmath,amsfonts,amssymb}
 \usepackage{fancyhdr} % Required for custom headers
 \usepackage{lastpage} % Required to determine the last page for the footer
 \usepackage{extramarks} % Required for headers and footers
@@ -139,13 +141,29 @@
 %----------------------------------------------------------------------------------------
 
 \begin{homeworkProblem}[The Model]
+
 The model section is intended to allow you to recapitulate the essential ingredients used in \hmwkTitle. Write down the \textit{necessary} equations to specify \hmwkTitle\ and and shortly explain the variables that are involved. This section should only introduce the equations, their solution should be outlined in the implementation section.\newline
 Hard limit: One page
 \vspace{10pt}
 
 \problemAnswer{ % Answer
-Your Answer
+The idea behind Locally Linear Embedding (LLE) is that we can learn non linear structure in the data by patching together lots of linear structures in smaller regions. It essentially finds a neighbourhood for each data point, finds the weights for linearly approximating the data in that neighbourhood and finally finds the low-dimensional coordinates best reconstructed by those weights. \\ 
+Given the data matrix $\textbf{X}_{n \times p}$, a desired dimension $q < p$ and a fix number of neighbours $k$ for each data point, LLE outputs a matrix $\textbf{Y}_{n \times q}$. Following steps show how LLE works:
+
+\begin{enumerate}
+\item Find the $k$ nearest neighbour for each data point $x_i$. Of course here the concept of "near" is directly related to the chosen distance metric.
+\item Find the weight matrix $\textbf{W}$ which minimises the following error:
+$$\epsilon(\textbf{W}) = \Sigma_i |x_i - \Sigma_j W_{ij}x_j |^2$$
+where $W_{ij} = 0$ if $x_j$ does not belong to the set of neighbours found in the first step, and for each $i$ $\Sigma_j W_{ij} = 1$
+\item Find the coordinates $\textbf{Y}$ which minimises the reconstruction using the obtained weights in the second step:
+$$\Theta(\textbf{Y}) = \Sigma_i |y_i - \Sigma_j W_{ij}y_j|^2$$
+where $\Sigma_i Y_{ij} = 0$ and $\textbf{Y}^\intercal\textbf{Y} = \textbf{I}$
+\end{enumerate}
+
+Essentially we would like to keep the same neighbouring structure in a lower dimensional space.
 }
+
+
 \end{homeworkProblem}
 \clearpage
 
@@ -176,9 +194,95 @@ Assume you pick some point in the embedding space. How can you map it back to th
 \end{homeworkSection}
 
 \vspace{10pt}
-\problemAnswer{ % Answer
-Your Answer
-}
+
+\begin{figure}
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth]{results/l1_neighs10_dim2_20000}
+  \caption{2D embedding}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth]{results/l1_neighs10_dim3_20000}
+  \caption{3D embedding}
+\end{subfigure}
+\caption{Embeddings of 20000 data points of MINST dataset using 10 neighbours and L1 distance}
+\label{fig:embed}
+\end{figure}
+
+
+
+\begin{figure}
+\centering
+\includegraphics[width=0.5\linewidth]{results/M_l1_neighs10_dim2_20000}
+\caption{Embeddings of 20000 data points of MINST dataset using 10 neighbours and L1 distance}
+\label{fig:M}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth]{results/singulars_l1_neighs10_dim2_20000}
+  \caption{Singular values for all 20000 dimensions}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth]{results/zoom_singulars_l1_neighs10_dim2_20000}
+  \caption{Zoomed on only first few dimensions}
+\end{subfigure}
+\caption{Singular values of the \textbf{M} matrix}
+\label{fig:sings}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+\includegraphics[width=1\linewidth]{results/euclidean_neighs1_dim2_3000}
+  \caption{$k=1$}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+\includegraphics[width=1\linewidth]{results/euclidean_neighs11_dim2_3000}
+  \caption{$k=11$}
+\end{subfigure}
+
+\begin{subfigure}{.5\textwidth}
+  \centering
+\includegraphics[width=1\linewidth]{results/euclidean_neighs111_dim2_3000}
+  \caption{$k=111$}
+\end{subfigure}
+
+\caption{Effect of number of neighbours on embeddings. Notice that the first plot is a normal consequence of having less neighbours than actually desired number of dimensions, here 2. The second plot shows a good clustering compared to all other numbers of neighbours. Last figure is representative of almost any $k > 20$. The reasons is discussed in the answer.}
+\label{fig:ks}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+\includegraphics[width=1\linewidth]{results/l1_neighs10_dim2_3000}
+  \caption{L1 distance}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+\includegraphics[width=1\linewidth]{results/l2_neighs10_dim2_3000}
+  \caption{L2 distance}
+\end{subfigure}
+
+\begin{subfigure}{.5\textwidth}
+  \centering
+\includegraphics[width=1\linewidth]{results/hamming_neighs10_dim2_3000}
+  \caption{Hamming distance}
+\end{subfigure}
+
+\caption{Effect of distance metric on the clustering.}
+\label{fig:metrics}
+\end{figure}
+
+
 \end{homeworkProblem}
 \clearpage
 
@@ -190,7 +294,22 @@ Hard limit: One page
 
 \vspace{10pt}
 \problemAnswer{ % Answer
-Your Answer
+
+Many built-in functions of scipy, numpy and sklearn have been used in the code. The entire code is hugely inspired by the function "sklearn.manifold.locally\_linear\_embedding". \\
+We may divide the implementation in following three parts: 
+\begin{enumerate}
+
+\item Finding neighbours: For this part the function sklearn.neighbors.NearestNeighbors is used.
+\item Finding weights: The error function for a particular $x$ can be rewritten as 
+$$\epsilon = |x_i - \Sigma_j W_{ij}x_j |^2 = |\Sigma_j W_{ij}(x_i - x_j)|^2 = \Sigma_{jk} W_{ij}W_{ik}C_{jk} $$ 
+where $C_{jk} = (x_i - x_j)(x_i - x_k)$ is the local covariance matrix. The optimal weights are then given by $W_{ij} = \frac{\Sigma_k C_{jk}^{-1}}{\Sigma_{lm} C_{lm}^{-1}}$. A simple way avoid this inverse operation is to solve the linear system $\Sigma_j C_{jk}W_{ik} = 1$ and then rescale the weights so that they sum to one (This is easily done by the "solve" function in scipy). The only problem than can arise here is when the covariance matrix is singular, and this can be solved by multiplying a very small regularisation value ($reg=1e-3$) to the trace of $\textbf{C}$.
+\item Last step is to find coordinates in the new low-dimensional space. In the exercise session we have seen that the second error function can be rewritten as 
+$$\Theta(\textbf{Y}) = \Sigma_i |y_i - \Sigma_j W_{ij}y_j|^2 $$ 
+$$\Theta(\textbf{Y}) = \textbf{Y}^\intercal \textbf{M}\textbf{Y}$$ 
+where $\textbf{M} = (\textbf{I} - \textbf{W})^\intercal( \textbf{I} - \textbf{W}) = \textbf{I} - \textbf{W} - \textbf{W}^\intercal + \textbf{W}^\intercal\textbf{W}$. \\
+Then by Rayleitz-Ritz theorem the optimal embedding is found by computing the bottom $d + 1$ eigenvectors of \textbf{M} where we drop the first one and keep the $d$ remaining. This is also simply done by the use of function "eigh" of scipy.
+\end{enumerate}
+
 }
 \end{homeworkProblem}
 \clearpage
@@ -201,10 +320,21 @@ Your page gives you space to include ideas, observations and results which do no
 No page limit.
 
 \vspace{10pt}
-\problemAnswer{ % Answer
-Your Answer
 
-\hmwkGitBranch % defined in line 5
+\problemAnswer{ % Answer
+MINST dataset is a very large dataset of $60000$ pictures of $28 \times 28$ dimension. As calculations were very time consuming, I had to reduce the size of dataset to at least $20000$. Some other analysis (like finding the most appropriate number of neighbours) has been performed on a dataset of only $3000$ pictures. At every part of this question, it is explicitly mentioned whether the dataset of $20000$ data points or $3000$ point has been used. \\
+
+
+
+Figure \ref{fig:embed} shows both 2D and 3D embeddings. In both embeddings we can see a clustering, although not perfect. One strange thing is that the 3D embedding does not use all the space available to make better clusters. \\
+Plotting the $\textbf{M}$ matrix is extremely hard as it is of $20000 \times 20000$ dimension which makes it almost impossible to have a look at it. In order to make it easier to see, only a very tiny fraction of matrix is plotted: $\textbf{M}_{1:50,1:50}$. Figure \ref{fig:M} shows this small block of the matrix which can be representative of the entire matrix, as it is very sparse, with large values on the secondary diagonal and mostly 0s everywhere else (but not everywhere). \\
+Figure \ref{fig:sings} shows the singular values of the $\textbf{M}$ matrix. If I understood well, the most appropriate number of dimensions to take in this case would be 5, as the singular values are still very small (and thus the objective value of our optimisation stays small) but we get more dimensions to embed the data. \\
+
+Both effects of number of neighbours and distance metrics have been studied. For this part only $3000$ data points are used. First embeddings for $k$ $in$ $[1, 11, 21, ..., 131, 141]$ have been compared. Visually it could be concluded that $k=11$ results in clusters that are better separated from each other. Figure \ref{fig:ks} compares the embeddings for only few of them (Note that in this case the metric distance is Euclidean, for not any particular reason). One interesting result was that for very big $k$s (aprox. $k > 20$) it seems that the clustering doesn't change that much and it actually doesn't improve at all. This result could come from the fact that when the number of neighbours are larger compared to the curvature of the original space, then we don't get any good resolution; in other words, the neighbourhood becomes so large that it can't be learned with out linear system of weights anymore, as then we try to fit a linear model for a non linear structure. In a Next step, embeddings for $k$ $in$ $[8, 9, 10, ..., 19]$ were compared in order to find out whether there is any "optimal" clustering for a specific $k$. Results was that they were mostly all visually similar regarding how well clusters are separated and thus they are not plotted here any more. That's why for other analysis $k=10$ is chosen. \\
+In order to see the effect of distance metric, 2D embeddings for distances L1, L2 and Hamming (Intentionally an almost irrelevant distance metric) are compared. Figure \ref{fig:metrics} shows the result. The result of L1 distance and L2 distance are almost the same (one rotated compared to other, which is actually inherent in solving the \textbf{M} matrix) and this is simply because both distances have the same nature. We can also see the clusterings resulted by the hamming distance are worse as there are more overlapping points from different clusters. This is also an expected result as the hamming distance has no meaning in the context of image vectors.
+
+ 
+
 }
 \end{homeworkProblem}
 \clearpage

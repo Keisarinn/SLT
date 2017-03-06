@@ -1,0 +1,5 @@
+.texpadtmp/
+.DS_Store
+.idea
+dataset/
+results/
