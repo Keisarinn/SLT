@@ -199,15 +199,15 @@ We can observe an increase of eigenvalues, where the increase is small in the be
 
 (d) Nearest Neighbors\\
 \includegraphics[width=8cm]{2d_embedding_1000p_10n_euclidean}
-\includegraphics[width=8cm]{2d_embedding_1000p_20n_euclidean}
+\includegraphics[width=8cm]{images}
 
 }
 
-\problemAnswer{The figures above show the results of 2D embedding using 10 neighbours (left) and 20 neighbours (right) respectively. Compared with the figure in the question (b) with 5 neighbours, we can observe that the number of the neighours influence the results in a dramatic way. We would expect that we can achieve a better performance of embedding, e.g. a clearer clustering, with increasing number of neighbours. However, it can not be observed here clearly. The distance metric used here is the usual Euclidean distance.\\
-The figures below shows the results of the embedding using the sum-of-absolute-values “Manhattan” distance. In our case, the two distance metrics lead to the results, which do not differ a lot from each other. 
+\problemAnswer{The figures above show the results of 2D embedding using 10 neighbours (left) and 50 neighbours (right) respectively. Compared with the figure in the question (b) with 5 neighbours, we can observe that the number of the neighours influence the results in a dramatic way. The increase of the number of neighbours does not lead to a better clustering. If we use too much neighbours, we may include points that do not belong to the cluster of the point. The distance metric used here is the usual Euclidean distance.\\
+The figures below shows the results of the embedding using the sum-of-absolute-values “Manhattan” distance. In our case, the Manhattan distance leads to a better result, especially in the case using 50 neighbours.
 
 \includegraphics[width=8cm]{2d_embedding_1000p_10n_manhatten}
-\includegraphics[width=8cm]{2d_embedding_1000p_20n_manhatten}
+\includegraphics[width=8cm]{images2}
 
 (e) Linear manifold interpolation: 
 The figure below shows the linear interpolation applied to the orignal space. The first image is the first data point in the mnist test dataset and the fifth image is the second data point. The three images between are interpolated images. 
@@ -220,7 +220,7 @@ The figure below shows the linear interpolation applied to the orignal space. Th
 
 For reconstruction we first compute the k nearest neighbours of the chosen points and then use the equation (3) to find the optimal weights. In the orignal space we weight the neighbour images with the weights we compute before. The sum is the mapping of the chosen point in the embedding space to the original space. \\
 The figure below on the left side is the reconstructed image using point within the manifold (the first image above), whereas the figure on the right side use point outside the manifold (the forth image above).
-This method works well for points within the manifold, but suitable for points outside the manifold. The higher the dimensionality of the embedding space, the better will be the result of backwards mapping. \\
+This method works well for points within the manifold, but not very well for points outside the manifold. The higher the dimensionality of the embedding space, the better will be the result of backwards mapping. \\
 
 \includegraphics[width=8cm]{images_reconstructed1}
 \includegraphics[width=8cm]{images_reconstructed2}
@@ -250,7 +250,7 @@ The third step is to compute the d-dimensional vectors $y_i$ which minimize the 
 E(y_1,...,y_N)=\sum\limits_k u_k^TMu_k,
 \end{equation}
 whereas $M=(I-W)^T(I-W)$ and $u_k=(y_{1k}...y_{Nk})$ for $k=1,...,d$. The vector $u$s are found computing the eigenvectors of the matrix M with the smallest $d+1$ eigenvalues and discarding the first eigenvector associated with the eigenvalue 0.\\
-During my implementation the computation of inverse C matrix is very inefficient. The more neighbours we use, the slower is the computation, as a high dimensional matrix with the dimensionality equal to the number of neighbours needs to be invert. 
+During my implementation the computation of inverse C matrix is very inefficient. The more neighbours we use, the slower is the computation, as a high dimensional matrix with the dimensionality equal to the number of neighbours needs to be invert. For the implementation I have used the package numpy and scipy.
 
 The link of my coding exercise: \hmwkGitBranch.
 }
@@ -273,6 +273,7 @@ Your Answer
 
 \end{document}
 
+\grid
 \grid
 \grid
 \grid

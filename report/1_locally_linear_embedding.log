@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.3.2)  5 MAR 2017 19:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.3.2)  6 MAR 2017 11:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **1_locally_linear_embedding.tex
-(/home/zhejun/slt-coding-exercises/1_locally_linear_embedding.tex
+(/home/zhejun/Git/slt-coding-exercises/report/1_locally_linear_embedding.tex
 LaTeX2e <2016/02/01>
 Babel <3.9q> and hyphenation patterns for 81 language(s) loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
@@ -78,7 +78,7 @@ Package: lipsum 2014/07/27 v1.3 150 paragraphs of Lorem Ipsum dummy text
 )
 \c@homeworkProblemCounter=\count89
 
-(/home/zhejun/slt-coding-exercises/1_locally_linear_embedding.aux)
+(/home/zhejun/Git/slt-coding-exercises/report/1_locally_linear_embedding.aux)
 \openout1 = `1_locally_linear_embedding.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 121.
@@ -168,7 +168,7 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-(/home/zhejun/slt-coding-exercises/1_locally_linear_embedding.toc
+(/home/zhejun/Git/slt-coding-exercises/report/1_locally_linear_embedding.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 3.
 LaTeX Font Info:    External font `cmex10' loaded for size
@@ -177,7 +177,8 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 \tf@toc=\write3
 \openout3 = `1_locally_linear_embedding.toc'.
 
- [2] [3]
+
+[2] [3]
 Package epstopdf Info: Source file: <2d_embedding_1000p_5n.eps>
 (epstopdf)                    date: 2017-03-05 09:32:59
 (epstopdf)                    size: 131483 bytes
@@ -268,25 +269,22 @@ pdf)
 Package pdftex.def Info: 2d_embedding_1000p_10n_euclidean-eps-converted-to.pdf 
 used on input line 204.
 (pdftex.def)             Requested size: 227.62204pt x 151.74721pt.
-Package epstopdf Info: Source file: <2d_embedding_1000p_20n_euclidean.eps>
-(epstopdf)                    date: 2017-03-05 11:00:33
-(epstopdf)                    size: 131543 bytes
-(epstopdf)             Output file: <2d_embedding_1000p_20n_euclidean-eps-conve
-rted-to.pdf>
-(epstopdf)                    date: 2017-03-05 11:02:51
-(epstopdf)                    size: 19273 bytes
-(epstopdf)             Command: <repstopdf --outfile=2d_embedding_1000p_20n_euc
-lidean-eps-converted-to.pdf 2d_embedding_1000p_20n_euclidean.eps>
+Package epstopdf Info: Source file: <images.eps>
+(epstopdf)                    date: 2017-03-06 11:28:00
+(epstopdf)                    size: 131608 bytes
+(epstopdf)             Output file: <images-eps-converted-to.pdf>
+(epstopdf)                    date: 2017-03-06 11:30:00
+(epstopdf)                    size: 19682 bytes
+(epstopdf)             Command: <repstopdf --outfile=images-eps-converted-to.pd
+f images.eps>
 (epstopdf)             \includegraphics on input line 204.
 Package epstopdf Info: Output file is already uptodate.
 
-<2d_embedding_1000p_20n_euclidean-eps-converted-to.pdf, id=29, 433.62pt x 289.0
-8pt>
-File: 2d_embedding_1000p_20n_euclidean-eps-converted-to.pdf Graphic file (type 
-pdf)
- <use 2d_embedding_1000p_20n_euclidean-eps-converted-to.pdf>
-Package pdftex.def Info: 2d_embedding_1000p_20n_euclidean-eps-converted-to.pdf 
-used on input line 204.
+<images-eps-converted-to.pdf, id=29, 433.62pt x 289.08pt>
+File: images-eps-converted-to.pdf Graphic file (type pdf)
+
+<use images-eps-converted-to.pdf>
+Package pdftex.def Info: images-eps-converted-to.pdf used on input line 204.
 (pdftex.def)             Requested size: 227.62204pt x 151.74721pt.
 
 Underfull \hbox (badness 10000) in paragraph at lines 204--205
@@ -299,12 +297,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 204--205
 Overfull \vbox (21.5016pt too high) has occurred while \output is active []
 
 
-[5 </home/zhejun/slt-coding-exercises/2d_embedding_1000p_5n-eps-converted-to.pd
-f> </home/zhejun/slt-coding-exercises/3d_embedding_1000p_5n-eps-converted-to.pd
-f> </home/zhejun/slt-coding-exercises/M_matrix.png> </home/zhejun/slt-coding-ex
-ercises/EW-eps-converted-to.pdf> </home/zhejun/slt-coding-exercises/2d_embeddin
-g_1000p_10n_euclidean-eps-converted-to.pdf> </home/zhejun/slt-coding-exercises/
-2d_embedding_1000p_20n_euclidean-eps-converted-to.pdf>]
+[5 </home/zhejun/Git/slt-coding-exercises/report/2d_embedding_1000p_5n-eps-conv
+erted-to.pdf> </home/zhejun/Git/slt-coding-exercises/report/3d_embedding_1000p_
+5n-eps-converted-to.pdf> </home/zhejun/Git/slt-coding-exercises/report/M_matrix
+.png> </home/zhejun/Git/slt-coding-exercises/report/EW-eps-converted-to.pdf> </
+home/zhejun/Git/slt-coding-exercises/report/2d_embedding_1000p_10n_euclidean-ep
+s-converted-to.pdf> </home/zhejun/Git/slt-coding-exercises/report/images-eps-co
+nverted-to.pdf>]
 Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no œ in font cmr10!
@@ -331,25 +330,22 @@ pdf)
 Package pdftex.def Info: 2d_embedding_1000p_10n_manhatten-eps-converted-to.pdf 
 used on input line 227.
 (pdftex.def)             Requested size: 227.62204pt x 151.74721pt.
-Package epstopdf Info: Source file: <2d_embedding_1000p_20n_manhatten.eps>
-(epstopdf)                    date: 2017-03-05 13:52:24
-(epstopdf)                    size: 131602 bytes
-(epstopdf)             Output file: <2d_embedding_1000p_20n_manhatten-eps-conve
-rted-to.pdf>
-(epstopdf)                    date: 2017-03-05 13:53:18
-(epstopdf)                    size: 19253 bytes
-(epstopdf)             Command: <repstopdf --outfile=2d_embedding_1000p_20n_man
-hatten-eps-converted-to.pdf 2d_embedding_1000p_20n_manhatten.eps>
+Package epstopdf Info: Source file: <images2.eps>
+(epstopdf)                    date: 2017-03-06 11:37:54
+(epstopdf)                    size: 131465 bytes
+(epstopdf)             Output file: <images2-eps-converted-to.pdf>
+(epstopdf)                    date: 2017-03-06 11:38:36
+(epstopdf)                    size: 19788 bytes
+(epstopdf)             Command: <repstopdf --outfile=images2-eps-converted-to.p
+df images2.eps>
 (epstopdf)             \includegraphics on input line 227.
 Package epstopdf Info: Output file is already uptodate.
 
-<2d_embedding_1000p_20n_manhatten-eps-converted-to.pdf, id=115, 433.62pt x 289.
-08pt>
-File: 2d_embedding_1000p_20n_manhatten-eps-converted-to.pdf Graphic file (type 
-pdf)
- <use 2d_embedding_1000p_20n_manhatten-eps-converted-to.pdf>
-Package pdftex.def Info: 2d_embedding_1000p_20n_manhatten-eps-converted-to.pdf 
-used on input line 227.
+<images2-eps-converted-to.pdf, id=115, 433.62pt x 289.08pt>
+File: images2-eps-converted-to.pdf Graphic file (type pdf)
+
+<use images2-eps-converted-to.pdf>
+Package pdftex.def Info: images2-eps-converted-to.pdf used on input line 227.
 (pdftex.def)             Requested size: 227.62204pt x 151.74721pt.
 Package epstopdf Info: Source file: <images_interp1.eps>
 (epstopdf)                    date: 2017-03-05 18:15:17
@@ -493,44 +489,45 @@ Underfull \hbox (badness 10000) in paragraph at lines 227--228
 
  []
 
-[6 </home/zhejun/slt-coding-exercises/2d_embedding_1000p_10n_manhatten-eps-conv
-erted-to.pdf> </home/zhejun/slt-coding-exercises/2d_embedding_1000p_20n_manhatt
-en-eps-converted-to.pdf> </home/zhejun/slt-coding-exercises/images_interp1-eps-
-converted-to.pdf> </home/zhejun/slt-coding-exercises/images_interp2-eps-convert
-ed-to.pdf> </home/zhejun/slt-coding-exercises/images_interp3-eps-converted-to.p
-df> </home/zhejun/slt-coding-exercises/images_interp4-eps-converted-to.pdf> </h
-ome/zhejun/slt-coding-exercises/images_interp5-eps-converted-to.pdf> </home/zhe
-jun/slt-coding-exercises/images_reconstructed1-eps-converted-to.pdf> </home/zhe
-jun/slt-coding-exercises/images_reconstructed2-eps-converted-to.pdf>] [7
+[6 </home/zhejun/Git/slt-coding-exercises/report/2d_embedding_1000p_10n_manhatt
+en-eps-converted-to.pdf> </home/zhejun/Git/slt-coding-exercises/report/images2-
+eps-converted-to.pdf> </home/zhejun/Git/slt-coding-exercises/report/images_inte
+rp1-eps-converted-to.pdf> </home/zhejun/Git/slt-coding-exercises/report/images_
+interp2-eps-converted-to.pdf> </home/zhejun/Git/slt-coding-exercises/report/ima
+ges_interp3-eps-converted-to.pdf> </home/zhejun/Git/slt-coding-exercises/report
+/images_interp4-eps-converted-to.pdf> </home/zhejun/Git/slt-coding-exercises/re
+port/images_interp5-eps-converted-to.pdf> </home/zhejun/Git/slt-coding-exercise
+s/report/images_reconstructed1-eps-converted-to.pdf> </home/zhejun/Git/slt-codi
+ng-exercises/report/images_reconstructed2-eps-converted-to.pdf>] [7
+
+] [8
 
 ]
-[8
 
-] 
 AED: lastpage setting LastPage
-(/home/zhejun/slt-coding-exercises/1_locally_linear_embedding.aux) ) 
+(/home/zhejun/Git/slt-coding-exercises/report/1_locally_linear_embedding.aux) )
+ 
 Here is how much of TeX's memory you used:
  1990 strings out of 493029
- 30022 string characters out of 6136235
+ 29888 string characters out of 6136235
  189014 words of memory out of 5000000
  5488 multiletter control sequences out of 15000+600000
  8847 words of font info for 31 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  37i,10n,43p,574b,233s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/font
-s/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-r9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
-></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on /home/zhejun/slt-coding-exercises/1_locally_linear_embedding.
-pdf (8 pages, 299340 bytes).
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7
+.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
+Output written on /home/zhejun/Git/slt-coding-exercises/report/1_locally_linear
+_embedding.pdf (8 pages, 300466 bytes).
 PDF statistics:
  265 PDF objects out of 1000 (max. 8388607)
  115 compressed objects within 2 object streams

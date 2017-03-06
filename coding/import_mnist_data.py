@@ -1,11 +1,3 @@
-#!/usr/bin/env python2
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Mar  3 19:35:42 2017
-
-@author: zhejun
-"""
-
 import loader as load
 import viewer as view
 
@@ -52,7 +44,7 @@ def plot_3D_embedding(X, y, title=None):
     if title is not None:
         plt.title(title)
         
-result,M_matrix=lle.lle_algorithm(X=training_images, n_neighbours=5, y_dim=2)
+result,M_matrix=lle.lle_algorithm(X=training_images, n_neighbours=50, y_dim=2)
 
 #EW, EV=linalg.eigh(M_matrix, eigvals_only=False, turbo=True)
 #plt.plot(EW)
@@ -63,7 +55,7 @@ result,M_matrix=lle.lle_algorithm(X=training_images, n_neighbours=5, y_dim=2)
 
 plot_2D_embedding(X=result, y=mnist_labels[0:1000, 0])
 #view.view_image(M_matrix)
-plt.savefig('images.eps')
+plt.savefig('images2.eps')
 
 #%% Linear manifold interpolation
 from pylab import imshow, cm

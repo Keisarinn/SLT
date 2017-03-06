@@ -1,11 +1,3 @@
-#!/usr/bin/env python2
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Mar  3 19:21:33 2017
-
-@author: zhejun
-"""
-
 from struct import unpack
 import gzip
 from numpy import zeros, uint8, float32

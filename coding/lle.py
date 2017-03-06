@@ -1,10 +1,3 @@
-#!/usr/bin/env python2
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Mar  4 14:09:58 2017
-
-@author: zhejun
-"""
 import numpy as np
 import scipy.spatial as spatial
 from numpy.linalg import inv

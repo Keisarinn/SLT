@@ -3,7 +3,7 @@
 """
 Created on Fri Mar  3 19:34:15 2017
 
-@author: zhejun
+
 """
 
 from pylab import imshow, show, cm
