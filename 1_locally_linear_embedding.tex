@@ -196,11 +196,117 @@ Assume you pick some point in the embedding space. How can you map it back to th
 
 \vspace{10pt}
 
-\problemAnswer{
+
+\begin{figure}
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth]{results/l1_neighs10_dim2_20000}
+  \caption{2D embedding}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth]{results/l1_neighs10_dim3_20000}
+  \caption{3D embedding}
+\end{subfigure}
+\caption{Embeddings of 20000 data points of MINST dataset using 10 neighbours and L1 distance. Although not perfect, we can see a kind of clustering between all 10 numbers, where there are of course some overlapping points. We can also observe that the 3D embedding does not use all the space available in order to separate clusters from each other. This is of course in contrast from PCA which tries to maximises the variance; here we try to keep the neighbouring structure.}
+\label{fig:embed}
+\end{figure}
 
 
 
-}
+\begin{figure}
+\centering
+\includegraphics[width=1\linewidth]{results/M_l1_neighs10_dim2_20000}
+\caption{Only a small portion of the matrix \textbf{M}, precisely $\textbf{M}_{[0:50][0:50]}$. This small portion is representative of the entire matrix as \textbf{M} seems to be very sparse, with positive values on the secondary diagonal and few negative values elsewhere.}
+\label{fig:M}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth]{results/singulars_l1_neighs10_dim2_20000}
+  \caption{Singular values for all 20000 dimensions}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth]{results/zoom_singulars_l1_neighs10_dim2_20000}
+  \caption{Zoomed on only first few dimensions}
+\end{subfigure}
+\caption{Singular values of the \textbf{M} matrix. We may guess that 5 dimensions is the optimal number of dimensions to take as the singular values still stay very small, but we will have also more dimensions for to express a better embedding. The problem with more dimensions is that the singular values increase and thus the objective value of our error function, which means that we lose some desired neighbouring structure.}
+\label{fig:sings}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+\includegraphics[width=1\linewidth]{results/euclidean_neighs1_dim2_3000}
+  \caption{$k=1$}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+\includegraphics[width=1\linewidth]{results/euclidean_neighs11_dim2_3000}
+  \caption{$k=11$}
+\end{subfigure}
+
+\begin{subfigure}{.5\textwidth}
+  \centering
+\includegraphics[width=1\linewidth]{results/euclidean_neighs111_dim2_3000}
+  \caption{$k=111$}
+\end{subfigure}
+
+\caption{Effect of number of neighbours on embeddings. Notice that the first plot is a normal consequence of having less neighbours than actually desired number of dimensions, here 2. The second plot shows a good clustering compared to all other numbers of neighbours. Last figure is representative of almost any $k > 20$. The reasons is discussed in the last section.}
+\label{fig:ks}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+\includegraphics[width=1\linewidth]{results/l1_neighs10_dim2_3000}
+  \caption{L1 distance}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+\includegraphics[width=1\linewidth]{results/l2_neighs10_dim2_3000}
+  \caption{L2 distance}
+\end{subfigure}
+
+\begin{subfigure}{.5\textwidth}
+  \centering
+\includegraphics[width=1\linewidth]{results/hamming_neighs10_dim2_3000}
+  \caption{Hamming distance}
+\end{subfigure}
+
+\caption{Effect of distance metric on the clustering.}
+\label{fig:metrics}
+\end{figure}
+
+
+
+\begin{figure}
+\centering
+\subcaptionbox{Taken from the manifold\label{fig:a}}{\includegraphics[width=.3\textwidth,height=3cm]{results/emb_1}}\hfill
+\subcaptionbox{Outside of the manifold\label{fig:b}}{\includegraphics[width=.3\textwidth,height=3cm]{results/intr_1}}\hfill
+\subcaptionbox{Outside of the manifold\label{fig:c}}{\includegraphics[width=.3\textwidth,height=3cm]{results/intr_2}}\		\subcaptionbox{Outside of the manifold\label{fig:d}}{\includegraphics[width=.3\textwidth,height=3cm]{results/intr_3}}\hfill
+\subcaptionbox{Outside of the manifold\label{fig:e}}{\includegraphics[width=.3\textwidth,height=3cm]{results/intr_4}}\hfill
+\subcaptionbox{Taken from the manifold\label{fig:f}}{\includegraphics[width=.3\textwidth,height=3cm]{results/emb_2}}\ 		\caption{Reconstructed vectors from the 2D embeddings. The first one and the last one are taken from the manifold, other four are on the line between those two (They are hence not on the manifold).}
+\label{fig:recon}
+\end{figure}
+
+
+\begin{figure}
+\centering
+\subcaptionbox{From the dataset\label{fig:a}}{\includegraphics[width=.3\textwidth,height=3cm]{results/original_1}}\hfill
+\subcaptionbox{On the line\label{fig:b}}{\includegraphics[width=.3\textwidth,height=3cm]{results/intr_1}}\hfill
+\subcaptionbox{On the line\label{fig:c}}{\includegraphics[width=.3\textwidth,height=3cm]{results/int2}}\		\subcaptionbox{On the line\label{fig:d}}{\includegraphics[width=.3\textwidth,height=3cm]{results/int3}}\hfill
+\subcaptionbox{On the line\label{fig:e}}{\includegraphics[width=.3\textwidth,height=3cm]{results/int_4}}\hfill
+\subcaptionbox{From the dataset\label{fig:f}}{\includegraphics[width=.3\textwidth,height=3cm]{results/original_2}}\ 		\caption{Except the first and last one, others are outside of the original data points, obtained from the line between the first vector and last one. Note that there is no reconstruction here, only results of interpolation is shown.}
+\label{fig:orig}
+\end{figure}
+
 
 
 \end{homeworkProblem}
@@ -256,7 +362,7 @@ Figure \ref{fig:sings} shows the singular values of the $\textbf{M}$ matrix. If 
 Both effects of number of neighbours and distance metrics have been studied. For this part only $3000$ data points are used. First embeddings for $k$ $in$ $[1, 11, 21, ..., 131, 141]$ have been compared. Visually it could be concluded that $k=11$ results in clusters that are better separated from each other. Figure \ref{fig:ks} compares the embeddings for only few of them (Note that in this case the metric distance is Euclidean, for not any particular reason). One interesting result was that for very big $k$s (aprox. $k > 20$) it seems that the clustering doesn't change that much and it actually doesn't improve at all. This result could come from the fact that when the number of neighbours are larger compared to the curvature of the original space, then we don't get any good resolution; in other words, the neighbourhood becomes so large that it can't be learned with out linear system of weights anymore, as then we try to fit a linear model for a non linear structure. In a Next step, embeddings for $k$ $in$ $[8, 9, 10, ..., 19]$ were compared in order to find out whether there is any "optimal" clustering for a specific $k$. Results was that they were mostly all visually similar regarding how well clusters are separated and thus they are not plotted here any more. That's why for other analysis $k=10$ is chosen. \\
 In order to see the effect of distance metric, 2D embeddings for distances L1, L2 and Hamming (Intentionally an almost irrelevant distance metric) are compared. Figure \ref{fig:metrics} shows the result. The result of L1 distance and L2 distance are almost the same (one rotated compared to other, which is actually inherent in solving the \textbf{M} matrix) and this is simply because both distances have the same nature. We can also see the clusterings resulted by the hamming distance are worse as there are more overlapping points from different clusters. This is also an expected result as the hamming distance has no meaning in the context of image vectors. \\
 
-An easy way which leads to almost correct reconstructions is to take a vector from the embedding space, find its neighbours in the same space, find the weights that fit the vector as a linear combination of those neighbours, and finally find the original vector by multiplying those weights to the corresponding vectors in the original space. Figure XX shows the result of reconstruction for two vectors from the embedding space (first one and the last one) and for four other points out of the embedding space (which are on the line that connects those two vectors in the space). We can see that the result is at least visually appealing! Finally figure XX shows images corresponding to the points on the line between two vectors in the original space just for comparison (the first one and last one are the original vectors, others are the images on the line between those points).
+An easy way which leads to almost correct reconstructions is to take a vector from the embedding space, find its neighbours in the same space, find the weights that fit the vector as a linear combination of those neighbours, and finally find the original vector by multiplying those weights to the corresponding vectors in the original space. Figure \ref{fig:recon} shows the result of reconstruction for two vectors from the embedding space (first one and the last one) and for four other points out of the embedding space (which are on the line that connects those two vectors in the space). We can see that the result is at least visually appealing! Finally figure \ref{fig:orig} shows images corresponding to the points on the line between two vectors in the original space just for comparison (the first one and last one are the original vectors, others are the images on the line between those points).
 }
 \end{homeworkProblem}
 \clearpage
