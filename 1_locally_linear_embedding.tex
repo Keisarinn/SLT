@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Make sure to set your name, legi number and url to the right git branch.
-\newcommand{\hmwkAuthorName}{YOUR NAME} % Your name
-\newcommand{\hmwkAuthorLegi}{YOUR LEGI NUMBER} % Your name
+\newcommand{\hmwkAuthorName}{Birkir Snaer Sigfusson} % Your name
+\newcommand{\hmwkAuthorLegi}{16-932-048} % Your name
 \newcommand{\hmwkGitBranch}{YOUR GIT BRANCH} % Your name
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -144,7 +144,11 @@ Hard limit: One page
 \vspace{10pt}
 
 \problemAnswer{ % Answer
-Your Answer
+There are two main equation we are working with are:
+$$\varepsilon(W) = \sum_{i}^{}\left|\vec{X_i} - \sum_{i}^{}W_{ij}\vec{X_j} \right|^2 $$
+$$\Phi(Y) = \sum_{i}^{}\left|\vec{Y_i} - \sum_{i}^{}W_{ij}\vec{Y_j} \right|^2 $$
+The first is a cost function for the reconstruction error, i.e. the sum of squared errors between each vector $\vec{X_i}$ and its reconstruction using all other vectors $\vec{X_j}$, $j=1,...i-1, i+1, ... N$. The $\vec{X}$ vectors have dimension $D$. $W$ is an $N$x$N$ matrix of weights. As we will see, $W$ is really sparse because each $\vec{X_i}$ will only be reconstructed from its nearest neighbors.
+The second equation is a cost function for the embedding vectors $\vec{Y_i}$ which have dimensionality $d<D$ with the weights $W_{ij}$ found using the first equation. Naturally the solution to the problem is found by minimizing the first equation, solving for the weights, then minimizing the second equation thus finding the embedding space.
 }
 \end{homeworkProblem}
 \clearpage
