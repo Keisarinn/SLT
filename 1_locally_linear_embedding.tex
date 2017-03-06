@@ -227,7 +227,7 @@ Investigate the influence of the choice of how many nearest neighbors you take i
 
 \vspace{10pt}
 \problemAnswer{ % Answer
-	Expermiments with different distance metrics (manhattan, euclidiean, canberra and hamming distance) a different number of neighbors (10, 30, 300 nearest neighbors) showed relative low influence on the clusters. For all tested configurations the cluster were very stable (\ref{fig:nn}). Since the digits are black white with only few gray scale values and centered in the image the distance metric has low influence and good results can be achived using the euclidean distance. Increasing the number of neighbors results in dense clusters with only few outliers. 
+	Experiments with different distance metrics (manhattan, euclidiean, canberra and hamming distance) and different number of neighbors (10, 30, 300 nearest neighbors) showed relative low influence on the clusters structure. For all tested metrics and number of nearest neighbors the samples of the digit one can easily be separated. This makes sense since ones have the least numbers of dark pixels. For all tested configurations the cluster were very stable (\ref{fig:nn}). Since the digits are black white with only few gray scale values and centered in the image the distance metric has low influence and good results can be achived using the euclidean distance. Increasing the number of neighbors results in dense (and overlapping) clusters with only a few outliers. 
 }
 
 
@@ -237,21 +237,28 @@ Assume you pick some point in the embedding space. How can you map it back to th
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.7\linewidth]{reconst}
-	\caption[short]{The reconstruction from the 784 dimensional space (28x28 images). Left: original, right: reconstruction }
+	\includegraphics[width=0.4\linewidth]{reconst}
+	\caption[short]{The reconstruction from 2d space back to the 784 dimensional space (28x28 images). Left: original, right: reconstruction }
 	\label{fig:reconst}
 \end{figure}
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.7\linewidth]{interpol}
+	\includegraphics[width=0.4\linewidth]{interpol}
 	\caption[short]{Top: interpolation between embedded digit 6 and 7. Bottom: Same interpolation in the original high dimensional space. }
-	\label{fig:reconst}
+	\label{fig:interpol}
 \end{figure}
 
 \vspace{10pt}
 \problemAnswer{ % Answer
-Your Answer
+	The reconstruction of a one digit from a two dimensional embedding space is shown in figure \ref{fig:reconst}. The reconstruction requires the following three steps:
+	\begin{enumerate}
+		\item Find the set of the k-nearest neighbors of $\mathbf{y}$ in the low dimensional space ($\mathcal{N}(\mathbf{y})$)
+		\item Compute the weight matrix $\mathbf{w}$ as in the original LLE algorithm
+		\item Approximate the original point as the linear combination found in step 2 by neighbors found in step 1 in the original space e.g.: $\hat{\mathbf{x}} = \sum_{x_j \in \mathcal{N}(x) = \mathcal{N}(y)  } \mathbf{w}_{j} \mathbf{x}_j$
+	\end{enumerate}
+		
+	The linear interpolation between embedding vectors and points in the original space can be seeen in figure \ref{fig:interpol}. The interpolation in the original space is just a linear transition between the interpolating digits. Much more interesting is the interpolation of embedding vectors. This shows corresponding digit of the cluster which the line traverses. 
 }
 \end{homeworkProblem}
 \clearpage
@@ -264,7 +271,7 @@ Hard limit: One page
 
 \vspace{10pt}
 \problemAnswer{ % Answer
-Your Answer
+I encountered numerical instabilities when inverting the matrix $\mathbf{C}$ for reconstructing a point. To solve this I followed the adivice of the original LLE paper and found the weights by solving the linear system of equations $\sum_j \mathbf{C}_{jk} \mathbf{w}_k = 1$.
 }
 \end{homeworkProblem}
 \clearpage
@@ -276,8 +283,7 @@ No page limit.
 
 \vspace{10pt}
 \problemAnswer{ % Answer
-Your Answer
-
+	Git branch:
 \hmwkGitBranch % defined in line 5
 }
 \end{homeworkProblem}
