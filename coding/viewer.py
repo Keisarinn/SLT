@@ -1,11 +1,3 @@
-#!/usr/bin/env python2
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Mar  3 19:34:15 2017
-
-
-"""
-
 from pylab import imshow, show, cm
 
 
