@@ -229,6 +229,11 @@ Hard limit: One page
 \vspace{10pt}
 \problemAnswer{ % Answer
 
+https://gitlab.vis.ethz.ch/vwegmayr/slt-coding-exercises/tree/12-932-661/1\_locally\_linear\_embedding
+
+I started by implementing the LLE algorithm using the scikit library. After reading the question about the $M$ matrix, I decided to implement the algorithm without the scikit implementation, using only numpy and the scikit nearest neighbor function. I tried to implement the algorithm as it is described on the following page: https://www.cs.nyu.edu/~roweis/lle/algorithm.html. As it is often more efficient to replace for loops with matrix operations, I tried to completely avoid the for loops. After having written some parts, I tested the implementation and encountered an out of memory error. Unfortunately, I didn't had enough time left to fix this bug, so I finished the project using the scikit implementation. The code producting the out of memory exception is inside the lle(X, k) function in the lle.py file. I would try to fix the bug by using for loops instead of matrix operations at some places.
+
+As the number of samples in the MNIST dataset is quite large, I decided to only use the samples of the test set.
 }
 \end{homeworkProblem}
 \clearpage
@@ -240,7 +245,7 @@ No page limit.
 
 \vspace{10pt}
 \problemAnswer{ % Answer
-Your Answer
+In the next project I will invest more time.
 \hmwkGitBranch % defined in line 5
 }
 \end{homeworkProblem}
