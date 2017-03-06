@@ -1,8 +1,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Make sure to set your name, legi number and url to the right git branch.
-\newcommand{\hmwkAuthorName}{YOUR NAME} % Your name
-\newcommand{\hmwkAuthorLegi}{YOUR LEGI NUMBER} % Your name
-\newcommand{\hmwkGitBranch}{YOUR GIT BRANCH} % Your name
+\newcommand{\hmwkAuthorName}{Julien Lamour} % Your name
+\newcommand{\hmwkAuthorLegi}{13-820-907} % Your name
+\newcommand{\hmwkGitBranch}{https://gitlab.vis.ethz.ch/vwegmayr/slt-coding-exercises/tree/13-820-907/1\_locally\_linear\_embedding} % Your name
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -18,6 +18,12 @@
 \usepackage{extramarks} % Required for headers and footers
 \usepackage{graphicx} % Required to insert images
 \usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage[font=small,labelfont=bf, skip=5pt]{caption}
+\usepackage[skip=2pt]{subcaption}
+\usepackage{mwe}
+\usepackage{hyperref}
+\usepackage{float}
+
 
 % Margins
 \topmargin=-0.45in
@@ -144,41 +150,140 @@ Hard limit: One page
 \vspace{10pt}
 
 \problemAnswer{ % Answer
-Your Answer
+Cost function for reconstruction errors:
+\begin{equation}
+    \mathcal{E}(W)=\sum_i{\Bigl|\vec{X_i} - \sum_j{W_{ij}\vec{X_j}}\Bigr|^2}
+\end{equation}
+\hspace{3pt} where $\vec{X_i}$ is the point to be reconstructed from a weighted combination ($W_{ij} $for$ j=1...n$) of its neighbors $\vec{X_j}$. $\sum_{ij}W_{ij}=1$ and $W_{ij}=0$ if $\vec{X_i}$ and $\vec{X_j}$ are not neighbors.\\
+
+Cost function for low dimensional coordinates:
+\begin{equation}
+    \Phi(Y) = \sum_i{\Bigl|\vec{Y_i}-\sum_j{W_{ij}\vec{Y_j}}\Bigr|^2}
+\end{equation}
+\hspace{3pt} where $W_{ij}$ are the exact same weights are described earlier and $\vec{Y_i}$ is the lower dimensional vector corresponding to $\vec{X_i}$ in the initial dimension.
 }
 \end{homeworkProblem}
 \clearpage
 
 %----------------------------------------------------------------------------------------
 \begin{homeworkProblem}[The Questions]
-This is the core section of your report, which contains the tasks for this exercise and your respective solutions. Make sure you present your results in an illustrative way by making use of graphics, plots, tables, etc. so that a reader can understand the results with a single glance. Check that your graphics have enough resolution or are vector graphics. Consider the use of GIFs when appropriate.\newline
-Hard limit: Two pages
-
 \begin{homeworkSection}{(a) Get the data}
-For this exercise we will work with the MNIST data set. In order to learn more about it and download it, go to http://yann.lecun.com/exdb/mnist/.
+I used a subset of the training set of size $N=5000$ for the exercise in order to get acceptable runtime. I made a few tests with the whole dataset ($N=60000$) but the results were similar.
 \end{homeworkSection}
-
 \begin{homeworkSection}{(b) Locally linear embedding}
-Implement the LLE algorithm and apply it to the MNIST data set. Provide descriptive visualizations for 2D \& 3D embedding spaces. Is it possible to see clusters?
+We can observe that both in 2D and 3D it is possible to see clusters in the data. Since the influence on the number of neighbors is studied in a later question, these plots were done using the 10 nearest neighbors for each points.
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.46\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/Y210.png}
+        \caption[Network2]%
+        {{\small 2D}}    
+        \label{fig:y2-10}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}  
+        \centering 
+        \includegraphics[width=\textwidth]{images/Y310-1.png}
+        \caption[]%
+        {{\small 3D}}    
+        \label{fig:y3-10-1}
+    \end{subfigure}
+    \caption[ Visualizations for 2D and 3D embedding spaces.]
+    {\small Visualizations for 2D (a) and 3D (b-d) embedding spaces.} 
+    \label{fig:visualizations}
+\end{figure}
 \end{homeworkSection}
-
 \begin{homeworkSection}{(c) Cluster structure}
-Investigate the cluster structure of the data. Can you observe block structures in the $M$ matrix (use matrix plots)? Also plot the singular values of $M$. Do you notice something?
-Can you think of ways to determine the optimal embedding dimension?
+As we can observe on the following plots, the M matrix has values very close to zero everywhere but in the diagonal and singular values are concentrated close to 0. Since the optimal embedding is found by computing the botton $d+1$ eigenvectors of the matrix $M$, one could start from 1D and stop adding eigenvectors (i.e. increasing the embedding dimension) until there is no significant gain in the reconstruction error.
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.4\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/M_2-3_10.png}
+        \caption[]%
+        {{\small M Matrix plot}}    
+        \label{fig:M}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.4\textwidth}  
+        \centering 
+        \includegraphics[width=\textwidth]{images/sing_2-3_10_hist.png}
+        \caption[]%
+        {{\small Histogram for M matrix singular values}}    
+        \label{fig:sing}
+    \end{subfigure}
+    \caption[ Cluster structure of the data]
+    {\small Cluster structure of the data.} 
+    \label{fig:structure}
+\end{figure}
 \end{homeworkSection}
-
 \begin{homeworkSection}{(d) Nearest Neighbors}
-Investigate the influence of the choice of how many nearest neighbors you take into account. Additionally, try different metrics to find the nearest neighbors (we are dealing with images!).
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.32\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/k3_euc.png}
+        \caption[]%
+        {{\small 3 neighbors}}    
+        \label{fig:3neighbors}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.32\textwidth}  
+        \centering 
+        \includegraphics[width=\textwidth]{images/k10_euc.png}
+        \caption[]%
+        {{\small 10 neighbors}}    
+        \label{fig:10neighbors}
+    \end{subfigure}
+        \begin{subfigure}[b]{0.32\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/k35_euc.png}
+        \caption[]%
+        {{\small 35 neighbors}}    
+        \label{fig:35neighbors}
+    \end{subfigure}
+    \hfill
+    \caption[]
+    {\small Influence of the number of neighbors $k$ (using Euclidean norm).}
+    \label{fig:neighbors}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.32\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/15_n1.png}
+        \caption[]%
+        {{\small L-1 norm}}    
+        \label{fig:l1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.32\textwidth}  
+        \centering 
+        \includegraphics[width=\textwidth]{images/15_n2.png}
+        \caption[]%
+        {{\small L-2 norm}}    
+        \label{fig:l2}
+    \end{subfigure}
+        \begin{subfigure}[b]{0.32\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/15_ninf.png}
+        \caption[]%
+        {{\small L-$\infty$ norm = $max(abs(x))$}}    
+        \label{fig:linf}
+    \end{subfigure}
+    \hfill
+    \caption[]
+    {\small Usage of different norms with fixed number of neighbors (15).}
+    \label{fig:norms}
+\end{figure}
+As we can observe of the above plots, the number of neighbors $k$ strongly influences the mapping in the lower dimensional space. Literature shows that it is usually common to pick $k$ by cross validation. Different norms also leads to different results, which can be trivially explained by the facts that different neighbors are going to be picked, but it has less influence than the number of neighbors.
 \end{homeworkSection}
-
 \begin{homeworkSection}{(e) Linear manifold interpolation}
+
+
 Assume you pick some point in the embedding space. How can you map it back to the original (high dimensional) space? Investigate how well this works for points within and outside the manifold (does it depend on the dimensionality of the embedding space?) Try things like linearly interpolating between two embedding vectors and plot the sequence of images along that line. What happens if you do that in the original space?
 \end{homeworkSection}
-
-\vspace{10pt}
-\problemAnswer{ % Answer
-Your Answer
-}
 \end{homeworkProblem}
 \clearpage
 
@@ -190,7 +295,8 @@ Hard limit: One page
 
 \vspace{10pt}
 \problemAnswer{ % Answer
-Your Answer
+I used Numpy for system solving as well as for eigenvalues computation, which is already optimized and therefore didn't lead to numerical neither efficiency problems. I used Matplotlib for plotting. I could have used a library for faster nearest-neighbors computation but found it more interesting to have it written by myself since it is fairly simple and makes the code more readable.\\\\
+Git branch: \url{\hmwkGitBranch}
 }
 \end{homeworkProblem}
 \clearpage
