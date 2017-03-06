@@ -1,4 +1,0 @@
-1_code/venv/
-1_code/.idea/
-
-*pyc

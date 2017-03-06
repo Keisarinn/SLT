@@ -2,7 +2,7 @@
 % Make sure to set your name, legi number and url to the right git branch.
 \newcommand{\hmwkAuthorName}{Michiels Joran} % Your name
 \newcommand{\hmwkAuthorLegi}{16-948-549} % Your name
-\newcommand{\hmwkGitBranch}{YOUR GIT BRANCH} % Your name
+\newcommand{\hmwkGitBranch}{16-948-549/1\_locally\_linear\_embedding} % Your name
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -191,10 +191,10 @@ Assume you pick some point in the embedding space. How can you map it back to th
 
 \begin{homeworkSection}{(b) Locally linear embedding}
 \begin{center}
-	\includegraphics[scale=0.6]{2Dembed_5neigh_Euclidean}
+	\includegraphics[scale=0.6]{1_figures/2Dembed_5neigh_Euclidean}
 \end{center}
 \begin{center}
-	\includegraphics[scale=0.6]{3Dembed}
+	\includegraphics[scale=0.6]{1_figures/3Dembed}
 \end{center}
 The above results are for 5 neighbours using the Euclidean distance.
 It is possible to see a bit of clustering, although it is easier for some numbers (labels) than for others (e.g. the number 5 vs 1). In the 3D embedding space some clusters are better to see (e.g. the number 0).
@@ -209,20 +209,24 @@ The structure of the matrix \textit{M} is symmetric with a dominant diagonal. Th
 \[M=(I-W)^T(I-W) \iff M_{ij} = \delta_{ij} - w_{ij} -w_{ji} + \sum_{k}w_{ki}w_{kj}\]
 where $\delta_{ij}$ is $1$ if $i=j$ and $0$ otherwise. The matrix is also very sparse.
 \bigskip \par
+
 The eigenvalues, (or singular values, they are the same for this type of matrix) are all positive since M is a positive semi-definite matrix. One eigenvalue is equal to zero (or equal to machine precision when it is computed). The eigenvector corresponding with this eigenvalue is the unit vector with all equal components. The plot of eigenvalues is not shown because it didn't seem interesting.
 \bigskip \par
+
 When dealing with a supervised problem one can choose the dimension of the embedding space that gives the lowest test error.
 \end{homeworkSection}
 
 \begin{homeworkSection}{(d) Nearest Neighbors}
-As can be seen in the pictures in the appendix, taking more neighbours seems to increase the spread of the data points in the embedding space (it is less concentrated around a particular region). Since we are dealing with images, it might be better to work with extracted features for the image, instead of the complete image. When working with the complete image the image first has to be flattenend to a 1D-array before it can be fed into the LLE-algorithm. Then we can use different distance metrics like the Euclidean or Manhattan distance. The Manhattan distance gives very different results (see appendix).
+As can be seen in the pictures in the appendix, taking more neighbours seems to increase the spread of the data points in the embedding space (it is less concentrated around a particular region). Since we are dealing with images, it might be better to work with extracted features for the image, instead of the complete image. When working with the complete image, the image first has to be flattenend to a 1D-array before it can be fed into the LLE-algorithm. Then we can use different distance metrics like the Euclidean or Manhattan distance. The Manhattan distance gives very different results (see appendix).
 \end{homeworkSection}
+
 \begin{homeworkSection}{(e) Linear manifold interpolation}
 A intiutive approach would be to try to describe that point (let's call it $\textbf{y}_t$) with the help of nearby points (of which you know the corresponding points in the \textit{D}-dimensional space). In a 2D-space this can be done by representing $\textbf{y}_t$ by two linearly independent other points  $\textbf{y}_s$  and $\textbf{y}_r$ (preferably the 2 nearest neighbours):
 \[\textbf{y}_t=a*\textbf{y}_s + b*\textbf{y}_r.\]
  $\textbf{x}_t \in \Re^D$ can then be found as:
  \[\textbf{x}_t \approx a*\textbf{x}_s + b*\textbf{x}_r.\]
 The above method does assumes a 2D-space. A similar method in 3D would require the 3 nearest neighbours.\bigskip \par
+
 I don't understand the question about comparing for points within or outside the manifold, since we are already working within the manifold when picking some point in the embedding space. Linear interpolation between two embedding vectors corresponds to linear interpolation between the original images of these embedding vector, according to my way of mapping described above. This gives us a transition from one image to another as can be seen in the appendix. 
 \end{homeworkSection}
 }
@@ -238,7 +242,16 @@ Hard limit: One page
 \vspace{10pt}
 \problemAnswer{ % Answer
 I used the methods as described in https://www.cs.nyu.edu/~roweis/lle/papers/lleintro.pdf.
+The nearest neighbours are found by using a sklearn method for nearest neighbours.
 \bigskip\par
+They minimizing weights $w_{ij}$ are found by using this formule:
+\[w_{ij}=\frac{\sum_k C_{jk}^{(i)-1}}{\sum_{lk} C_{lk}^{(i)-1}}\]
+with $\textbf{C}^{(i)}$ the matrix with element $C^{(i)}_{jk}=(\textbf{x}_i -\textbf{x}_j)^T(\textbf{x}_i-\textbf{x}_k)$ and $\textbf{C}^{(i)-1}$ its inverse. $\textbf{x}_j$ and  $\textbf{x}_k$ are nearest neighbours.
+\bigskip\par
+Then a matrix \textbf{M} is computed as:
+\[\textbf{M}=(\textbf{I}-\textbf{W})^T*(\textbf{I}-\textbf{W})\]
+The top \textit{d} of the bottom \textit{d+1} eigenvectors of this matrix represent the \textit{d} embedding coordinates.
+\bigskip \par
 I had no efficiency or numerical problems. I restricted myself to 1000 data points because the visualizations didn't need more than that. One thing to take into account is that the zero eigenvalue of matrix \textit{M} will be found as the machine precision.
 }
 \end{homeworkProblem}
@@ -252,26 +265,26 @@ No page limit.
 \vspace{10pt}
 \problemAnswer{ % Answer
 \begin{center}
-	\includegraphics[scale=0.6]{matrix_plot}
+	\includegraphics[scale=0.6]{1_figures/matrix_plot}
 \end{center}
 
 }
 \problemAnswer{ % Answer
 	\begin{center}
-		\includegraphics[scale=0.6]{2Dembed_3neigh_Euclidean}
+		\includegraphics[scale=0.6]{1_figures/2Dembed_3neigh_Euclidean}
 	\end{center}
 		\begin{center}
-			\includegraphics[scale=0.6]{2Dembed_10neigh_Euclidean}
+			\includegraphics[scale=0.6]{1_figures/2Dembed_10neigh_Euclidean}
 		\end{center}
 	
 	
 }
 \problemAnswer{ % Answer
 	\begin{center}
-		\includegraphics[scale=0.6]{2Dembed_5neigh_Manhattan}
+		\includegraphics[scale=0.6]{1_figures/2Dembed_5neigh_Manhattan}
 	\end{center}
 	\begin{center}
-		\includegraphics[scale=0.6]{linear_int}
+		\includegraphics[scale=0.6]{1_figures/linear_int}
 	\end{center}
 	
 	
