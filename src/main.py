@@ -109,25 +109,22 @@ def structure_analysis(M, name=None):
         plt.savefig('../results/eigens_' + name + '.png')
         plt.close()
 
-def reconstruct(W, dim, name=None):
-    M = (W.T * W - W.T - W).toarray()
-    M.flat[::M.shape[0] + 1] += 1  # W = W - I = W - I
-    res = null_space(M, dim)
-    if(name != None):
-        np.save('../results/reconstructed_' + name + '_to_' + str(dim), res);
-    return res
+def reconstruct(y, Y, X, n_neighbors, metric, reg=1e-3):
+    knn = NearestNeighbors(n_neighbors + 1, metric=metric).fit(Y)
+    Y = knn._fit_X
+    ind = knn.kneighbors(y, return_distance=False)[:, 1:]
+    data = barycenter_weights(y, Y[ind], reg=reg)
 
-def barycenter_kneighbors_graph(X, n_neighbors, metric, reg=1e-3):
-    print("Fitting weights...")
-    knn = NearestNeighbors(n_neighbors + 1, metric=metric).fit(X)
-    X = knn._fit_X
-    n_samples = X.shape[0]
-    ind = knn.kneighbors(X, return_distance=False)[:, 1:]
-    Z = X[ind];
+    return np.dot(data, X[ind,:]).reshape(X.shape[1])
+
+
+
+def barycenter_weights(X, Z, reg=1e-3):
 
     X = check_array(X, dtype=FLOAT_DTYPES)
     Z = check_array(Z, dtype=FLOAT_DTYPES, allow_nd=True)
 
+    n_samples, n_neighbors = X.shape[0], Z.shape[1]
     B = np.empty((n_samples, n_neighbors), dtype=X.dtype)
     v = np.ones(n_neighbors, dtype=X.dtype)
 
@@ -144,7 +141,15 @@ def barycenter_kneighbors_graph(X, n_neighbors, metric, reg=1e-3):
         G.flat[::Z.shape[1] + 1] += R
         w = solve(G, v, sym_pos=True)
         B[i, :] = w / np.sum(w)
-    data = B
+    return B
+
+def barycenter_kneighbors_graph(X, n_neighbors, metric, reg=1e-3):
+    print("Fitting weights...")
+    knn = NearestNeighbors(n_neighbors + 1, metric=metric).fit(X)
+    X = knn._fit_X
+    n_samples = X.shape[0]
+    ind = knn.kneighbors(X, return_distance=False)[:, 1:]
+    data = barycenter_weights(X, X[ind], reg=reg)
     indptr = np.arange(0, n_samples * n_neighbors + 1, n_neighbors)
     return csr_matrix((data.ravel(), ind.ravel(), indptr),
                       shape=(n_samples, n_samples))
@@ -202,10 +207,10 @@ def main():
 
     #*****************************       Parameters and Data loading      ****************
     # Specify Parameters for embedding, or name for loading and analysis
-    # neighbors_n = [10, 15, 18];
-    # dims = [2, 3];
-    # metrics = ['l1', 'hamming'];
-    name = 'hamming_neighs10_dim2';
+    neighbors_n = [10];
+    dims = [2];
+    metrics = ['l1'];
+    # name = 'l1_neighs10_dim2';
     n = 3000;
 
     ## Load data
@@ -214,38 +219,36 @@ def main():
     labels = labels[0:n];
 
     #*****************************       Embedding      ****************
-    # embede(images, labels, neighbors_n, dims, metrics);
+    embede(images, labels, neighbors_n, dims, metrics);
 
 
     #*****************************       Analysis      ****************
     #Load the saved result
     # M = np.load('../results/' + str(n) + '/M_' +  name + '.npy');
     # W = load_sparse_csr('../results/' + str(n) + '/weights_' +  name + '.npz');
-    embedding = np.load('../results/' + str(n) + '/embedding_' +  name + '.npy');
-
+    # embedding = np.load('../results/' + str(n) + '/embedding_' +  name + '.npy');
 
     # structure_analysis(M, name);
-    visualize_embedding_2d(embedding, labels);
+    # visualize_embedding_2d(embedding, labels);
     # visualize_embedding_3d(embedding, labels);
     # visualize_M(M, 50)
 
     #*****************************       Reconstruction      ****************
-
-    # Show an example of images on the line between two points
-    # points = get_line(images[10,:], images[12,:], 5)
-    # show_image(images[10,:].reshape(28, 28))
-    # show_image(images[12,:].reshape(28, 28))
+    # ind1 = 19 # Number 9
+    # ind2 = 22 # Number 9
+    # points = get_line(images[ind1,:], images[ind2,:], 5)
+    # show_image(images[ind1,:].reshape(28, 28))
+    # show_image(images[ind2,:].reshape(28, 28))
     # for p in points:
     #     show_image(p.reshape(28, 28))
     #
-    # X = reconstruct(W, images.shape[1], name)
-    # X = X.reshape(n ,int(images.shape[1]))
-    # points = get_line(X[10,:], X[12,:], 5)
-    # show_image(X[10,:].reshape(28, 28))
-    # show_image(X[12,:].reshape(28, 28))
-    # for p in points:
-    #     show_image(p.reshape(28, 28))
-    # # show_image(X.reshape(n ,int(np.sqrt(images.shape[1])), int(np.sqrt(images.shape[1])))[10])
-    print("Hallo")
+    # points_e = get_line(embedding[ind1,:], embedding[ind2,:], 5)
+    # res = reconstruct(embedding[ind1,:], embedding, images, 10, 'l1')
+    # show_image(res.reshape(28, 28))
+    # res = reconstruct(embedding[ind2,:], embedding, images, 10, 'l1')
+    # show_image(res.reshape(28, 28))
+    # for p in points_e:
+    #     res = reconstruct(p, embedding, images, 10, 'l1')
+    #     show_image(res.reshape(28, 28))
 
 main()
