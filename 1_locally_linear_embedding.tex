@@ -1,8 +1,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Make sure to set your name, legi number and url to the right git branch.
-\newcommand{\hmwkAuthorName}{YOUR NAME} % Your name
-\newcommand{\hmwkAuthorLegi}{YOUR LEGI NUMBER} % Your name
-\newcommand{\hmwkGitBranch}{YOUR GIT BRANCH} % Your name
+\newcommand{\hmwkAuthorName}{Vincent Stettler} % Your name
+\newcommand{\hmwkAuthorLegi}{12-932-661} % Your name
+\newcommand{\hmwkGitBranch}{12-932-661/1\_locally\_linear\_embedding} % Your name
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -18,6 +18,7 @@
 \usepackage{extramarks} % Required for headers and footers
 \usepackage{graphicx} % Required to insert images
 \usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+\usepackage{amssymb} % Used for mathematical sets
 
 % Margins
 \topmargin=-0.45in
@@ -144,7 +145,15 @@ Hard limit: One page
 \vspace{10pt}
 
 \problemAnswer{ % Answer
-Your Answer
+Locally linear embedding is a non-linear dimension reduction algorithm that, as opposed to methods like PCA or MDS, can be used to preserve the internal, low-dimensional structure of a non-linear, smooth manifold living in a high dimesnional space.
+
+Given are N vectors $x_i \in \mathbb{R}^D$ that are expected to lie on some manifold. The idea is to use the fact that neighboring points should then, approximately, lie on a locally linear patch of the manifold. Each data point is expressed as a linear combination of its neighbors, and the so-called \emph{reconstruction error} is then defined as:
+$$ \mathcal{E} (W) = \sum\nolimits_{i} |x_i - \sum\nolimits_{j} w_{ij}x_j|^2 $$
+The optimal weights are found by minimizing the reconstruction error under the constraints that (i) $w_{ij} = 0$ if $x_j$ is not considered to be a neighbor of $x_i$, and (ii) $\forall i. \sum\nolimits_{j} w_{ij} = 1$. Note that these weights then are invariant under rotation, rescaling, and translation of the data points and its neighbors. This implies that the wheights need to characterize intrinsic properties of each neighborhood, and do not depend on a particular frame of reference.
+
+The next step of the LLE algorithm then maps each $x_i \in \mathbb{R}^D$ to a $y_i \in \mathbb{R}^d$, where $d << D$ is the internal dimension of the manifold. This is done by choosing $y_i$ such that the \emph{embedding error} is minimized:
+$$ \Phi (Y) = \sum\nolimits_{i} |y_i - \sum\nolimits_{j} w_{ij}y_j|^2 $$
+Note that the weights $w_{ij}$ are the optimized weights of the first step. By our assumptions we can expect that the same weights $w_{ij}$ that reconstruct $x_i$ in the D dimensional space, also reconstruct its embedded manifold coordinates in d dimensions. The above problem can be solved by solving a sparse N $\times$ N eigenvector problem.
 }
 \end{homeworkProblem}
 \clearpage
@@ -162,14 +171,43 @@ For this exercise we will work with the MNIST data set. In order to learn more a
 Implement the LLE algorithm and apply it to the MNIST data set. Provide descriptive visualizations for 2D \& 3D embedding spaces. Is it possible to see clusters?
 \end{homeworkSection}
 
+\vspace{10pt}
+\problemAnswer{ % Answer
+\includegraphics[width=0.5\textwidth, height=250px]{./plots/lle_plot_k5_test.png}
+
+There are some clusters, yes.
+}
+
 \begin{homeworkSection}{(c) Cluster structure}
 Investigate the cluster structure of the data. Can you observe block structures in the $M$ matrix (use matrix plots)? Also plot the singular values of $M$. Do you notice something?
 Can you think of ways to determine the optimal embedding dimension?
 \end{homeworkSection}
 
+\vspace{10pt}
+\problemAnswer{ % Answer
+Unfortunately, I am not able to investigate the $M$ matrix, because I am using the scikit implementation of the LLE algorithm and there is no simple way to access the matrix. I further explain my issues in the implementation section.
+
+The optimal embedding in the LLE algorithm is found by computing the d+1 eigenvectors of the $M$ matrix that correspond to the smallest d+1 eigenvalues. After dropping the smallest eigenvector, the remaining d vectors are then used as embedding coordinates. So I think that the optimal embedding dimsension can be determined by taking all eigenvectors that are small in some sense. Another way I could think of, is to simply try out a range of candidate dimensions and take that number, after which the reconstruction error improves only slightly.
+}
+
 \begin{homeworkSection}{(d) Nearest Neighbors}
 Investigate the influence of the choice of how many nearest neighbors you take into account. Additionally, try different metrics to find the nearest neighbors (we are dealing with images!).
 \end{homeworkSection}
+
+\problemAnswer{ % Answer
+Again, I am not able to try different metrics, as the scikit interface has no simply way to do use different metrics. The following figures show the embeddings using 5, 15, and 25 neighbors (Sorry for the formatting):
+
+\includegraphics[width=0.5\textwidth, height=250px]{./plots/lle_plot_k5_test.png}
+
+\includegraphics[width=0.5\textwidth, height=250px]{./plots/lle_plot_k15_test.png}
+}
+
+\problemAnswer{ % Answer
+
+\includegraphics[width=0.5\textwidth, height=250px]{./plots/lle_plot_k25_test.png}
+
+I notice that the reconstruction error decreases when the number of neighbors decreases.
+}
 
 \begin{homeworkSection}{(e) Linear manifold interpolation}
 Assume you pick some point in the embedding space. How can you map it back to the original (high dimensional) space? Investigate how well this works for points within and outside the manifold (does it depend on the dimensionality of the embedding space?) Try things like linearly interpolating between two embedding vectors and plot the sequence of images along that line. What happens if you do that in the original space?
@@ -177,7 +215,7 @@ Assume you pick some point in the embedding space. How can you map it back to th
 
 \vspace{10pt}
 \problemAnswer{ % Answer
-Your Answer
+Unfortunately, I had no time left to do this part of the project.
 }
 \end{homeworkProblem}
 \clearpage
@@ -190,7 +228,7 @@ Hard limit: One page
 
 \vspace{10pt}
 \problemAnswer{ % Answer
-Your Answer
+
 }
 \end{homeworkProblem}
 \clearpage
@@ -203,7 +241,6 @@ No page limit.
 \vspace{10pt}
 \problemAnswer{ % Answer
 Your Answer
-
 \hmwkGitBranch % defined in line 5
 }
 \end{homeworkProblem}
