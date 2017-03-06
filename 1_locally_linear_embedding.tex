@@ -19,6 +19,10 @@
 \usepackage{graphicx} % Required to insert images
 \usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
 
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{float}
+
 % Margins
 \topmargin=-0.45in
 \evensidemargin=0in
@@ -180,9 +184,78 @@ Assume you pick some point in the embedding space. How can you map it back to th
 \end{homeworkSection}
 
 \vspace{10pt}
-\problemAnswer{ % Answer
-Your Answer
-}
+%\problemAnswer{ % Answer
+	\begin{figure}[H]
+		\begin{subfigure}[b]{0.25\textwidth}
+			\includegraphics[width=\textwidth]{fig1_es_2d}
+			\caption{2-D embedding space. The clusters are visible but overlap is significant in various areas.}
+		\end{subfigure}
+		\begin{subfigure}[b]{0.25\textwidth}
+			\includegraphics[width=\textwidth]{fig2_es_3d}
+			\caption{3-D embedding space. Adding a dimension reveals clearer serperation between clusters. E.g. the blue and yellow.}
+		\end{subfigure}
+		\begin{subfigure}[b]{0.25\textwidth}
+			\includegraphics[width=\textwidth]{fig3_m_matrix}
+			\caption{M matrix for the embedding space in (a). I can't notice any clusters in the matrix. That's because the pictures for different numbers are placed randomly around the matrix so we shouldn't expect any noticable clusters to form.}
+		\end{subfigure}
+		\begin{subfigure}[b]{0.25\textwidth}
+			\includegraphics[width=\textwidth]{fig4_sv_m}
+			\caption{The singular values of M in (c). Perharps the optimal dimension is where the graph plateaus? (going from the right).}
+		\end{subfigure}
+		\begin{subfigure}[b]{0.25\textwidth}
+			\includegraphics[width=\textwidth]{fig5_es_2d_nn1}
+			\caption{2-D embedding space using only one nearest neighbor. All datapoints are mixed together}
+		\end{subfigure}
+		\begin{subfigure}[b]{0.25\textwidth}
+			\includegraphics[width=\textwidth]{fig6_es_3d_nn1}
+			\caption{3-D embedding space using only one nearest neighbor. Adding a dimension hasn't revealed anything.}
+		\end{subfigure}
+		\begin{subfigure}[b]{0.25\textwidth}
+			\includegraphics[width=\textwidth]{fig7_es_2d_nn5}
+			\caption{2-D embedding space using 5 nearest neighbors. The clusters are now becoming visible.}
+		\end{subfigure}
+		\begin{subfigure}[b]{0.25\textwidth}
+			\includegraphics[width=\textwidth]{fig8_es_3d_nn5}
+			\caption{3-D embedding space using 5 nearest neighbors}
+		\end{subfigure}
+		\begin{subfigure}[b]{0.25\textwidth}
+			\includegraphics[width=\textwidth]{fig9_es_2d_dm}
+			\caption{2-D embedding space using absolute distance. It works but I wouldn't say its better.}
+		\end{subfigure}
+		\begin{subfigure}[b]{0.25\textwidth}
+			\includegraphics[width=\textwidth]{fig10_es_3d_dm}
+			\caption{3-D embedding space using absolute distance. Again I'm more happy about using L2 distance.}
+		\end{subfigure}
+	\end{figure}
+
+	\begin{figure}[H]
+		\begin{subfigure}[t]{0.5\textwidth}
+			\centering\captionsetup{width=.8\linewidth}
+			\includegraphics[width=0.8\textwidth]{fig11_point_in_manifold}
+			\caption{Point on manifold mapped into the original space. This point was generated randomly so it seems to be in a place with a lot of numbers}
+		\end{subfigure}
+		\begin{subfigure}[t]{0.5\textwidth}
+			\centering\captionsetup{width=.8\linewidth}
+			\includegraphics[width=0.8\textwidth]{fig12_point_out_manifold}
+			\caption{Point outside manifold mapped into higher dimension. The result is clearly a seven.}
+		\end{subfigure}
+	\end{figure}
+	
+		\begin{figure}[H]
+		\begin{subfigure}[t]{0.5\textwidth}
+			\centering\captionsetup{width=.8\linewidth}
+			\includegraphics[width=\textwidth]{fig13_lin_intp_es}
+			\caption{linearly interpolating between two points in the embedding space. The set of pictures get a bit messy in the beginning.}
+		\end{subfigure}
+		\begin{subfigure}[t]{0.5\textwidth}
+			\centering\captionsetup{width=.8\linewidth}
+			\includegraphics[width=\textwidth]{fig14_lin_intp_os}
+			\caption{Linearly interpolating between two points in the original space. The transition between images is much smoother in this case}
+		\end{subfigure}
+	\end{figure}
+	
+	
+%}
 \end{homeworkProblem}
 \clearpage
 
@@ -194,7 +267,13 @@ Hard limit: One page
 
 \vspace{10pt}
 \problemAnswer{ % Answer
-Your Answer
+\begin{enumerate}
+	\item Find the nearest neighbors of each vector in $\vec{X}$. Simple for loop and calculate L2 distance.
+	\item Find the optimal weights. Here I used the followed the suggestion of the paper by solving $Cw = 1$.
+	\item Find the eigenvectors of $M$ and solve for the embedding vectors $\vec{Y}$. Because of having to compute the eigenvectors of $M$ I couldn't use too much data.
+\end{enumerate}
+
+Overall there weren't any complications. Just followed the outline of the paper.
 }
 \end{homeworkProblem}
 \clearpage
