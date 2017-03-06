@@ -196,7 +196,6 @@ Assume you pick some point in the embedding space. How can you map it back to th
 
 \vspace{10pt}
 
-
 \begin{figure}
 \centering
 \begin{subfigure}{.5\textwidth}
@@ -212,7 +211,6 @@ Assume you pick some point in the embedding space. How can you map it back to th
 \caption{Embeddings of 20000 data points of MINST dataset using 10 neighbours and L1 distance. Although not perfect, we can see a kind of clustering between all 10 numbers, where there are of course some overlapping points. We can also observe that the 3D embedding does not use all the space available in order to separate clusters from each other. This is of course in contrast from PCA which tries to maximises the variance; here we try to keep the neighbouring structure.}
 \label{fig:embed}
 \end{figure}
-
 
 
 \begin{figure}
@@ -360,8 +358,11 @@ Plotting the $\textbf{M}$ matrix is extremely hard as it is of $20000 \times 200
 Figure \ref{fig:sings} shows the singular values of the $\textbf{M}$ matrix. If I understood well, the most appropriate number of dimensions to take in this case would be 5, as the singular values are still very small (and thus the objective value of our optimisation stays small) but we get more dimensions to embed the data. \\
 
 Both effects of number of neighbours and distance metrics have been studied. For this part only $3000$ data points are used. First embeddings for $k$ $in$ $[1, 11, 21, ..., 131, 141]$ have been compared. Visually it could be concluded that $k=11$ results in clusters that are better separated from each other. Figure \ref{fig:ks} compares the embeddings for only few of them (Note that in this case the metric distance is Euclidean, for not any particular reason). One interesting result was that for very big $k$s (aprox. $k > 20$) it seems that the clustering doesn't change that much and it actually doesn't improve at all. This result could come from the fact that when the number of neighbours are larger compared to the curvature of the original space, then we don't get any good resolution; in other words, the neighbourhood becomes so large that it can't be learned with out linear system of weights anymore, as then we try to fit a linear model for a non linear structure. In a Next step, embeddings for $k$ $in$ $[8, 9, 10, ..., 19]$ were compared in order to find out whether there is any "optimal" clustering for a specific $k$. Results was that they were mostly all visually similar regarding how well clusters are separated and thus they are not plotted here any more. That's why for other analysis $k=10$ is chosen. \\
-In order to see the effect of distance metric, 2D embeddings for distances L1, L2 and Hamming (Intentionally an almost irrelevant distance metric) are compared. Figure \ref{fig:metrics} shows the result. The result of L1 distance and L2 distance are almost the same (one rotated compared to other, which is actually inherent in solving the \textbf{M} matrix) and this is simply because both distances have the same nature. We can also see the clusterings resulted by the hamming distance are worse as there are more overlapping points from different clusters. This is also an expected result as the hamming distance has no meaning in the context of image vectors. \\
+In order to see the effect of distance metric, 2D embeddings for distances L1, L2 and Hamming (Intentionally an almost irrelevant distance metric) are compared. Figure \ref{fig:metrics} shows the result. The result of L1 distance and L2 distance are almost the same (one rotated compared to other, which is actually inherent in solving the \textbf{M} matrix) and this is simply because both distances have the same nature. We can also see the clusterings resulted by the hamming distance are worse as there are more overlapping points from different clusters. This is also an expected result as the hamming distance has no meaning in the context of image vectors. (page continues...)\\
 
+}
+
+\problemAnswer{
 An easy way which leads to almost correct reconstructions is to take a vector from the embedding space, find its neighbours in the same space, find the weights that fit the vector as a linear combination of those neighbours, and finally find the original vector by multiplying those weights to the corresponding vectors in the original space. Figure \ref{fig:recon} shows the result of reconstruction for two vectors from the embedding space (first one and the last one) and for four other points out of the embedding space (which are on the line that connects those two vectors in the space). We can see that the result is at least visually appealing! Finally figure \ref{fig:orig} shows images corresponding to the points on the line between two vectors in the original space just for comparison (the first one and last one are the original vectors, others are the images on the line between those points).
 }
 \end{homeworkProblem}
